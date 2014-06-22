@@ -1,0 +1,26 @@
+package swarm;
+
+import java.util.Vector;
+
+public class swarm_based_clustering {
+	public float cal_euclidean_distance(Vector<Float> data_position , Vector<Float> centroid_position)
+	{
+		float distance=0 ; 
+		
+		return distance ; 
+	}
+	
+	public float cal_quantization_error()
+	{
+		float je_quantization_error = 0 ; 
+		
+		return je_quantization_error ; 
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+}

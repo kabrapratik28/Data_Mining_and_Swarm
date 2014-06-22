@@ -1,0 +1,21 @@
+package swarm;
+
+public class particle {	
+	
+	public particle()
+	{
+		
+	}
+	public void position()
+	{
+		
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

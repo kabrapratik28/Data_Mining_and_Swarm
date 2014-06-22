@@ -1,0 +1,16 @@
+import java.util.Vector;
+
+
+public class dataset {
+	long identity ;   // identity of dataset
+	Vector<Float> vector = new Vector<>(); // float for data 
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

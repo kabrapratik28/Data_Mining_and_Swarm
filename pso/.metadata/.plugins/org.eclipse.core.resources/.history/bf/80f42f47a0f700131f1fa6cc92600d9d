@@ -1,0 +1,20 @@
+import java.util.Vector;
+
+
+public class dataset {
+	long identity ;   // identity of dataset
+	Vector<Float> vector ; // float for data
+	public void add_data(long iden , Vector<Float> data)
+	{
+		vector = new Vector<>(); // float for data object created
+		
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

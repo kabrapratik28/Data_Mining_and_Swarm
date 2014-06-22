@@ -1,0 +1,20 @@
+package dataset;
+
+import java.util.Vector;
+
+public class dataset {
+	Vector<data> alldata ; 
+	public void new_dataset()
+	{
+		
+		
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,34 @@
+package swarm;
+
+import java.util.Vector;
+
+public class swarm_based_clustering {
+
+	public float cal_euclidean_distance(Vector<Float> data_position , Vector<Float> centroid_position)
+	{
+		float distance=0 ; 
+		float sumofsquare = 0  ; 
+		int data_position_vec_size = data_position.size() ; 
+		for (int counter_position_size = 0 ; counter_position_size < data_position_vec_size ; counter_position_size++)
+		{
+			float diffrence_of_position = data_position.get(counter_position_size) - centroid_position.get(counter_position_size);
+			sumofsquare = sumofsquare + (float)Math.pow(diffrence_of_position, 2);
+		}
+		distance = (float)Math.sqrt(sumofsquare);
+		return distance ; 
+	}
+	
+	public float cal_quantization_error()
+	{
+		float je_quantization_error = 0 ; 
+		
+		return je_quantization_error ; 
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+}

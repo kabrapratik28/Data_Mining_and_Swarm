@@ -1,0 +1,33 @@
+package swarm;
+
+public class particle {	
+	
+	public particle()
+	{
+		
+	}
+	public void position()
+	{
+		
+	}
+	public void velocity()
+	{
+		
+	}
+	public void pbest()
+	{
+		
+	}
+	public void gbest()
+	{
+		
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

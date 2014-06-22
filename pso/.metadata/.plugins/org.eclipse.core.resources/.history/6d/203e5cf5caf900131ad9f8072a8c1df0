@@ -1,0 +1,32 @@
+package swarm;
+
+import java.util.Vector;
+
+public class particle {	
+	Vector< Vector<Integer> > current_location;  
+	public particle()
+	{
+		
+	}
+	public void position()
+	{
+		
+	}
+	public void velocity()
+	{
+		
+	}
+	public void pbest()
+	{
+		
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

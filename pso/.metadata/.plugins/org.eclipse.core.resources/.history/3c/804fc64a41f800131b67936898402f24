@@ -1,0 +1,25 @@
+package dataset;
+
+import java.util.Vector;
+
+public class dataset {
+	Vector<data> alldata ; 
+	public void new_dataset()
+	{
+		alldata = new Vector<>() ;
+	}
+	public void add_data_instance(long ident , Vector<Float> dataval)
+	{
+		data data_ins = new data();
+		data_ins.add_data(ident, dataval);
+		alldata.add(data_ins);
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
