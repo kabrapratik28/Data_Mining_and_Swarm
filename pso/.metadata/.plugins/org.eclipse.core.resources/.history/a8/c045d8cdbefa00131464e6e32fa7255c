@@ -4,21 +4,6 @@ import java.util.Vector;
 
 public class swarm_based_clustering {
 	Vector< cluster > ClusterFormation ; // all cluster are store of current Cluster
-	float quantization_error_value ; 
-	static Vector< Vector<Float> > points ; 
-	
-	public swarm_based_clustering(Vector< Vector <Float> > position_of_centroids)
-	{
-		ClusterFormation = new Vector<>() ; 
-		assign_point_to_cluster(position_of_centroids, points) ;   // assigning of points to respective near cluster
-		quantization_error_value  = cal_quantization_error(ClusterFormation); // quantization error calculated
-	}
-	
-	public float get_quantization_error_value ()  //to get quantization error value
-	{
-		return quantization_error_value ; 
-	}
-	
 	public float cal_euclidean_distance(Vector<Float> data_position , Vector<Float> centroid_position)
 	{
 		float distance=0 ; 
@@ -103,54 +88,6 @@ public class swarm_based_clustering {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		//testing 
-		/* 
-		Vector <Vector<Float>> cent = new Vector<Vector<Float>>() ;  
-		Vector<Float> onec = new Vector<Float>() ; 
-		onec.add((float)2);
-		onec.add((float)6.5);
-		cent.add(onec);
-		
-	    onec = new Vector<Float>() ; 
-		onec.add((float)9);
-		onec.add((float)0);
-		cent.add(onec);
-		
-		Vector <Vector<Float>> points = new Vector<Vector<Float>>() ; 
-		onec = new Vector<Float>();
-		onec.add((float) 1);
-		onec.add((float) 5);
-		points.add(onec);
-		
-		onec = new Vector<Float>();
-		onec.add((float) 7);
-		onec.add((float) 1);
-		points.add(onec);
-		
-		onec = new Vector<Float>();
-		onec.add((float) 2);
-		onec.add((float) 7);
-		points.add(onec);
-		
-		onec = new Vector<Float>();
-		onec.add((float) 3);
-		onec.add((float) 6);
-		points.add(onec);
-		
-		onec = new Vector<Float>();
-		onec.add((float) 8);
-		onec.add((float) 2);
-		points.add(onec);
-		
-		onec = new Vector<Float>();
-		onec.add((float) 9);
-		onec.add((float) 1);
-		points.add(onec);
-		
-		// now send data to code 
-		swarm_based_clustering s1 = new swarm_based_clustering(cent, points);
-		System.out.println(s1.get_quantization_error_value());
-		*/
+
 	}
 }

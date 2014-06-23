@@ -74,14 +74,7 @@ public class particle {
 	} 
 	public void set_pbest()
 	{
-		float temp_pbest ; 
-		swarm_based_clustering particle_cluster = new swarm_based_clustering(current_location);
-		temp_pbest = particle_cluster.get_quantization_error_value();
-		if (temp_pbest < pbest)
-		{
-			pbest = temp_pbest ; 
-			pbest_position = new Vector<Vector<Float> > (current_location);
-		}
+		
 	}
 	public float velocity_cal_formula(float pre_vel,float curr_val, float pbest_val , float gbest_val , float random1 , float random2)
 	{

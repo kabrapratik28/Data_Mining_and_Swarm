@@ -6,32 +6,31 @@ public class particle {
 	Vector< Vector<Float> > current_location ;  // now current velocity
 	Vector< Vector<Float> > current_velocity ;  // now current velocity
 	Vector< Vector<Float> > previous_velocity ; //to keep inertia we require previous velocity
-
-	float pbest ;  
+	float curr_dimension_velocity ;  // velocity now
+	float curr_dimension_position ;  //position now
+	long pbest ;  
 	Vector< Vector<Float> > pbest_position ;  // all dimension value for pbest value
+	
+	static settings setting_for_all ;  // setting for all particles (inertia, c1, c2 , no of cluster , dimension ,etc)
+	
 	
 	/*
 	 * set after all particle value calculated
 	 * initialization after all particle calculated
 	 */
-	static float gbest ; 
+	static int gbest ; 
 	static Vector< Vector<Float> > gbest_position ;  
-
-	static settings setting_for_all ;  // setting for all particles (inertia, c1, c2 , no of cluster , dimension ,etc)
-	
 	
 	//When object initializes position and velocity initial values set 
-	public particle(Vector< Vector<Float> > intial_values ,Vector< Vector<Float> > intial_velocities , Vector< Vector<Float> > prev_velocity_for_first_time )
+	public particle(Vector< Vector<Float> > intial_values ,Vector< Vector<Float> > intial_velocities  )
 	{
 		current_location = new Vector<Vector<Float> >(intial_values);
 		current_velocity = new Vector< Vector<Float> > (intial_velocities); 
-		previous_velocity = new Vector<Vector<Float> > (prev_velocity_for_first_time);
-		pbest_position = new Vector<Vector<Float> > (current_location); //copy same dimension to pbest_position bz its for first time
 		/*
-		 * set pbest
+		 * previous velocity randomly set
+		 * pbest set according to current location assigned now  also copy same dimension to pbest_position
 		 */
-		swarm_based_clustering particle_cluster = new swarm_based_clustering(current_location);
-		pbest = particle_cluster.get_quantization_error_value();
+		
 	}
 
 	public void set_velocity(float rando1 ,float rando2)
@@ -74,18 +73,11 @@ public class particle {
 	} 
 	public void set_pbest()
 	{
-		float temp_pbest ; 
-		swarm_based_clustering particle_cluster = new swarm_based_clustering(current_location);
-		temp_pbest = particle_cluster.get_quantization_error_value();
-		if (temp_pbest < pbest)
-		{
-			pbest = temp_pbest ; 
-			pbest_position = new Vector<Vector<Float> > (current_location);
-		}
+		
 	}
 	public float velocity_cal_formula(float pre_vel,float curr_val, float pbest_val , float gbest_val , float random1 , float random2)
 	{
-		float curr_dimension_velocity = (
+		curr_dimension_velocity = (
 		setting_for_all.w *  pre_vel + 
 		setting_for_all.c1 * random1 * (gbest_val - curr_val) +
 		setting_for_all.c2 * random2* (pbest_val -  curr_val)
@@ -95,7 +87,7 @@ public class particle {
 	
 	public float position_cal_formula(float pre_val , float curr_vel)
 	{
-		float curr_dimension_position = pre_val + curr_vel ; 
+		curr_dimension_position = pre_val + curr_vel ; 
 		return curr_dimension_position ; 
 	}
 	

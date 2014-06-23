@@ -1,13 +1,14 @@
 package swarm;
 
 import java.util.Vector;
+import dataset.* ; 
 
 public class swarm_based_clustering {
 	Vector< cluster > ClusterFormation ; // all cluster are store of current Cluster
 	float quantization_error_value ; 
 	static Vector< Vector<Float> > points ; 
 	
-	public swarm_based_clustering(Vector< Vector <Float> > position_of_centroids)
+	public swarm_based_clustering(Vector< Vector <Float> > position_of_centroids, Vector< Vector<Float> > points)
 	{
 		ClusterFormation = new Vector<>() ; 
 		assign_point_to_cluster(position_of_centroids, points) ;   // assigning of points to respective near cluster
