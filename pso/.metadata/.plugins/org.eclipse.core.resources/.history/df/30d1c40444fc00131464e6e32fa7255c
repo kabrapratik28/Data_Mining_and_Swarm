@@ -1,0 +1,32 @@
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Vector;
+
+
+public class aaa {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Vector<Vector< Float >> cv = new Vector<Vector<Float>>() ;
+		Vector< Float > aa = new Vector<Float>() ; 
+		aa.add((float)1.2);
+		aa.add((float)2.1);
+		cv.add(aa);
+		aa = new Vector<>() ; 
+		aa.add((float)9.8);
+		aa.add((float)3.5);
+		cv.add(aa) ; 
+		Vector<Vector< Float >> pv = new Vector<Vector<Float>>() ;
+	    Collections.copy(pv,cv);
+
+		cv.get(0).set(0, (float)2.9);
+		cv.get(0).set(1, (float)4.5);
+		Vector<Vector< Float >> nv = new Vector<Vector<Float>>(pv) ;
+		System.out.println(pv.get(0).get(0));
+		System.out.println(nv.get(0).get(0));
+	}
+
+}

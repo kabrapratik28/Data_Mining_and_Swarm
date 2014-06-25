@@ -1,0 +1,47 @@
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Vector;
+
+
+public class aaa {
+	public static void copy_vector_inside_vector(Vector<Vector<Float>> src_vec ,Vector<Vector<Float>> des_vec )
+	{
+		int src_vec_size = src_vec.size();
+		int count_vec_src = 0 ;
+		for(count_vec_src=0 ; count_vec_src < src_vec_size ; count_vec_src++)
+		{
+			des_vec.add((Vector<Float>)src_vec.get(count_vec_src).clone());
+		}
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Vector<Vector< Float >> cv = new Vector<Vector<Float>>() ;
+		Vector< Float > aa = new Vector<Float>() ; 
+		aa.add((float)1.2);
+		aa.add((float)2.1);
+		cv.add(aa);
+		aa = new Vector<>() ; 
+		aa.add((float)9.8);
+		aa.add((float)3.5);
+		cv.add(aa) ; 
+		Vector<Vector< Float >> pv = new Vector<Vector<Float>>() ;
+		copy_vector_inside_vector(cv,pv);
+
+		
+		//copy_vector_inside_vector(cv,pv) ; 
+		
+				
+		cv.get(0).set(0, (float)2.9);
+		cv.get(0).set(1, (float)4.5);
+		cv.get(1).set(0, (float)66);
+		cv.get(1).set(0, (float)99);
+		Vector<Vector< Float >> nv = new Vector<Vector<Float>>() ;
+		copy_vector_inside_vector(pv, nv);
+		System.out.println(nv.get(0).get(0));
+		System.out.println(pv.get(1).get(1));
+	}
+
+}
