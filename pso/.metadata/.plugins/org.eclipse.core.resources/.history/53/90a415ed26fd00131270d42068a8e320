@@ -1,0 +1,33 @@
+package dataset;
+
+import java.util.Vector;
+
+public class Data_reader_from_file {
+
+	/**
+	 * @param args
+	 */
+	Vector < Vector<Float> > dataset ; 
+	public Data_reader_from_file(String filename, String delimiter) {
+		dataset =  new Vector<Vector<Float> >();
+	}
+	
+	
+	
+	Vector < Vector<Float> > get_dataset()
+	{
+		return dataset ; 
+	}
+	
+	int get_dimension_of_data_set()
+	{
+		int dimension_of_data_size = dataset.get(0).size() ;  // considering all element size is same
+		return dimension_of_data_size ; 
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

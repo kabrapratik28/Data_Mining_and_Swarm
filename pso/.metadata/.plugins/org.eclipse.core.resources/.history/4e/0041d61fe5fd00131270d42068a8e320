@@ -1,0 +1,18 @@
+package dataset;
+
+public class test {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String abc = "1.23,3.45,6.5" ; 
+		String[] tokens = abc.split(",");
+		for (String s: tokens)
+		{
+			System.out.println(s);
+		}
+	}
+
+}

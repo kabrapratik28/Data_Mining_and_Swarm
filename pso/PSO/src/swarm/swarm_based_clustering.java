@@ -2,6 +2,8 @@ package swarm;
 
 import java.util.Vector;
 
+import dataset.Data_reader_from_file;
+
 public class swarm_based_clustering {
 	Vector< cluster > ClusterFormation ; // all cluster are store of current Cluster
 	float quantization_error_value ; 
@@ -41,7 +43,7 @@ public class swarm_based_clustering {
 		 * another particle is not near to any so 0/0 can occur
 		 */
 		float je_quantization_error = 0 ; 
-		float je_quantization_error_denometer = 0 ; 
+		float je_quantization_error_numerator = 0 ; 
 		int no_of_cluster = whole_cluster.size() ; 
 		for (int count_cluster=0 ; count_cluster < no_of_cluster ; count_cluster++ )
 		{
@@ -53,9 +55,19 @@ public class swarm_based_clustering {
 						distance_total_by_one_cluster  + 
 						cal_euclidean_distance(whole_cluster.get(count_cluster).near_points.get(point_counter),whole_cluster.get(count_cluster).centroid);
 			}
-			je_quantization_error_denometer  = je_quantization_error_denometer + (distance_total_by_one_cluster/total_no_of_point_in_cluster); 
+			
+			je_quantization_error_numerator  = je_quantization_error_numerator + (distance_total_by_one_cluster/total_no_of_point_in_cluster); 
+			/*
+			 * Float divide zero by zero not throw exception
+			 * Check by isNaN(Not a Number) is it infinity 
+			 * if yes set to infinity 
+			 */
+			if (Float.isNaN(je_quantization_error_numerator))
+			{
+				je_quantization_error_numerator = settings.INFINITY ; // set infinity
+			}
 		}
-		je_quantization_error = je_quantization_error_denometer  / no_of_cluster ; 
+		je_quantization_error = je_quantization_error_numerator  / no_of_cluster ; 
 		return je_quantization_error ; 
 	}
 	
@@ -150,6 +162,36 @@ public class swarm_based_clustering {
 		
 		// now send data to code 
 		swarm_based_clustering s1 = new swarm_based_clustering(cent, points);
+		System.out.println(s1.get_quantization_error_value());
+		*/
+
+		//test case fail 
+		// SOLVED USING THIS SOLUTION  //	settings.INFINITY = Float.MAX_VALUE ;
+		/*	Vector <Vector<Float>> cent = new Vector<Vector<Float>>() ;  
+		Vector<Float> onec = new Vector<Float>() ; 
+		onec.add((float)4.8286843);
+		onec.add((float)3.5884287);
+		onec.add((float)2.2840087);
+		onec.add((float)0.3912301);
+		cent.add(onec);
+		
+	    onec = new Vector<Float>() ; 
+		onec.add((float)4.5839624);
+		onec.add((float)4.3574142);
+		onec.add((float)2.009513);
+		onec.add((float)1.696347);
+		cent.add(onec);
+		
+	    onec = new Vector<Float>() ; 
+		onec.add((float)6.658968);
+		onec.add((float)3.9877458);
+		onec.add((float)5.1710057);
+		onec.add((float)2.119962);
+		cent.add(onec);
+		
+		Data_reader_from_file d1  = new Data_reader_from_file("iris.data",",") ; 
+		swarm_based_clustering.points = d1.get_dataset() ; 
+		swarm_based_clustering s1 = new swarm_based_clustering(cent);
 		System.out.println(s1.get_quantization_error_value());
 		*/
 	}

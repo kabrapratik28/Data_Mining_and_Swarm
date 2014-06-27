@@ -1,0 +1,27 @@
+package dataset;
+
+public class test {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		boolean a = (float) (0.0/0); 
+		float b = (float)1.2;
+		
+		if (a)
+		{
+			System.out.println("yaa");
+			//a = b ; 
+			System.out.println(a);
+			System.out.println(b);
+		}
+		else{
+			System.out.println("No");
+			System.out.println(a);
+			System.out.println(b);
+		}
+	}
+
+}

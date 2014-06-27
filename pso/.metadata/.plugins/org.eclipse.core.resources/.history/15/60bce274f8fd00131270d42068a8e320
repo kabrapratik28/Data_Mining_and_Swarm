@@ -1,0 +1,29 @@
+package swarm;
+
+import java.util.Vector;
+
+public class random_particle_generator {
+	Vector<Float> min_of_dataset ; 
+	Vector<Float> max_of_dataset ; 
+	int no_of_cluster  ; 
+	public random_particle_generator(int no_of_cluster , Vector< Vector<Float> > min_max_of_dataset)
+	{
+		this.no_of_cluster = no_of_cluster ; 
+		min_of_dataset = new Vector<Float>(min_max_of_dataset.get(0)); // get all min elements
+		max_of_dataset = new Vector<Float>(min_max_of_dataset.get(1)); // get all max elements 
+	}
+	
+	particle get_random_particle()
+	{
+		particle random_new_particle = null ; 
+		
+		
+		return random_new_particle ; 
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	
+	
+	}
+}

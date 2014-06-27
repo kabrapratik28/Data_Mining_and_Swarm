@@ -1,0 +1,17 @@
+package swarm;
+
+import java.util.Vector;
+
+public class random_particle_generator {
+	
+	public random_particle_generator(int no_of_cluster , Vector< Vector<Float> > min_max_of_dataset)
+	{
+		
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	
+	
+	}
+}

@@ -1,0 +1,18 @@
+package dataset;
+
+public class testnan {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		float a = (float) ((float)0.0/0.0);
+		float b = (float) ((float)0.0/0.0);
+		System.out.println(a);
+		System.out.println(b);
+		System.out.println(a == Float.NaN);
+		
+	}
+
+}
