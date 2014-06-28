@@ -1,0 +1,37 @@
+package dataset;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Vector;
+
+public class csv_file_creator {
+	PrintWriter writer ; 
+	public csv_file_creator(String filename, Vector< Vector<Float> > data_to_be_written)
+	{
+		
+
+	}
+	
+	public void create_file(String filename)
+	{
+		try {
+		    writer = new PrintWriter(filename, "UTF-8");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error : file not found");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error : Unsupported Encoding Exception");
+		}
+	}
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		csv_file_creator c1 = new csv_file_creator("bk.csv", null);
+	}
+
+}

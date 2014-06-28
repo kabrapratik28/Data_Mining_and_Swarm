@@ -1,8 +1,7 @@
 package swarm;
 
 import java.util.Vector;
-
-import dataset.Data_reader_from_file;
+//import dataset.Data_reader_from_file;
 
 public class swarm_based_clustering {
 	Vector< cluster > ClusterFormation ; // all cluster are store of current Cluster
@@ -57,17 +56,17 @@ public class swarm_based_clustering {
 			}
 			
 			je_quantization_error_numerator  = je_quantization_error_numerator + (distance_total_by_one_cluster/total_no_of_point_in_cluster); 
-			/*
-			 * Float divide zero by zero not throw exception
-			 * Check by isNaN(Not a Number) is it infinity 
-			 * if yes set to infinity 
-			 */
-			if (Float.isNaN(je_quantization_error_numerator))
-			{
-				je_quantization_error_numerator = settings.INFINITY ; // set infinity
-			}
 		}
 		je_quantization_error = je_quantization_error_numerator  / no_of_cluster ; 
+		/*
+		 * Float divide zero by zero not throw exception
+		 * Check by isNaN(Not a Number) is it infinity 
+		 * if yes set to infinity 
+		 */
+		if (Float.isNaN(je_quantization_error))
+		{
+			je_quantization_error = settings.INFINITY ; // set infinity
+		}
 		return je_quantization_error ; 
 	}
 	

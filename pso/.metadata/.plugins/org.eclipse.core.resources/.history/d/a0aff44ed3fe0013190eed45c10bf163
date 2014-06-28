@@ -1,0 +1,57 @@
+package dataset;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Vector;
+
+public class csv_file_creator {
+	PrintWriter writer ; 
+	public csv_file_creator(String filename, Vector< Vector<Float> > data_to_be_written)
+	{
+		create_file(filename); 
+		int size_of_header = data_to_be_written.get(0).size();
+		add_header(size_of_header) ;
+		write_data_to_csv(data_to_be_written) ; 
+		writer.close() ; 
+	}
+	
+	public void create_file(String filename)
+	{
+		try {
+		    writer = new PrintWriter(filename, "UTF-8");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error : file not found");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error : Unsupported Encoding Exception");
+		}
+	}
+	
+	public void add_header(int size_of_header) 
+	{
+		String header_given = "" ; 
+		for (int count_number = 0 ; count_number < size_of_header ; count_number++)
+		{
+			header_given = header_given + String.valueOf(count_number)+" ," ; 
+		}
+		// strip last comma 
+		header_given = header_given.replaceAll("[, ]+$", "");
+		
+		writer.println(header_given) ; 
+	}
+	
+	public void write_data_to_csv(Vector<Vector<Float> > Data)
+	{
+		
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		csv_file_creator c1 = new csv_file_creator("bk.csv", null);
+	}
+
+}

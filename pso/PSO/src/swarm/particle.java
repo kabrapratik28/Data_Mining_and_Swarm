@@ -1,6 +1,5 @@
 package swarm;
 
-import java.util.Arrays;
 import java.util.Vector;
 
 import dataset.Data_reader_from_file;
