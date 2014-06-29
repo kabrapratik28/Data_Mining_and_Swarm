@@ -187,7 +187,7 @@ public class swarm_based_clustering {
 		onec.add((float)5.1710057);
 		onec.add((float)2.119962);
 		cent.add(onec);
-		
+	
 		Data_reader_from_file d1  = new Data_reader_from_file("iris.data",",") ; 
 		swarm_based_clustering.points = d1.get_dataset() ; 
 		swarm_based_clustering s1 = new swarm_based_clustering(cent);

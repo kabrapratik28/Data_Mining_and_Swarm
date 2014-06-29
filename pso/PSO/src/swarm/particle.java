@@ -139,22 +139,40 @@ public class particle {
 		 * SET NO OF DIMESIONS AND NO OF CLUSTER
 		 * SET INFINITY VALUE
 		 */
-		settings.INFINITY = Float.MAX_VALUE ;  // max float value assigned 
+		settings.INFINITY = Float.MAX_VALUE ;  // max float value assigned
+		/*
+		 * SET DIMESTION                      <==== IMP
+		 * SET NO. OF CLUSTER                   
+		 */
 		settings settings_for_now = new settings(3,4,(float)0.72,(float)1.49,(float)1.49);
 		particle.setting_for_all = settings_for_now ; // set settings	
 
-		Data_reader_from_file d1  = new Data_reader_from_file("iris.data",",") ; 
+		Data_reader_from_file d1  = new Data_reader_from_file("test_dataset/1.iris/iris.data",",") ; 
 		swarm_based_clustering.points = d1.get_dataset() ; 
 		random_particle_generator r1 = new random_particle_generator(settings_for_now.no_of_cluster, d1.get_min_and_max_value_of_dimensions()) ; 
 	
 		//particles information
 		Vector<particle> particles_as_cen = new Vector<particle>() ;
 		
-		// 10 particle generating 
-		for (int a =0  ; a< 10 ; a++)
+		particle p ; 
+		
+		//centroid as 1 of particle 
+		// kmeans (input is dataset , no of inital seed , no of cluster)
+		simplekmeans kmeans = new simplekmeans(swarm_based_clustering.points , 10 , settings_for_now.no_of_cluster ) ; 
+		// random particle get (random  velocity set)
+		p = r1.get_random_particle() ; 
+		//location set as centroid calculated by kmeans 
+		p.current_location = kmeans.get_centroids() ;
+		// p best value updated because of current position set to centroid 
+		p.set_pbest() ; 
+		// add to particle list 
+		particles_as_cen.add(p);
+		
+		// remaining 9 particle generating 
+		for (int a =0  ; a< 9 ; a++)
 		{
-			particle p1 = r1.get_random_particle() ; 
-			particles_as_cen.add(p1);
+			p = r1.get_random_particle() ; 
+			particles_as_cen.add(p);
 		}
 		
 		particle.gbest = -1 ; 

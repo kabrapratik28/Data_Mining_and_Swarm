@@ -6,6 +6,13 @@ import weka.core.converters.CSVLoader;
  
 import java.io.File;
 
+/*
+ * THIS IS FILE CONVERT ARFF FILE 
+ *      ==== CAUSTION ===== 
+ * BY DEFAULT
+ * CONSIDERING NUMERIC ATTRIBUTE AS EACH ATTRIBUTE 
+ * (FOR E.G. NOT CONSIDER NONCOUNTIOUS AS SEX{MALE, FEMALE} OR BINARY {0,1} )
+*/
 public class csv_to_arff {
 	String arff_file_name ; 
 	

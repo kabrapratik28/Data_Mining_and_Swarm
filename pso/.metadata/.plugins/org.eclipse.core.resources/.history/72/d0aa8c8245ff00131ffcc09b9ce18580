@@ -1,0 +1,73 @@
+package swarm;
+
+import java.util.Vector;
+
+import dataset.csv_file_creator;
+import dataset.csv_to_arff;
+
+import weka.clusterers.SimpleKMeans ;
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource ;  
+
+public class simplekmeans {
+	SimpleKMeans kmeans ; 
+	public simplekmeans(Vector< Vector<Float> > data_to_be_clustered, int set_seed , int no_of_cluster)
+	{
+		csv_file_creator csv_temp = new csv_file_creator("temporaryfile.csv", data_to_be_clustered) ;
+		csv_to_arff arff_temp = new csv_to_arff("temporaryfile.csv","temporaryfile.arff") ; 
+		kmeans_calculations(set_seed , no_of_cluster);
+	}
+	
+	public void kmeans_calculations(int set_seed , int no_of_cluster)
+	{
+		Instances data = null;
+		try {
+			data = DataSource.read("temporaryfile.arff");  // data instances read from arff file
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error : Loading of arff file");
+		}
+		
+		// kmeans clas object 
+		kmeans = new SimpleKMeans();
+		//no of intial seed set // by default it is 10 
+		kmeans.setSeed(set_seed);
+		// This is the important parameter to set
+		kmeans.setPreserveInstancesOrder(true);
+		try {
+			// no of cluster to be formed are set // by default 2
+			kmeans.setNumClusters(no_of_cluster);
+			// actualy building cluster on given data from arff with prev. settings
+			kmeans.buildClusterer(data) ; 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Number of cluster cannot set");
+		}
+		
+	}
+	
+	public Vector< Vector<Float> > get_centroids()
+	{
+		Vector< Vector<Float> > centroids = new Vector< Vector<Float> >() ; 
+		
+		
+		return centroids ; 
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		Instances centroids = kmeans.getClusterCentroids() ;
+		for (int i = 0; i < centroids.numInstances(); i++) { 
+			System.out.print("Centroid ");
+			System.out.print (i + 1) ;
+			System.out.print( ": ") ;
+			System.out.println(centroids.instance(i) );
+		} 
+		
+	}
+
+}
