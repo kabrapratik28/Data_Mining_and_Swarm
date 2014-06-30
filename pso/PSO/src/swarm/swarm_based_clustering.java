@@ -193,5 +193,12 @@ public class swarm_based_clustering {
 		swarm_based_clustering s1 = new swarm_based_clustering(cent);
 		System.out.println(s1.get_quantization_error_value());
 		*/
+		/*  <==== WINE DATA CALCULATION ==== >
+		Data_reader_from_file d1  = new Data_reader_from_file("wine.data",",") ; 
+		swarm_based_clustering.points = d1.get_dataset() ; 
+		simplekmeans k1 = new simplekmeans(swarm_based_clustering.points , 10 , 3) ; 
+		swarm_based_clustering s1 = new swarm_based_clustering(k1.get_centroids()) ;
+		System.out.println(s1.get_quantization_error_value());
+		*/
 	}
 }

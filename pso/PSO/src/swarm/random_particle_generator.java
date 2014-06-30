@@ -61,7 +61,7 @@ public class random_particle_generator {
 		// TODO Auto-generated method stub
 		//Test data 
 		/* 
-		Data_reader_from_file d1  = new Data_reader_from_file("abc",",") ; 
+		data_reader_from_file d1  = new data_reader_from_file("abc",",") ; 
 		swarm_based_clustering.points = d1.get_dataset() ; 
 		random_particle_generator r1 = new random_particle_generator(3, d1.get_min_and_max_value_of_dimensions()) ; 
 		for (int a = 0 ; a<10 ; a++)

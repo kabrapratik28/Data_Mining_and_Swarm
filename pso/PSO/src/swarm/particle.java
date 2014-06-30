@@ -2,7 +2,8 @@ package swarm;
 
 import java.util.Vector;
 
-import dataset.Data_reader_from_file;
+import dataset.data_reader_from_file;
+import dataset.xml_file_reader;
 
 public class particle {	
 	Vector< Vector<Float> > current_location ;  // now current velocity
@@ -134,22 +135,24 @@ public class particle {
 		//algorithm based on 
 		//Data Clustering using Particle Swarm Optimization DW van der Merwe 
 		
-		//settings exaplained in paper are used 
+		//settings explained in paper are used 
 		/*
-		 * SET NO OF DIMESIONS AND NO OF CLUSTER
 		 * SET INFINITY VALUE
 		 */
 		settings.INFINITY = Float.MAX_VALUE ;  // max float value assigned
-		/*
-		 * SET DIMESTION                      <==== IMP
+		/*           
 		 * SET NO. OF CLUSTER                   
 		 */
-		settings settings_for_now = new settings(3,4,(float)0.72,(float)1.49,(float)1.49);
-		particle.setting_for_all = settings_for_now ; // set settings	
+		// direct setting in program
+		//settings settings_for_now = new settings(3,(float)0.72,(float)1.49,(float)1.49);
+		
+		// Setting taken from xml file 
+		xml_file_reader swarm_xml_reader = new xml_file_reader("swarm.xml") ; 
+		particle.setting_for_all = swarm_xml_reader.get_settings() ; // set settings	
 
-		Data_reader_from_file d1  = new Data_reader_from_file("test_dataset/1.iris/iris.data",",") ; 
+		data_reader_from_file d1  = new data_reader_from_file(particle.setting_for_all.file_name,",") ; 
 		swarm_based_clustering.points = d1.get_dataset() ; 
-		random_particle_generator r1 = new random_particle_generator(settings_for_now.no_of_cluster, d1.get_min_and_max_value_of_dimensions()) ; 
+		random_particle_generator r1 = new random_particle_generator(particle.setting_for_all.no_of_cluster, d1.get_min_and_max_value_of_dimensions()) ; 
 	
 		//particles information
 		Vector<particle> particles_as_cen = new Vector<particle>() ;
@@ -158,7 +161,7 @@ public class particle {
 		
 		//centroid as 1 of particle 
 		// kmeans (input is dataset , no of inital seed , no of cluster)
-		simplekmeans kmeans = new simplekmeans(swarm_based_clustering.points , 10 , settings_for_now.no_of_cluster ) ; 
+		simplekmeans kmeans = new simplekmeans(swarm_based_clustering.points , 10 , particle.setting_for_all.no_of_cluster ) ; 
 		// random particle get (random  velocity set)
 		p = r1.get_random_particle() ; 
 		//location set as centroid calculated by kmeans 
@@ -168,8 +171,8 @@ public class particle {
 		// add to particle list 
 		particles_as_cen.add(p);
 		
-		// remaining 9 particle generating 
-		for (int a =0  ; a< 9 ; a++)
+		// remaining (no_of_particle-1) particle generating 
+		for (int count_particle =0  ; count_particle< (particle.setting_for_all.no_of_particle-1) ; count_particle++)
 		{
 			p = r1.get_random_particle() ; 
 			particles_as_cen.add(p);
@@ -185,7 +188,7 @@ public class particle {
 			}
 		}
 		System.out.println(particle.gbest);
-		for (int a = 0 ; a<1000 ; a++)
+		for (int iteration_counter = 0 ; iteration_counter< particle.setting_for_all.max_no_of_iterations ; iteration_counter++)
 		{
 			float rando1 = (float)Math.random() ; 
 			float rando2 = (float)Math.random() ; 
