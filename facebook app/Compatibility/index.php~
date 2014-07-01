@@ -1,0 +1,53 @@
+<html>
+
+ <body>
+<?php
+
+
+    $app_id = "YOUR APP ID";
+    $app_secret = "YOUR APP SECRET";
+
+    try
+    {
+        include_once ('libs/facebook.php');
+    }
+    catch(Exception $o)
+    {
+     print_r($o);
+    }
+
+    $facebook = new Facebook(array(
+     'appId'  => $app_id,
+      'secret' => $app_secret,
+      'cookie' => true
+    ));
+
+    $user = $facebook->getUser();
+    $loginUrl = $facebook->getLoginUrl(array
+      (
+                'scope'         => 'email'
+            )
+        );
+
+    if ($user)
+    {
+      try
+      {
+        $f=$facebook->api('/me');
+         $access_token = $facebook->getAccessToken();
+      } catch (FacebookApiException $e)
+       {
+         echo $e;
+         $user = null;
+       }
+    }
+
+    if (!$user) {
+        echo "<script type='text/javascript'>top.location.href = '$loginUrl';</script>";
+        exit;
+    }
+echo $f['name']."<br/><img src='https://graph.facebook.com/".$f['id']."/picture' width='50' height='50'  />";
+
+?>
+</body>
+</html>
