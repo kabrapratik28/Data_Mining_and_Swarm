@@ -1,6 +1,13 @@
 <html>
   <body>
     <?php
+       
+    	include 'datagetter/status.php' ; // to get access to all function
+    	include 'datagetter/post.php' ;
+    	include 'datagetter/photos.php' ;
+    	include 'datagetter/groups.php' ;
+    	 
+    	 
        //echo '<link href="css/try.css" rel="stylesheet">';
    
        $app_id = "759326554108395";
@@ -25,15 +32,51 @@
       $loginUrl = $facebook->getLoginUrl(array
            (
                 //taking permission as passed in string 
-                'scope'         => 'public_profile,user_friends,email,user_about_me,user_activities,user_activities,user_birthday,user_education_history,user_events,user_groups,user_hometown,user_interests,user_likes,user_location,user_photos,user_relationships,user_relationship_details,user_relationship_details,user_status,user_tagged_places,user_videos,user_work_history,read_friendlists,read_friendlists'
-           )
+                'scope'         =>           
+
+      		'user_about_me,
+      		user_actions.books,
+      		user_actions.music,
+      		user_actions.news,
+      		user_actions.video,
+      		user_activities,
+      		user_birthday,
+      		user_education_history,
+      		user_events,
+      		user_friends,
+      		user_games_activity,
+      		user_groups,
+      		user_hometown,
+      		user_interests,
+      		user_likes,
+      		user_location,
+      		user_photos,
+      		user_relationship_details,
+      		user_relationships,
+      		user_religion_politics,
+      		user_status,
+      		user_tagged_places,
+      		user_videos,
+      		user_website,
+      		user_work_history,
+      		email,
+			manage_notifications,
+			manage_pages,
+ 			publish_actions,
+			read_friendlists,
+			read_insights,
+			read_mailbox,
+			read_page_mailboxes,
+			read_stream,
+			rsvp_event'
+      		 )
      );
 
     if ($user)
     {
       try
       {
-        $f=$facebook->api('/me?fields=statuses');
+        $f=$facebook->api('/me?fields=statuses,posts,photos,groups');
          $access_token = $facebook->getAccessToken();
       } catch (FacebookApiException $e)
        {
@@ -56,24 +99,24 @@
 
     //this is print recursive array 
     //echo print_r($f)."<br/>";
-
-    echo count($f[statuses][data])."<br/>" ; 
     
     //recursive print statues
     //echo print_r($f[statuses])."<br/>";
 
-   // status // likes // no of data
-    foreach( $f[statuses][data] as $status) {
-        echo "Status : ".$status[message]."<br/>" ; 
-        echo "Like no. : ".count($status[likes][data])."<br/>" ;
-        echo "Comment no. : ".count($status[comments][data])."<br/>" ;
-        echo "<br/><br/><br/>";
-    
-    }
+    // get status info from status.php
+    $status_info =  get_status_data($f) ; //array
+      
+    //get post info from post.php
+	$posts_info  = get_post_data($f)  ;  //array
 
-  
-
+	//get photos from photos.php
+	$photos_info = get_photos_data($f) ;  //array
+	
+	// get no of groups fron groups.php
+	$no_of_groups = get_groups_data($f) ; //number
+	
+	// inbox (no of personal messages)
+	
     ?>
   </body>
 </html>
-
