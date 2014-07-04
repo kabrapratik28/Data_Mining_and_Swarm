@@ -6,8 +6,10 @@
     	include 'datagetter/post.php' ;
     	include 'datagetter/photos.php' ;
     	include 'datagetter/groups.php' ;
+    	include 'datagetter/inbox.php' ;  
+    	include 'datagetter/tagged_places.php' ;
     	 
-    	 
+    	
        //echo '<link href="css/try.css" rel="stylesheet">';
    
        $app_id = "759326554108395";
@@ -76,7 +78,7 @@
     {
       try
       {
-        $f=$facebook->api('/me?fields=statuses,posts,photos,groups');
+        $f=$facebook->api('/me?fields=statuses,posts,photos,groups,inbox,tagged_places');
          $access_token = $facebook->getAccessToken();
       } catch (FacebookApiException $e)
        {
@@ -115,8 +117,54 @@
 	// get no of groups fron groups.php
 	$no_of_groups = get_groups_data($f) ; //number
 	
-	// inbox (no of personal messages)
+	// inbox (no of personal messages)  // not all meg gettings from first day
+	$no_of_messages = get_inbox_data($f) ; //number 
 	
-    ?>
+	// tagged places info from tagged_places.php
+	$tagged_places_info = get_tagged_places_data($f) ; // array of place and time 
+     
+	?>
+	
+	<script src="http://connect.facebook.net/en_US/all.js"></script>
+	  <script>
+      FB.init({
+        appId  : '759326554108395',
+        status : true,
+        cookie : true,
+		xfbml : true
+      });
+
+		function invitefriends(){
+			FB.ui({
+				method: 'apprequests',
+		        message: 'Compare Facebook Usage With Your Friends',		
+			});				
+		}
+
+		function publicresults(){
+			msg = 'Compare your results with me.' ; 
+			
+			FB.ui({
+				method: 'feed',
+		        name : 'Compare Facebook Usage With Your Friends',
+		        link : 'https://apps.facebook.com/759326554108395/'	,	
+		       /* picture : '' ,*/
+			    caption : 'Can you beat it ? ' ,  
+			    description : msg ,   
+			});		
+
+			}
+	  </script>
+      
+      <input type="button"
+        onclick="invitefriends(); return false;"
+        value="Send Request to Friends"
+      /><br/><br/><br/>
+      
+      <input type="button"
+        onclick="publicresults(); return false;"
+        value="Post Results"
+      />
+	
   </body>
 </html>
