@@ -8,6 +8,7 @@
     	include 'datagetter/groups.php' ;
     	include 'datagetter/inbox.php' ;  
     	include 'datagetter/tagged_places.php' ;
+    	include 'datagetter/friends.php' ;
     	 
     	
        //echo '<link href="css/try.css" rel="stylesheet">';
@@ -78,7 +79,7 @@
     {
       try
       {
-        $f=$facebook->api('/me?fields=statuses,posts,photos,groups,inbox,tagged_places');
+        $f=$facebook->api('/me?fields=id,name,birthday,email,statuses,posts,photos,groups,inbox,tagged_places,friends');
          $access_token = $facebook->getAccessToken();
       } catch (FacebookApiException $e)
        {
@@ -97,7 +98,7 @@
     echo $f['name']."<br/><img src='https://graph.facebook.com/".$f['id']."/picture' width='50' height='50'  /><br/>";
 
     //print birthday
-    //echo $f['birthday']."<br/><br/><br/>" ; 
+    echo $f['birthday']."<br/><br/><br/>" ; 
 
     //this is print recursive array 
     //echo print_r($f)."<br/>";
@@ -122,7 +123,16 @@
 	
 	// tagged places info from tagged_places.php
 	$tagged_places_info = get_tagged_places_data($f) ; // array of place and time 
-     
+	
+	//friends getting from friends.php  // ***ONLY GET FRIENDS WHICH ARE USING THIS APP
+	$friends_name_id = get_facebook_friends($f); 
+
+	
+	// ***************************
+	// PASSING DATE TO DATABASE 
+	// ***************************
+	// $datetoputinmysql = date('Y-m-d', strtotime('02/28/1994')); // "Year-month-date" mysql compatible
+	// ***************************
 	?>
 	
 	<script src="http://connect.facebook.net/en_US/all.js"></script>
@@ -165,6 +175,6 @@
         onclick="publicresults(); return false;"
         value="Post Results"
       />
-	
+
   </body>
 </html>
