@@ -19,7 +19,7 @@
     <min_distance_to_terminate> </min_distance_to_terminate>
     -->
   
-    <data_file_name>test_dataset/2.wine/wine.data</data_file_name>
+    <data_file_name>test_dataset/1.iris/iris.data</data_file_name>
   
   </settings>
 

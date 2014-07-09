@@ -35,7 +35,7 @@ public class simplekmeans {
 			System.out.println("Error : Loading of arff file");
 		}
 		
-		// kmeans clas object 
+		// kmeans class object 
 		kmeans = new SimpleKMeans();
 		//no of intial seed set // by default it is 10 
 		kmeans.setSeed(set_seed);

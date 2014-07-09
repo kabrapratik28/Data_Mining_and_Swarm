@@ -1,8 +1,6 @@
 package swarm;
 
 import java.util.Vector;
-import java.util.Collections;
-
 //import dataset.Data_reader_from_file;
 
 public class swarm_based_clustering {
@@ -14,12 +12,7 @@ public class swarm_based_clustering {
 	{
 		ClusterFormation = new Vector<>() ; 
 		assign_point_to_cluster(position_of_centroids, points) ;   // assigning of points to respective near cluster
-		/*
-		 * Basic paper by van de merwe : cal_quantization_error
-		 * paper by A.A.A. Esmin : F2 => cal_quantization_error_normalized
-		 *               (BEST=>)  F3 => cal_quantization_error_normalized_more_cluster  
-		 */
-		quantization_error_value  = cal_quantization_error_normalized_more_cluster(ClusterFormation); // quantization error calculated
+		quantization_error_value  = cal_quantization_error(ClusterFormation); // quantization error calculated
 	}
 	
 	public float get_quantization_error_value ()  //to get quantization error value
@@ -40,7 +33,7 @@ public class swarm_based_clustering {
 		distance = (float)Math.sqrt(sumofsquare);
 		return distance ; 
 	}
-
+	
 	public float cal_quantization_error(Vector<cluster> whole_cluster)
 	{
 		/*  *NOT HANDLED YET HANDLE THIS *
@@ -48,7 +41,6 @@ public class swarm_based_clustering {
 		 * suppose one particle near to all points
 		 * another particle is not near to any so 0/0 can occur
 		 */
-
 		float je_quantization_error = 0 ; 
 		float je_quantization_error_numerator = 0 ; 
 		int no_of_cluster = whole_cluster.size() ; 
@@ -71,7 +63,6 @@ public class swarm_based_clustering {
 		 * Check by isNaN(Not a Number) is it infinity 
 		 * if yes set to infinity 
 		 */
-
 		if (Float.isNaN(je_quantization_error))
 		{
 			je_quantization_error = settings.INFINITY ; // set infinity
@@ -83,7 +74,7 @@ public class swarm_based_clustering {
 	public float cal_quantization_error_normalized(Vector<cluster> whole_cluster)
 	{
 		/*
-		 * this is method according to  A.A.A. Esmin paper (f2 formula)
+		 * this is method according to  A.A.A. Esmin paper 
 		 */
 		
 		float je_quantization_error = 0 ; 
@@ -104,13 +95,10 @@ public class swarm_based_clustering {
 					(distance_total_by_one_cluster/total_no_of_point_in_cluster)
 					*
 					/* added by A.A.A. Esmin F2 formula */
-					((float)total_no_of_point_in_cluster/(float)points.size()) // if not make float it will became 0
+					(total_no_of_point_in_cluster/points.size())
 					); 
 		}
-		// bz no denometer now so direct assignment
-		je_quantization_error = je_quantization_error_numerator ; 
-		// removed in the paper of A.A.A. Esmin F2 formula
-		//je_quantization_error = je_quantization_error_numerator  / no_of_cluster ; 
+		je_quantization_error = je_quantization_error_numerator  / no_of_cluster ; 
 		/*
 		 * Float divide zero by zero not throw exception
 		 * Check by isNaN(Not a Number) is it infinity 
@@ -122,59 +110,6 @@ public class swarm_based_clustering {
 		}
 		return je_quantization_error ; 
 	}
-	
-	
-	public float cal_quantization_error_normalized_more_cluster(Vector<cluster> whole_cluster)
-	{
-		/*
-		 * this is method according to  A.A.A. Esmin paper (f3 formula)
-		 */
-		Vector<Integer> no_of_cluster_for_min_max_cal = new Vector<>()  ;
-		float je_quantization_error = 0 ; 
-		float je_quantization_error_numerator = 0 ; 
-		int no_of_cluster = whole_cluster.size() ; 
-		for (int count_cluster=0 ; count_cluster < no_of_cluster ; count_cluster++ )
-		{
-			float distance_total_by_one_cluster = 0 ; 
-			int total_no_of_point_in_cluster = whole_cluster.get(count_cluster).near_points.size() ;
-			// adding point so to finally calculate min point cluster and max point cluster
-			no_of_cluster_for_min_max_cal.add(total_no_of_point_in_cluster);
-			for (int point_counter = 0 ; point_counter < total_no_of_point_in_cluster; point_counter++)
-			{
-				distance_total_by_one_cluster  = 
-						distance_total_by_one_cluster  + 
-						cal_euclidean_distance(whole_cluster.get(count_cluster).near_points.get(point_counter),whole_cluster.get(count_cluster).centroid);
-			}
-			
-			je_quantization_error_numerator  = je_quantization_error_numerator + (
-					(distance_total_by_one_cluster/total_no_of_point_in_cluster)
-					*
-					/* added by A.A.A. Esmin F2 formula */
-					((float)total_no_of_point_in_cluster/(float)points.size()) // if not make float it will became 0
-					); 
-		}
-		// bz no denometer now so direct assignment
-		//F3 formula 			                           //******IMP HERE********
-		je_quantization_error = je_quantization_error_numerator *
-				(
-					Collections.max(no_of_cluster_for_min_max_cal) 
-					- Collections.min(no_of_cluster_for_min_max_cal)
-					+1
-				) ; 
-		// removed in the paper of A.A.A. Esmin F2,F3 formula
-		//je_quantization_error = je_quantization_error_numerator  / no_of_cluster ; 
-		/*
-		 * Float divide zero by zero not throw exception
-		 * Check by isNaN(Not a Number) is it infinity 
-		 * if yes set to infinity 
-		 */
-		if (Float.isNaN(je_quantization_error))
-		{
-			je_quantization_error = settings.INFINITY ; // set infinity
-		}
-		return je_quantization_error ; 
-	}
-	
 	
 	
 	public void assign_point_to_cluster(Vector< Vector <Float> > position_of_centroids, Vector< Vector<Float> > points)
@@ -223,7 +158,7 @@ public class swarm_based_clustering {
 		// TODO Auto-generated method stub
 		
 		//testing 
-		/*
+		/* 
 		Vector <Vector<Float>> cent = new Vector<Vector<Float>>() ;  
 		Vector<Float> onec = new Vector<Float>() ; 
 		onec.add((float)2);
@@ -267,8 +202,7 @@ public class swarm_based_clustering {
 		points.add(onec);
 		
 		// now send data to code 
-		swarm_based_clustering.points = points ; 
-		swarm_based_clustering s1 = new swarm_based_clustering(cent);
+		swarm_based_clustering s1 = new swarm_based_clustering(cent, points);
 		System.out.println(s1.get_quantization_error_value());
 		*/
 

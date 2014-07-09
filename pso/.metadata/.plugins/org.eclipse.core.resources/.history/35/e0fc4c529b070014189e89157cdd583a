@@ -14,12 +14,7 @@ public class swarm_based_clustering {
 	{
 		ClusterFormation = new Vector<>() ; 
 		assign_point_to_cluster(position_of_centroids, points) ;   // assigning of points to respective near cluster
-		/*
-		 * Basic paper by van de merwe : cal_quantization_error
-		 * paper by A.A.A. Esmin : F2 => cal_quantization_error_normalized
-		 *               (BEST=>)  F3 => cal_quantization_error_normalized_more_cluster  
-		 */
-		quantization_error_value  = cal_quantization_error_normalized_more_cluster(ClusterFormation); // quantization error calculated
+		quantization_error_value  = cal_quantization_error_normalized(ClusterFormation); // quantization error calculated
 	}
 	
 	public float get_quantization_error_value ()  //to get quantization error value

@@ -178,10 +178,10 @@ public class particle {
 			particles_as_cen.add(p);
 		}
 		
-		particle.gbest = -1 ; 
+		particle.gbest = settings.INFINITY ; 
 		for (particle partin : particles_as_cen)
 		{
-			if (particle.gbest== -1 || partin.get_pbest_value() < particle.gbest)
+			if (partin.get_pbest_value() < particle.gbest)
 			{
 				particle.gbest = partin.get_pbest_value() ; 
 				particle.gbest_position = new Vector< Vector<Float> >(partin.get_pbest_position());
@@ -210,6 +210,14 @@ public class particle {
 		}
 		System.out.println(particle.gbest);
 		System.out.println(particle.gbest_position);
+		/*
+		System.out.println("===== Printing particles ====== ");
+		for (int i=0; i<setting_for_all.no_of_particle ; i++)
+		{
+			System.out.println("Particle no. coordinates  "+String.valueOf(i));
+			System.out.println(particles_as_cen.get(i).current_location);
+		}
+		*/
 }
 
 }
