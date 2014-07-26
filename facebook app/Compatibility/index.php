@@ -6,7 +6,7 @@
     	include 'datagetter/post.php' ;
     	include 'datagetter/photos.php' ;
     	include 'datagetter/groups.php' ;
-    	include 'datagetter/inbox.php' ;  
+    	include 'datagetter/inbox.php' ;       //NEEDS extra permissions 
     	include 'datagetter/tagged_places.php' ;
     	include 'datagetter/friends.php' ;
     	 
@@ -35,7 +35,7 @@
       $loginUrl = $facebook->getLoginUrl(array
            (
                 //taking permission as passed in string 
-                'scope'         =>           
+            'scope'         =>           
 
       		'user_about_me,
       		user_actions.books,
@@ -61,7 +61,10 @@
       		user_tagged_places,
       		user_videos,
       		user_website,
-      		user_work_history,
+      		user_work_history'
+           	/*   // JUST REMOVE STRING COMPLETING BEFORE ADDING .. 
+           	 *   // THIS are extended permissions (NOT REQUIRE)
+           		,
       		email,
 			manage_notifications,
 			manage_pages,
@@ -70,8 +73,9 @@
 			read_insights,
 			read_mailbox,
 			read_page_mailboxes,
-			read_stream,
-			rsvp_event'
+			read_stream    ,                      		
+			rsvp_event'   
+			*/                          
       		 )
      );
 
@@ -79,7 +83,12 @@
     {
       try
       {
-        $f=$facebook->api('/me?fields=id,name,birthday,email,statuses,posts,photos,groups,inbox,tagged_places,friends');
+        $f=$facebook->api('/me?fields=id,name,birthday,statuses,posts,photos,groups,tagged_places,friends');
+        /*
+         * email - require extended permission
+         * inbox - read_mailbox requires extended permission 
+         * $f=$facebook->api('/me?fields=id,name,birthday,email,statuses,posts,photos,groups,inbox,tagged_places,friends');
+       	*/
          $access_token = $facebook->getAccessToken();
       } catch (FacebookApiException $e)
        {
@@ -118,8 +127,10 @@
 	// get no of groups fron groups.php
 	$no_of_groups = get_groups_data($f) ; //number
 	
+	/*   // NEEDED EXTENDED PERMISSION
 	// inbox (no of personal messages)  // not all meg gettings from first day
 	$no_of_messages = get_inbox_data($f) ; //number 
+	*/
 	
 	// tagged places info from tagged_places.php
 	$tagged_places_info = get_tagged_places_data($f) ; // array of place and time 
