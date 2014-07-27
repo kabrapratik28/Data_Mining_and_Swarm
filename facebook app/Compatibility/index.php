@@ -10,6 +10,7 @@
     	include 'datagetter/tagged_places.php' ;
     	include 'datagetter/friends.php' ;
     	 
+    	include 'database/add_data.php' ; //database add
     	
        //echo '<link href="css/try.css" rel="stylesheet">';
    
@@ -83,6 +84,7 @@
     {
       try
       {
+      	// PLEAse CHANGE THIS ...... ************************
         $f=$facebook->api('/me?fields=id,name,birthday,statuses,posts,photos,groups,tagged_places,friends');
         /*
          * email - require extended permission
@@ -109,6 +111,13 @@
     //print birthday
     echo $f['birthday']."<br/><br/><br/>" ; 
 
+    //add to database table User (id,name,birthday)
+    add_user($f); 
+    
+    $g = $facebook->api('/me?fields=statuses.limit(1).fields(id,message,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000))');
+    extract_status_related_things($g) ; 
+    
+    
     //this is print recursive array 
     //echo print_r($f)."<br/>";
     

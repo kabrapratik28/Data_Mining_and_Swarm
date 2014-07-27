@@ -21,5 +21,6 @@ function get_status_data($facebook_user)
           
           //return array of status array, no of like array, no of comments array 
           return  $array_of_return ; 
-       }
+
+       }	
 ?>       
