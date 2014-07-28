@@ -84,9 +84,9 @@ FOREIGN KEY (group_id) REFERENCES Groups(group_id)
 
 Create Table Photo
 (
-photo_id varchar(50),
 user_id varchar(50),
-photo_caption varchar(50),
+photo_id varchar(50),
+photo_caption varchar(2500),
 place_id varchar(50),
 time_stamp timestamp,
 PRIMARY KEY  (photo_id),
@@ -116,7 +116,8 @@ photo_id varchar(50),
 comment_id varchar(50),
 user_id varchar(50),
 comment  varchar(200),
-like_count integer,
+like_count int,
+time_stamp timestamp,
 PRIMARY KEY (comment_id),
 FOREIGN KEY (photo_id) REFERENCES Photo(photo_id)
 );

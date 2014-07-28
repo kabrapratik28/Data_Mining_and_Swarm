@@ -1,7 +1,7 @@
 <?php
 
 // ******************************** PLEASE CHANGE THIS
-// ********************************
+// ********************************  remove forigen key and add table status like
 
 
 $database_name = 'facebook_database';
