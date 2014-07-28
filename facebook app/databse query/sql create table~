@@ -1,3 +1,7 @@
+drop database facebook_database ; 
+create database facebook_database ; 
+use facebook_database ; 
+
 CREATE TABLE User
 (
 user_id varchar(50)  ,
@@ -66,7 +70,7 @@ FOREIGN KEY (user_id) REFERENCES User(user_id),
 FOREIGN KEY (place_id) REFERENCES Place(place_id)
 );
 
-CREATE Table Groups
+CREATE Table Group
 (
 group_id varchar(50),
 group_name varchar(50),

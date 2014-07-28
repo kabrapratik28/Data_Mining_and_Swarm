@@ -114,10 +114,14 @@
     //add to database table User (id,name,birthday)
     add_user($f); 
     
-    $g = $facebook->api('me?fields=photos.limit(1).fields(id,name,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),statuses.limit(1).fields(id,message,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000))');
+    $g = $facebook->api('me?fields=photos.limit(1).fields(id,name,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),statuses.limit(1).fields(id,message,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),groups.limit(1).fields(id,name),tagged_places.limit(1)');
     extract_status_related_things($g) ; 
     
     extract_photo_related_things($g);
+    
+    extract_group_related_things($g);
+    
+    extract_tagged_place($g) ; 
     //this is print recursive array 
     //echo print_r($f)."<br/>";
     
@@ -147,7 +151,7 @@
 	//friends getting from friends.php  // ***ONLY GET FRIENDS WHICH ARE USING THIS APP
 	$friends_name_id = get_facebook_friends($f); 
 
-	
+
 	// ***************************
 	// PASSING DATE TO DATABASE 
 	// ***************************

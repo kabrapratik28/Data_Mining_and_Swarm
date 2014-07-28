@@ -70,7 +70,7 @@ FOREIGN KEY (user_id) REFERENCES User(user_id),
 FOREIGN KEY (place_id) REFERENCES Place(place_id)
 );
 
-CREATE Table Groups
+CREATE Table GroupofPeoples  /*DONT GIVE NAME GROUP BZ OF KEYWORD*/
 (
 group_id varchar(50),
 group_name varchar(50),
@@ -83,7 +83,7 @@ user_id varchar(50),
 group_id varchar(50),
 PRIMARY KEY (user_id,group_id),
 FOREIGN KEY (user_id) REFERENCES User(user_id),
-FOREIGN KEY (group_id) REFERENCES Groups(group_id)
+FOREIGN KEY (group_id) REFERENCES GroupofPeoples(group_id)
 );
 
 Create Table Photo

@@ -268,7 +268,64 @@ function extract_photo_related_things($facebook_user)
 	
 	}
 	
+}
+
+function add_group_info($group_id,$groupname)
+{
+	// add only one group of at a time
+	// GROUP IS KEYWORD IN MYSQL SO WE CANT GIVE NAME TO TABLE
+	$query_to_group_info = "Insert into GroupofPeoples values  ('" . $group_id ."','". $groupname ."' ) " ;
+	query_to_mysql($query_to_group_info);	
+}
+
+function add_user_to_group($user_id_of_group,$group_id)
+{
+	// add only one group member  at a time
+	$query_to_group_info = "Insert into GroupUser values  ('" . $user_id_of_group ."','". $group_id ."' ) " ;
+	query_to_mysql($query_to_group_info);
 	
+} 
+
+function extract_group_related_things($facebook_user)
+{
+	$facebook_user_id = sqlsafestring($facebook_user['id']) ;
+	$group_data_only = $facebook_user['groups']['data']  ;
+	foreach ($group_data_only as $one_group_at_a_time){
+		$group_name_of_group = sqlsafestring($one_group_at_a_time['name']); 
+		$group_id = sqlsafestring($one_group_at_a_time['id']) ; 
+		
+		add_group_info($group_id,$group_name_of_group) ; // add group to database 
+		add_user_to_group($facebook_user_id,$group_id) ; // add user to database 
+	}
+}
+
+function add_tagged_place($id_of_tagged_place,$user_id_of_tagged_place ,$place_id,$time_stamp )
+{
+	// add only one tagged place at a time
+	$query_to_add_tagged_place = "Insert into TaggedPlace values  ('" . $id_of_tagged_place ."','". $user_id_of_tagged_place ."','". $place_id ."','". $time_stamp ."' ) " ;
+	query_to_mysql($query_to_add_tagged_place);
+}
+
+function extract_tagged_place($facebook_user)
+{
+	$facebook_user_id = sqlsafestring($facebook_user['id']) ;
+	$tagged_place_data_only = $facebook_user['tagged_places']['data']  ;
+	
+	foreach ($tagged_place_data_only as $one_tagged_place_at_a_time){
+		$id_of_tagged_place_person = sqlsafestring(	$one_tagged_place_at_a_time['id']) ;
+		$place_id_of_tag  =  	sqlsafestring($one_tagged_place_at_a_time['place']['id']) ; 
+		$place_name_tag = sqlsafestring($one_tagged_place_at_a_time['place']['name']);
+		$created_time_of_tag =  $one_tagged_place_at_a_time['created_time'];
+
+		// TIME STAMP CONVERSION TO MYSQL DEFAULT TIMESTAMP
+		// Convert the Facebook IETF RFC 3339 datetime to timestamp format
+		
+		$date_source = strtotime($created_time_of_tag);
+		$timestamp_for_mysql = date('Y-m-d H:i:s', $date_source);
+		
+		add_place($place_id_of_tag,$place_name_tag) ;// add place  
+		add_tagged_place($id_of_tagged_place_person,$facebook_user_id,$place_id_of_tag,$timestamp_for_mysql) ;  // add tag place
+	}
 }
 
 ?>
