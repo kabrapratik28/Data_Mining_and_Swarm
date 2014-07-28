@@ -30,9 +30,17 @@ CREATE TABLE StatusTag
 (
 status_id varchar(50) , 
 user_id varchar(50) ,
+PRIMARY KEY (status_id,user_id),
 FOREIGN KEY (status_id) REFERENCES Status(status_id)
 );
 
+Create Table StatusLike
+(
+status_id varchar(50) , 
+user_id varchar(50) ,
+PRIMARY KEY (status_id,user_id),
+FOREIGN KEY (status_id) REFERENCES Status(status_id)
+);
 
 Create Table StatusComment
 (
@@ -69,6 +77,7 @@ Create Table GroupUser
 (
 user_id varchar(50),
 group_id varchar(50),
+PRIMARY KEY (user_id,group_id),
 FOREIGN KEY (user_id) REFERENCES User(user_id),
 FOREIGN KEY (group_id) REFERENCES Groups(group_id)
 );
@@ -87,6 +96,7 @@ Create Table PhotoTag
 (
 photo_id varchar(50),
 user_id varchar(50),
+PRIMARY KEY (photo_id,user_id),
 FOREIGN KEY (photo_id) REFERENCES Photo(photo_id)
 );
  
@@ -94,6 +104,7 @@ Create Table PhotoLike
 (
 photo_id varchar(50),
 user_id varchar(50),
+PRIMARY KEY (photo_id,user_id),
 FOREIGN KEY (photo_id) REFERENCES Photo(photo_id)
 );
 

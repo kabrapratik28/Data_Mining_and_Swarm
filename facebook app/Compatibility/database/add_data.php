@@ -64,11 +64,19 @@ function add_status_tags($status_id, $uid)
 	query_to_mysql($query_to_add_tags);
 }
 
+function add_status_like($status_id, $uid)
+{
+	// add only one like at a time
+	$query_to_add_like = "Insert into StatusLike values  ('" . $status_id ."','". $uid ."') " ;
+	query_to_mysql($query_to_add_like);
+}
+
 function add_status($userid, $idofstatus, $statusmessage , $placeid , $time)
 {
 	$query_to_add_status = "Insert into Status values  ('" . $userid ."','". $idofstatus ."','". $statusmessage ."','". $placeid ."','". $time ."'  ) " ;
 	query_to_mysql($query_to_add_status);
 }
+
 
 function extract_status_related_things($facebook_user)
 {  // Extraction function 
@@ -112,12 +120,11 @@ function extract_status_related_things($facebook_user)
 		}
 			
 		// for likes
-		$likes_of_one_status = $one_status_info ['tags']['data'] ;
-		$array_of_likes_id = array() ;
+		$likes_of_one_status = $one_status_info ['likes']['data'] ;
 		
 		foreach ($likes_of_one_status as $one_like_data)
 		{
-			array_push( $array_of_likes_id ,$one_like_data['id']);
+			add_status_like($id_of_status,$one_like_data['id']) ; 
 		}
 		
 		//for comment
