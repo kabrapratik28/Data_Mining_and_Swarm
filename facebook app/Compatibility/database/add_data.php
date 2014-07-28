@@ -77,6 +77,12 @@ function add_status($userid, $idofstatus, $statusmessage , $placeid , $time)
 	query_to_mysql($query_to_add_status);
 }
 
+function add_comment_of_status($comment_id, $usr_id , $comment_string, $like_count,$created_time,$status_id)
+{
+	// add only one comment of status at a time
+	$query_to_add_comment_of_status = "Insert into StatusComment values  ('" . $status_id ."','". $comment_id ."','". $usr_id ."','". $comment_string ."','". $like_count ."','". $created_time ."' ) " ;
+	query_to_mysql($query_to_add_comment_of_status);
+}
 
 function extract_status_related_things($facebook_user)
 {  // Extraction function 
@@ -88,6 +94,7 @@ function extract_status_related_things($facebook_user)
 //2.STATUS
 //3.STATUS TAGS
 //4.STATUS LIKE TAGS
+//5.STATUS COMMENT'S
 	$facebook_user_id = $facebook_user['id'] ; 
 	$status_array_only = $facebook_user['statuses']['data']  ;
 	
@@ -128,9 +135,25 @@ function extract_status_related_things($facebook_user)
 		}
 		
 		//for comment
+		$comment_data = $one_status_info['comments']['data'] ; 
+		foreach ($comment_data as $one_comment_at_a_time){
+			$comment_id = $one_comment_at_a_time['id'] ; 
+			$user_id_of_comment = $one_comment_at_a_time['from']['id'] ; 
+			$message_of_comment = $one_comment_at_a_time['message'] ;
+			$like_count =  $one_comment_at_a_time['like_count'] ; 
+			$created_time_comment = $one_comment_at_a_time['created_time'] ; 
+			add_comment_of_status($comment_id, $user_id_of_comment , $message_of_comment, $like_count,$created_time_comment,$id_of_status) ; 
+		}
 		
 	}
 	
 
 }
+
+
+function add_photo_data($facebook_user)
+{
+	
+}
+
 ?>
