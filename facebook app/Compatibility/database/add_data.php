@@ -145,6 +145,7 @@ function extract_status_related_things($facebook_user)
 		foreach ($tags_of_one_status as $one_tag_data)
 		{
 			// add tags uid = $one_tag_data['id']    
+			//print_r($one_tag_data) ; 
 			add_status_tags( $id_of_status , sqlsafestring($one_tag_data['id'])) ; 		
 		}
 			
@@ -153,6 +154,7 @@ function extract_status_related_things($facebook_user)
 		
 		foreach ($likes_of_one_status as $one_like_data)
 		{
+			//print_r($one_like_data) ;
 			add_status_like($id_of_status,sqlsafestring($one_like_data['id'])) ;
 		}
 		
@@ -240,6 +242,7 @@ function extract_photo_related_things($facebook_user)
 		foreach ($tags_of_one_photo as $one_tag_data)
 		{
 			// add tags uid = $one_tag_data['id']
+			//print_r($one_tag_data) ;
 			add_photo_tags( $id_of_photo , sqlsafestring($one_tag_data['id'])) ;
 		}
 			
@@ -248,6 +251,7 @@ function extract_photo_related_things($facebook_user)
 	
 		foreach ($likes_of_one_photo as $one_like_data)
 		{
+			//print_r($one_like_data) ;
 			add_photo_like($id_of_photo,$one_like_data['id']) ;
 		}
 	
