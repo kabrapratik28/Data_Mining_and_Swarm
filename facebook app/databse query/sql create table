@@ -126,4 +126,21 @@ PRIMARY KEY (comment_id),
 FOREIGN KEY (photo_id) REFERENCES Photo(photo_id)
 );
 
+Create Table FriendCount
+(
+user_id varchar(50)  ,
+friendcount int,
+FOREIGN KEY (user_id) REFERENCES User(user_id),
+PRIMARY KEY (user_id)
+);
+
+Create Table ProfilePicAndTimeLine
+(
+user_id varchar(50)  ,
+profile_pic_count int,
+cover_pic_count int,
+FOREIGN KEY (user_id) REFERENCES User(user_id),
+PRIMARY KEY (user_id)
+);
+
 

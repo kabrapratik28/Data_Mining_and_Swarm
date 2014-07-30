@@ -70,7 +70,7 @@ FOREIGN KEY (user_id) REFERENCES User(user_id),
 FOREIGN KEY (place_id) REFERENCES Place(place_id)
 );
 
-CREATE Table Group
+CREATE Table GroupofPeoples  /*DONT GIVE NAME GROUP BZ OF KEYWORD*/
 (
 group_id varchar(50),
 group_name varchar(50),
@@ -83,7 +83,7 @@ user_id varchar(50),
 group_id varchar(50),
 PRIMARY KEY (user_id,group_id),
 FOREIGN KEY (user_id) REFERENCES User(user_id),
-FOREIGN KEY (group_id) REFERENCES Groups(group_id)
+FOREIGN KEY (group_id) REFERENCES GroupofPeoples(group_id)
 );
 
 Create Table Photo
@@ -124,6 +124,23 @@ like_count int,
 time_stamp timestamp,
 PRIMARY KEY (comment_id),
 FOREIGN KEY (photo_id) REFERENCES Photo(photo_id)
+);
+
+Create Table FriendCount
+(
+user_id varchar(50)  ,
+friendcount int,
+FOREIGN KEY (user_id) REFERENCES User(user_id),
+PRIMARY KEY (user_id)
+);
+
+Create Table ProfilePicAndTimeLine
+(
+user_id varchar(50)  ,
+profile_pic_count int,
+cover_pic_count int,
+FOREIGN KEY (user_id) REFERENCES User(user_id),
+PRIMARY KEY (user_id)
 );
 
 

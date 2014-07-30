@@ -48,7 +48,7 @@ function query_to_mysql($query_string) {
 
 	// Execute query
 	if (mysqli_query ( $connection, $query )) {
-		echo "successfully" . "<br/>";
+		//echo "successfully" . "<br/>";
 	} else {
 		echo "Error" . mysqli_error ( $connection ) . "<br/>";
 	}
@@ -328,4 +328,55 @@ function extract_tagged_place($facebook_user)
 	}
 }
 
+
+function extract_friend_count($facebook_user)
+{
+	$facebook_user_id = sqlsafestring($facebook_user['id']) ;
+	$count_of_friends = $facebook_user['friends']['summary']['total_count'];
+	
+	// add only friend count
+	$query_to_add_friend_count = "Insert into FriendCount values  ('" . $facebook_user_id ."','". $count_of_friends ."' ) " ;
+	query_to_mysql($query_to_add_friend_count);
+	
+	//Update
+	//IF DATABASE CONTAIN USER THEN UPDATE VALUE  ... bz friends can be added
+	$query_to_update_friend_count = "Update FriendCount set friendcount = '". $count_of_friends ."' where user_id = '".$facebook_user_id."'" ;
+	query_to_mysql($query_to_update_friend_count);
+	
+}
+
+function extract_profile_pic_timeline_count($facebook_user)
+{
+	$facebook_user_id = sqlsafestring($facebook_user['id']) ;
+	$cover_photo_data_only = $facebook_user['albums']['data']  ;
+	$flag_cover = 0 ; 
+	$flag_profile_pic = 0; 
+	$count_of_profile_pic = 0 ; 
+	$count_of_cover_pic = 0 ; 
+	foreach ($cover_photo_data_only as $one_album)
+	{
+		if ($one_album['name']=="Profile Pictures"){
+			$count_of_profile_pic = $one_album['count'] ; 
+			$flag_profile_pic =1;
+		}
+		elseif($one_album['name']=="Cover Photos"){
+			$count_of_cover_pic= $one_album['count'] ;
+			$flag_cover=1; 
+		}
+		
+		if ($flag_cover==1 and $flag_profile_pic==1)
+		{
+			break ; 
+		}
+	}
+	
+	// add only profilepic and cover photo count
+	$query_to_add_count = "Insert into ProfilePicAndTimeLine values  ('" . $facebook_user_id ."','". $count_of_profile_pic ."','".$count_of_cover_pic."' ) " ;
+	query_to_mysql($query_to_add_count);
+	
+	//Update
+	//IF DATABASE CONTAIN USER THEN UPDATE VALUE  ... bz pics can be added
+	$query_to_update_count = "Update ProfilePicAndTimeLine set profile_pic_count = '". $count_of_profile_pic ."',cover_pic_count= '".$count_of_cover_pic."'where user_id = '".$facebook_user_id."'" ;
+	query_to_mysql($query_to_update_count);
+}
 ?>

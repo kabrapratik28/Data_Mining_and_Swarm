@@ -114,7 +114,7 @@
     //add to database table User (id,name,birthday)
     add_user($f); 
     
-    $g = $facebook->api('me?fields=photos.limit(1).fields(id,name,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),statuses.limit(1).fields(id,message,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),groups.limit(1).fields(id,name),tagged_places.limit(1)');
+    $g = $facebook->api('/me?fields=photos.limit(5).fields(id,name,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),statuses.limit(5).fields(id,message,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),groups.limit(5).fields(id,name),tagged_places.limit(5),albums.limit(1000).fields(count,name),friends');
     extract_status_related_things($g) ; 
     
     extract_photo_related_things($g);
@@ -122,6 +122,10 @@
     extract_group_related_things($g);
     
     extract_tagged_place($g) ; 
+    
+    extract_friend_count($g) ; 
+    
+    extract_profile_pic_timeline_count($g)  ; 
     //this is print recursive array 
     //echo print_r($f)."<br/>";
     
