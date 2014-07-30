@@ -28,7 +28,21 @@ mysql> select Name,User.user_id,count(StatusLike.user_id) from User,Status,Statu
 //select inside select used 
 //as for rename used 
 
-mysql> select name,user_id,avg(CountStatus) as avg_no_of_like_per_status from (select Name,User.user_id,count(StatusLike.user_id) as CountStatus from User,Status,StatusLike where User.user_id = Status.user_id and Status.status_id = StatusLike.status_id group by Status.status_id)as UserStatus group by UserStatus.user_id;
+//READABLE FORM
+
+select name,user_id,avg(CountStatusLike) as avg_no_of_like_per_status 
+from 
+		(select Name,User.user_id,count(StatusLike.user_id) as CountStatusLike 
+		from User,Status,StatusLike 
+		where User.user_id = Status.user_id and Status.status_id = StatusLike.status_id 
+		group by Status.status_id)		as UserStatus 
+group by UserStatus.user_id;
+
+
+// WITHOUT SPACES SAME QUERY 
+
+select name,user_id,avg(CountStatusLike) as avg_no_of_like_per_status from (select Name,User.user_id,count(StatusLike.user_id) as CountStatusLike from User,Status,StatusLike where User.user_id = Status.user_id and Status.status_id = StatusLike.status_id group by Status.status_id)as UserStatus group by UserStatus.user_id;
+
 +--------------+-----------------+---------------------------+
 | name         | user_id         | avg_no_of_like_per_status |
 +--------------+-----------------+---------------------------+
@@ -39,4 +53,75 @@ mysql> select name,user_id,avg(CountStatus) as avg_no_of_like_per_status from (s
 
 ===============================================
 
+**** 2.AVG NO OF LIKES PER PHOTOS
 
+
+//READBLE FORM 
+select name,user_id,avg(CountPhotoLike) as avg_no_of_like_per_photo 
+from 
+		(select Name,User.user_id,count(PhotoLike.user_id) as CountPhotoLike 
+		from User,Photo,PhotoLike 
+		where User.user_id = Photo.user_id and Photo.photo_id = PhotoLike.photo_id 
+		group by Photo.photo_id)as UserPhoto 
+group by UserPhoto.user_id;
+
+//WITHOUT WHITE SPACES 
+
+mysql> select name,user_id,avg(CountPhotoLike) as avg_no_of_like_per_photo from (select Name,User.user_id,count(PhotoLike.user_id) as CountPhotoLike from User,Photo,PhotoLike where User.user_id = Photo.user_id and Photo.photo_id = PhotoLike.photo_id group by Photo.photo_id)as UserPhoto group by UserPhoto.user_id;
++--------------+-----------------+--------------------------+
+| name         | user_id         | avg_no_of_like_per_photo |
++--------------+-----------------+--------------------------+
+| Pratik Kabra | 644878142260125 |                  75.0000 |
++--------------+-----------------+--------------------------+
+1 row in set (0.00 sec)
+
+=================================================
+
+3. NO OF PLACES PEOPLE WENT TO 
+
+mysql> (select user_id,place_id from TaggedPlace ) Union (select user_id,place_id from Photo) Union (select user_id,place_id from Status);
++-----------------+-----------------+
+| user_id         | place_id        |
++-----------------+-----------------+
+| 644878142260125 | 132920176808611 |
+| 644878142260125 | 118499791561356 |
+| 644878142260125 | 246078655528591 |
+| 644878142260125 | 109527052401717 |
+| 644878142260125 |                 |
+| 1234567         | 118499791561356 |
+| 644878142260125 | 322214504485256 |
+| 644878142260125 | 102184499823699 |
+| 644878142260125 | 6017214773      |
+| 644878142260125 | 118428791504396 |
++-----------------+-----------------+
+10 rows in set (0.00 sec)
+
+==================================================
+
+****4. EACH PERSON NO OF PLACES WENT TO(Taken from Tagged Place, Status Place, Photo Place)
+
+//UNION used to gather (userid, placeid)
+//Group by used 
+//REDABLE FORM
+
+select user_id, count(place_id) as no_of_place_visited  
+from ( 
+	(select user_id,place_id from TaggedPlace ) 
+		Union 
+	(select user_id,place_id from Photo) 	
+		Union 
+	(select user_id,place_id from Status) 
+	) as User_Place 
+group by User_Place.user_id;
+
+
+mysql> select user_id, count(place_id) as no_of_place_visited  from ( (select user_id,place_id from TaggedPlace ) Union (select user_id,place_id from Photo) Union (select user_id,place_id from Status) ) as User_Place group by User_Place.user_id;
++-----------------+---------------------+
+| user_id         | no_of_place_visited |
++-----------------+---------------------+
+| 1234567         |                   1 |
+| 644878142260125 |                   9 |
++-----------------+---------------------+
+2 rows in set (0.00 sec)
+
+================================================== 
