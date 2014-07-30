@@ -1,0 +1,42 @@
+SQL QURIES (DATA FOR LAST 5 COMMENT ) 
+CREATE VIEW FOR EACH SEPREATLY
+=========================================
+
+0.No of Likes for each status
+// group by used 
+// count used  
+
+mysql> select Name,User.user_id,count(StatusLike.user_id) from User,Status,StatusLike where User.user_id = Status.user_id and Status.status_id = StatusLike.status_id group by Status.status_id;
++--------------+-----------------+---------------------------+
+| Name         | user_id         | count(StatusLike.user_id) |
++--------------+-----------------+---------------------------+
+| Mohit        | 1234567         |                         1 |
+| Pratik Kabra | 644878142260125 |                        74 |
+| Pratik Kabra | 644878142260125 |                        31 |
+| Pratik Kabra | 644878142260125 |                         8 |
+| Pratik Kabra | 644878142260125 |                        41 |
+| Pratik Kabra | 644878142260125 |                        16 |
++--------------+-----------------+---------------------------+
+6 rows in set (0.00 sec)
+
+
+
+===========================================
+
+****1. AVG NO OF LIKES PER STATUS
+
+//select inside select used 
+//as for rename used 
+
+mysql> select name,user_id,avg(CountStatus) as avg_no_of_like_per_status from (select Name,User.user_id,count(StatusLike.user_id) as CountStatus from User,Status,StatusLike where User.user_id = Status.user_id and Status.status_id = StatusLike.status_id group by Status.status_id)as UserStatus group by UserStatus.user_id;
++--------------+-----------------+---------------------------+
+| name         | user_id         | avg_no_of_like_per_status |
++--------------+-----------------+---------------------------+
+| Mohit        | 1234567         |                    1.0000 |
+| Pratik Kabra | 644878142260125 |                   34.0000 |
++--------------+-----------------+---------------------------+
+2 rows in set (0.00 sec)
+
+===============================================
+
+
