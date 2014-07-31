@@ -125,3 +125,95 @@ mysql> select user_id, count(place_id) as no_of_place_visited  from ( (select us
 2 rows in set (0.00 sec)
 
 ================================================== 
+
+5. STATUSES PER WEEK UPDATE INFO 
+
+//for time interval calculation  ==>    http://www.plumislandmedia.net/mysql/sql-reporting-time-intervals/
+//group by 2 things => uid , weekbeging
+//order by week 
+//FROM_DAYS AND TO_DAYS my sql in built function
+
+//READBLE FORM 
+
+SELECT user_id , COUNT(status_id) AS StatusPerWeek , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) AS week_beginning  
+
+FROM Status  
+
+GROUP BY user_id , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) 
+
+ORDER BY FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7));
+
+
+
+mysql> SELECT user_id , COUNT(status_id) AS StatusPerWeek , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) AS week_beginning  FROM Status  GROUP BY user_id , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7))  ORDER BY FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7));
++-----------------+---------------+----------------+
+| user_id         | StatusPerWeek | week_beginning |
++-----------------+---------------+----------------+
+| 644878142260125 |             1 | 2013-08-11     |
+| 1234567         |             2 | 2013-08-11     |
+| 1234567         |             1 | 2013-08-18     |
+| 644878142260125 |             1 | 2013-10-27     |
+| 644878142260125 |             1 | 2013-11-10     |
+| 644878142260125 |             1 | 2013-11-17     |
+| 644878142260125 |             1 | 2014-01-05     |
++-----------------+---------------+----------------+
+7 rows in set (0.00 sec)
+
+======================================================
+
+****6. AVG NO OF STATUSES PER WEEK 
+
+//SAME ABOVE QUERY GROUP BY USER AND AVG STATUSPERWEEK
+
+//READBLE FORM 
+select user_id , AVG(StatusPerWeek) as avg_status_per_week
+FROM
+		(SELECT user_id , COUNT(status_id) AS StatusPerWeek , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) AS 		week_beginning  
+				FROM Status  GROUP BY user_id , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7))  
+				ORDER BY FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7))) 
+		as StatusWeek 
+
+group by user_id;
+
+
+mysql> select user_id , AVG(StatusPerWeek) as avg_status_per_week FROM(SELECT user_id , COUNT(status_id) AS StatusPerWeek , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) AS week_beginning  FROM Status  GROUP BY user_id , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7))  ORDER BY FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7))) as StatusWeek group by user_id;
++-----------------+---------------------+
+| user_id         | avg_status_per_week |
++-----------------+---------------------+
+| 1234567         |              1.5000 |
+| 644878142260125 |              1.0000 |
++-----------------+---------------------+
+2 rows in set (0.00 sec)
+
+========================================================
+
+7.PHOTO WEEK 
+ 
+mysql> SELECT user_id , COUNT(photo_id) AS PhotoPerWeek , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) AS week_beginning  FROM Photo  GROUP BY user_id , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7))  ORDER BY FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) ;
++-----------------+--------------+----------------+
+| user_id         | PhotoPerWeek | week_beginning |
++-----------------+--------------+----------------+
+| 644878142260125 |            1 | 2014-04-06     |
+| 644878142260125 |            2 | 2014-04-20     |
+| 644878142260125 |            1 | 2014-06-08     |
+| 644878142260125 |            1 | 2014-07-13     |
++-----------------+--------------+----------------+
+4 rows in set (0.00 sec)
+
+
+========================================================
+
+****8. AVG NO OF PHOTHOS PER WEEK
+
+mysql> select user_id , AVG(PhotoPerWeek) as avg_photo_per_week FROM(SELECT user_id , COUNT(photo_id) AS PhotoPerWeek , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) AS week_beginning  FROM Photo  GROUP BY user_id , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7))  ORDER BY FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7))) as PhotoWeek group by user_id;
++-----------------+--------------------+
+| user_id         | avg_photo_per_week |
++-----------------+--------------------+
+| 644878142260125 |             1.2500 |
++-----------------+--------------------+
+1 row in set (0.00 sec)
+
+========================================================
+
+
+

@@ -1,0 +1,126 @@
+VIEWS 
+===================================
+0. NO OF STATUS LIKE FOR EACH STATUS 
+
+//READBLE FORM 
+CREATE VIEW no_of_likes_per_status AS
+	select Name,User.user_id,count(StatusLike.user_id) as CountStatusLike 
+		from User,Status,StatusLike 
+		where User.user_id = Status.user_id and Status.status_id = StatusLike.status_id 
+		group by Status.status_id
+
+//QUERY 
+CREATE VIEW no_of_likes_per_status AS select Name,User.user_id,count(StatusLike.user_id) as CountStatusLike from User,Status,StatusLike where User.user_id = Status.user_id and Status.status_id = StatusLike.status_id group by Status.status_id ;
+
+====================================
+
+1. AVG NO OF LIKES PER STATUS
+
+//no_of_likes_per_status VIEW USED
+
+//READABLE FORM
+
+CREATE VIEW avg_likes_per_status AS 
+select name,user_id,avg(CountStatusLike) as avg_no_of_like_per_status 
+from no_of_likes_per_status as UserStatus 
+group by UserStatus.user_id;
+
+
+====================================
+
+2.LIKES FOR PHOTOS
+
+// READBLE FORM
+CREATE VIEW no_of_likes_per_photo AS
+select Name,User.user_id,count(PhotoLike.user_id) as CountPhotoLike 
+		from User,Photo,PhotoLike 
+		where User.user_id = Photo.user_id and Photo.photo_id = PhotoLike.photo_id 
+		group by Photo.photo_id ; 
+
+//WITHOUT SPACE
+CREATE VIEW no_of_likes_per_photo AS select Name,User.user_id,count(PhotoLike.user_id) as CountPhotoLike from User,Photo,PhotoLike where User.user_id = Photo.user_id and Photo.photo_id = PhotoLike.photo_id group by Photo.photo_id ;
+
+==================================
+
+3.AVG NO OF LIKES PER PHOTO
+
+//READBLE FORM 
+CREATE VIEW avg_likes_per_photo AS 
+select name,user_id,avg(CountPhotoLike) as avg_no_of_like_per_photo 
+from no_of_likes_per_photo as UserPhoto 
+group by UserPhoto.user_id;
+
+===================================
+
+4.PLACES PEOPLE WENT TO
+
+CREATE VIEW places_people_went_to AS 
+(select user_id,place_id from TaggedPlace ) Union (select user_id,place_id from Photo) Union (select user_id,place_id from Status);
+
+===================================
+
+5.NO OF PLACES PEOPLE WENT TO 
+
+CREATE VIEW no_of_place_people_went_to AS 
+select user_id, count(place_id) as no_of_place
+from places_people_went_to
+group by user_id ; 
+
+=====================================
+
+6.STATUSES PER WEEK UPDATE INFO 
+
+CREATE VIEW statusweek AS
+SELECT user_id , COUNT(status_id) AS StatusPerWeek , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) AS week_beginning  FROM Status  GROUP BY user_id , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7))  ORDER BY FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7));
+
+=====================================
+
+7. AVG STATUS PER WEEK
+
+CREATE VIEW status_per_week AS
+select user_id , AVG(StatusPerWeek) as avg_status_per_week FROM statusweek group by user_id;
+
+======================================
+
+8.Total Status uptil now
+
+CREATE VIEW total_status AS
+select user_id , COUNT(StatusPerWeek) as total_status FROM statusweek group by user_id;
+
+=======================================
+
+9.PHOTO PER WEEK UPDATE INFO
+
+CREATE VIEW photoweek AS
+SELECT user_id , COUNT(photo_id) AS PhotoPerWeek , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) AS week_beginning  FROM Photo  GROUP BY user_id , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7))  ORDER BY FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) ;
+
+========================================
+
+10.AVG PHOTO PER WEEK
+
+CREATE VIEW photo_per_week AS 
+select user_id , AVG(PhotoPerWeek) as avg_photo_per_week FROM photoweek group by user_id;
+
+========================================
+
+11.TOTAL NO OF PHOTOS
+
+CREATE VIEW total_photo AS 
+select user_id , COUNT(PhotoPerWeek) as total_photo FROM photoweek group by user_id;
+
+=========================================
+
+12. WHOLE INFO IN ONE ******************
+
+CREATE VIEW user_info as
+select User.user_id , avg_no_of_like_per_status , avg_no_of_like_per_photo , no_of_place, avg_status_per_week, total_status.total_status as total_status , avg_photo_per_week, total_photo.total_photo as total_photo, friendcount,profile_pic_count, cover_pic_count
+from User , avg_likes_per_status, avg_likes_per_photo, no_of_place_people_went_to, status_per_week, total_status, photo_per_week,total_photo ,FriendCount , ProfilePicAndTimeLine
+where User.user_id = avg_likes_per_status.user_id 
+and  User.user_id = avg_likes_per_photo.user_id 
+and User.user_id = no_of_place_people_went_to.user_id 
+and User.user_id = status_per_week.user_id 
+and User.user_id = total_status.user_id 
+and User.user_id = photo_per_week.user_id 
+and User.user_id = total_photo.user_id
+and User.user_id = ProfilePicAndTimeLine.user_id
+and User.user_id = FriendCount.user_id;
