@@ -4,13 +4,22 @@ VIEWS
 
 //READBLE FORM 
 CREATE VIEW no_of_likes_per_status AS
-	select Name,User.user_id,count(StatusLike.user_id) as CountStatusLike 
+	select User.user_id,count(StatusLike.user_id) as CountStatusLike 
 		from User,Status,StatusLike 
 		where User.user_id = Status.user_id and Status.status_id = StatusLike.status_id 
 		group by Status.status_id
 
+
+//LEFT JOIN QUERY (FOR SPECIFICATIO SEE PHOTO SECTION)
+CREATE VIEW no_of_likes_per_status AS
+select User.user_id,count(StatusLike.user_id) as CountStatusLike 
+from User 
+LEFT OUTER JOIN Status ON User.user_id = Status.user_id
+LEFT OUTER JOIN StatusLike ON Status.status_id = StatusLike.status_id
+group by Status.status_id ; 
+
 //QUERY 
-CREATE VIEW no_of_likes_per_status AS select Name,User.user_id,count(StatusLike.user_id) as CountStatusLike from User,Status,StatusLike where User.user_id = Status.user_id and Status.status_id = StatusLike.status_id group by Status.status_id ;
+CREATE VIEW no_of_likes_per_status AS select User.user_id,count(StatusLike.user_id) as CountStatusLike from User,Status,StatusLike where User.user_id = Status.user_id and Status.status_id = StatusLike.status_id group by Status.status_id ;
 
 ====================================
 
@@ -21,7 +30,7 @@ CREATE VIEW no_of_likes_per_status AS select Name,User.user_id,count(StatusLike.
 //READABLE FORM
 
 CREATE VIEW avg_likes_per_status AS 
-select name,user_id,avg(CountStatusLike) as avg_no_of_like_per_status 
+select user_id,avg(CountStatusLike) as avg_no_of_like_per_status 
 from no_of_likes_per_status as UserStatus 
 group by UserStatus.user_id;
 
@@ -32,13 +41,60 @@ group by UserStatus.user_id;
 
 // READBLE FORM
 CREATE VIEW no_of_likes_per_photo AS
-select Name,User.user_id,count(PhotoLike.user_id) as CountPhotoLike 
+select User.user_id,count(PhotoLike.user_id) as CountPhotoLike 
 		from User,Photo,PhotoLike 
 		where User.user_id = Photo.user_id and Photo.photo_id = PhotoLike.photo_id 
 		group by Photo.photo_id ; 
 
 //WITHOUT SPACE
-CREATE VIEW no_of_likes_per_photo AS select Name,User.user_id,count(PhotoLike.user_id) as CountPhotoLike from User,Photo,PhotoLike where User.user_id = Photo.user_id and Photo.photo_id = PhotoLike.photo_id group by Photo.photo_id ;
+// DONT USE THIS (NOT A LEFT JOIN )
+CREATE VIEW no_of_likes_per_photo AS select User.user_id,count(PhotoLike.user_id) as CountPhotoLike from User,Photo,PhotoLike where User.user_id = Photo.user_id and Photo.photo_id = PhotoLike.photo_id group by Photo.photo_id ;
+
+//LEFT JOIN USE 
+CREATE VIEW no_of_likes_per_photo AS
+select User.user_id,count(PhotoLike.user_id) as CountPhotoLike 
+from User 
+LEFT OUTER JOIN Photo ON User.user_id = Photo.user_id
+LEFT OUTER JOIN PhotoLike ON Photo.photo_id = PhotoLike.photo_id
+group by Photo.photo_id ; 
+
+//WITHOUT SPACE LEFT JOIN
+CREATE VIEW no_of_likes_per_photo AS select User.user_id,count(PhotoLike.user_id) as CountPhotoLike from User 
+LEFT OUTER JOIN Photo ON User.user_id = Photo.user_id
+LEFT OUTER JOIN PhotoLike ON Photo.photo_id = PhotoLike.photo_id
+group by Photo.photo_id ; 
+
+
+WHY LEFT JOIN ???
+=> BZ PHOTO NOT GET LIKE NOT CONSIDERD IN AVG IN NORMAL CASE 
+=======   EXAMPLE =====================
+mysql> select Name,User.user_id,count(PhotoLike.user_id) as CountPhotoLike from User LEFT OUTER JOIN Photo ON User.user_id = Photo.user_id LEFT OUTER JOIN PhotoLike ON Photo.photo_id = PhotoLike.photo_id group by Photo.photo_id ; 
++--------------+-----------------+----------------+
+| Name         | user_id         | CountPhotoLike |
++--------------+-----------------+----------------+
+| Mohit        | 1234567         |              0 |
+| Pratik Kabra | 644878142260125 |              4 |
+| Pratik Kabra | 644878142260125 |            167 |
+| Pratik Kabra | 644878142260125 |              0 |
+| Pratik Kabra | 644878142260125 |             28 |
+| Pratik Kabra | 644878142260125 |             89 |
+| Pratik Kabra | 644878142260125 |             87 |
++--------------+-----------------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> select Name,User.user_id,count(PhotoLike.user_id) as CountPhotoLike from User,Photo,PhotoLike where User.user_id = Photo.user_id and Photo.photo_id = PhotoLike.photo_id group by Photo.photo_id ;
++--------------+-----------------+----------------+
+| Name         | user_id         | CountPhotoLike |
++--------------+-----------------+----------------+
+| Pratik Kabra | 644878142260125 |              4 |
+| Pratik Kabra | 644878142260125 |            167 |
+| Pratik Kabra | 644878142260125 |             28 |
+| Pratik Kabra | 644878142260125 |             89 |
+| Pratik Kabra | 644878142260125 |             87 |
++--------------+-----------------+----------------+
+5 rows in set (0.00 sec)
+===================== EXAMPLE END ============================
+
 
 ==================================
 
@@ -46,7 +102,7 @@ CREATE VIEW no_of_likes_per_photo AS select Name,User.user_id,count(PhotoLike.us
 
 //READBLE FORM 
 CREATE VIEW avg_likes_per_photo AS 
-select name,user_id,avg(CountPhotoLike) as avg_no_of_like_per_photo 
+select user_id,avg(CountPhotoLike) as avg_no_of_like_per_photo 
 from no_of_likes_per_photo as UserPhoto 
 group by UserPhoto.user_id;
 
@@ -85,7 +141,7 @@ select user_id , AVG(StatusPerWeek) as avg_status_per_week FROM statusweek group
 8.Total Status uptil now
 
 CREATE VIEW total_status AS
-select user_id , COUNT(StatusPerWeek) as total_status FROM statusweek group by user_id;
+select user_id , COUNT(StatusPerWeek) as total_no_of_status FROM statusweek group by user_id;
 
 =======================================
 
@@ -106,21 +162,26 @@ select user_id , AVG(PhotoPerWeek) as avg_photo_per_week FROM photoweek group by
 11.TOTAL NO OF PHOTOS
 
 CREATE VIEW total_photo AS 
-select user_id , COUNT(PhotoPerWeek) as total_photo FROM photoweek group by user_id;
+select user_id , COUNT(PhotoPerWeek) as total_no_of_photo FROM photoweek group by user_id;
 
 =========================================
 
 12. WHOLE INFO IN ONE ******************
+//COLASE USED WHEN NULL GET RETUEN 0 FOR THAT
 
 CREATE VIEW user_info as
-select User.user_id , avg_no_of_like_per_status , avg_no_of_like_per_photo , no_of_place, avg_status_per_week, total_status.total_status as total_status , avg_photo_per_week, total_photo.total_photo as total_photo, friendcount,profile_pic_count, cover_pic_count
-from User , avg_likes_per_status, avg_likes_per_photo, no_of_place_people_went_to, status_per_week, total_status, photo_per_week,total_photo ,FriendCount , ProfilePicAndTimeLine
-where User.user_id = avg_likes_per_status.user_id 
-and  User.user_id = avg_likes_per_photo.user_id 
-and User.user_id = no_of_place_people_went_to.user_id 
-and User.user_id = status_per_week.user_id 
-and User.user_id = total_status.user_id 
-and User.user_id = photo_per_week.user_id 
-and User.user_id = total_photo.user_id
-and User.user_id = ProfilePicAndTimeLine.user_id
-and User.user_id = FriendCount.user_id;
+select User.user_id , User.name , COALESCE(avg_no_of_like_per_status,0) AS avg_no_of_like_per_status , COALESCE(avg_no_of_like_per_photo,0) AS avg_no_of_like_per_photo ,COALESCE(no_of_place,0) AS no_of_place , COALESCE(avg_status_per_week,0) AS avg_status_per_week, COALESCE(total_no_of_status,0) AS total_no_of_status ,COALESCE(avg_photo_per_week,0) AS avg_photo_per_week , COALESCE(total_no_of_photo,0) AS total_no_of_photo, COALESCE(friendcount,0) AS friendcount, COALESCE(profile_pic_count,0) AS profile_pic_count ,COALESCE(cover_pic_count,0) AS cover_pic_count
+
+from User 
+
+LEFT OUTER JOIN avg_likes_per_status ON User.user_id = avg_likes_per_status.user_id 
+LEFT OUTER JOIN avg_likes_per_photo ON User.user_id = avg_likes_per_photo.user_id 
+LEFT OUTER JOIN no_of_place_people_went_to ON User.user_id = no_of_place_people_went_to.user_id 
+LEFT OUTER JOIN status_per_week ON User.user_id = status_per_week.user_id 
+LEFT OUTER JOIN total_status ON User.user_id = total_status.user_id 
+LEFT OUTER JOIN photo_per_week ON User.user_id = photo_per_week.user_id 
+LEFT OUTER JOIN total_photo ON User.user_id = total_photo.user_id
+LEFT OUTER JOIN ProfilePicAndTimeLine ON User.user_id = ProfilePicAndTimeLine.user_id
+LEFT OUTER JOIN FriendCount ON User.user_id = FriendCount.user_id;
+
+============================================

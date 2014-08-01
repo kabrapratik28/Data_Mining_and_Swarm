@@ -1,5 +1,8 @@
 SQL QURIES (DATA FOR LAST 5 COMMENT ) 
 CREATE VIEW FOR EACH SEPREATLY
+**** USE LEFT JOIN FOR                     <== *** because of 1. IF ANY STATUS GET 0 LIKES (IF LEFT JOIN USED NOT CONSIDERD IN 														             AVG)
+	0.STATUSLIKE (1 ALSO CHANGES)          <== IF NO STATUS OR PHOTO UPLOADED WE DIDNT GET ENTRY (NOT BIG ISSUE BZ WE GET LAST 													LEFT JOIN,  WE GET ENTRY) 
+	2.PHOTOLIKE 
 =========================================
 
 0.No of Likes for each status
