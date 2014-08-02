@@ -43,14 +43,15 @@ function query_to_mysql($query_string) {
 	$connection = mysqli_connect ( $host,$superuser_database, $password, $database_name );
 	// Check connection
 	if (mysqli_connect_errno ()) {
-		echo "Failed to connect to MySQL: " . mysqli_connect_error () . "<br/>";
+		//echo "Failed to connect to MySQL: " . mysqli_connect_error () . "<br/>";
 	}
 
 	// Execute query
 	if (mysqli_query ( $connection, $query )) {
 		//echo "successfully" . "<br/>";
 	} else {
-		echo "Error" . mysqli_error ( $connection ) . "<br/>";
+		//echo "Error" . mysqli_error ( $connection ) . "<br/>";
+		//echo "Query : " . $query."<br/>" ."======<br/>";
 	}
 
 	// sql close

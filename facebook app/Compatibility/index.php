@@ -1,7 +1,10 @@
 <html>
+
   <body>
+
+
     <?php
-       
+       /*
     	include 'datagetter/status.php' ; // to get access to all function
     	include 'datagetter/post.php' ;
     	include 'datagetter/photos.php' ;
@@ -9,9 +12,9 @@
     	include 'datagetter/inbox.php' ;       //NEEDS extra permissions 
     	include 'datagetter/tagged_places.php' ;
     	include 'datagetter/friends.php' ;
-    	 
+    	*/ 
     	include 'database/add_data.php' ; //database add
-    	
+    	include 'database/getdata.php';   // get user data
        //echo '<link href="css/try.css" rel="stylesheet">';
    
        $app_id = "759326554108395";
@@ -133,16 +136,16 @@
     //echo print_r($f[statuses])."<br/>";
 
     // get status info from status.php
-    $status_info =  get_status_data($f) ; //array
+    //$status_info =  get_status_data($f) ; //array
       
     //get post info from post.php
-	$posts_info  = get_post_data($f)  ;  //array
+	//$posts_info  = get_post_data($f)  ;  //array
 
 	//get photos from photos.php
-	$photos_info = get_photos_data($f) ;  //array
+	//$photos_info = get_photos_data($f) ;  //array
 	
 	// get no of groups fron groups.php
-	$no_of_groups = get_groups_data($f) ; //number
+	//$no_of_groups = get_groups_data($f) ; //number
 	
 	/*   // NEEDED EXTENDED PERMISSION
 	// inbox (no of personal messages)  // not all meg gettings from first day
@@ -150,18 +153,86 @@
 	*/
 	
 	// tagged places info from tagged_places.php
-	$tagged_places_info = get_tagged_places_data($f) ; // array of place and time 
+	//$tagged_places_info = get_tagged_places_data($f) ; // array of place and time 
 	
 	//friends getting from friends.php  // ***ONLY GET FRIENDS WHICH ARE USING THIS APP
-	$friends_name_id = get_facebook_friends($f); 
-
-
+	//$friends_name_id = get_facebook_friends($f); 
+	
+    $friends_name_id = $g ['friends'] ['data'] ; 
+    function cmp($a, $b)   // assend by name
+    {
+    	return strcmp($a["name"], $b["name"]);
+    }
+    usort($friends_name_id, "cmp");
+    //echo print_r($friends_name_id)."<br/>";
+	foreach ($friends_name_id as $one_friend)
+	{
+		echo $one_friend['name']."<br/><img src='https://graph.facebook.com/".$one_friend['id']."/picture' width='50' height='50'  /><br/>";
+		
+	}
 	// ***************************
 	// PASSING DATE TO DATABASE 
 	// ***************************
 	// $datetoputinmysql = date('Y-m-d', strtotime('02/28/1994')); // "Year-month-date" mysql compatible
 	// ***************************
-	?>
+	
+    $one_user_all_values_array = get_userinfo_from_mysql($f['id']);
+    
+    $user_id_for_app = $one_user_all_values_array['user_id'];
+    $nameofuser = $one_user_all_values_array['name'];
+    $user_avg_like_status  =  $one_user_all_values_array['avg_no_of_like_per_status'] ; 
+    $user_avg_like_photo  =  $one_user_all_values_array['avg_no_of_like_per_photo'] ;
+    $user_no_of_place = $one_user_all_values_array['no_of_place'] ;
+    $user_avg_status_per_week =  $one_user_all_values_array['avg_status_per_week'] ;
+    $user_total_status   =$one_user_all_values_array['total_no_of_status'] ;
+    $user_avg_photo   =$one_user_all_values_array['avg_photo_per_week'] ;
+    $user_total_photo   =$one_user_all_values_array['total_no_of_photo'] ;
+    $user_frnd_cnt   =$one_user_all_values_array['friendcount'];
+    $user_prfile_pic_cnt   =$one_user_all_values_array['profile_pic_count'];
+    $user_cvr_pic_cnt   =$one_user_all_values_array['cover_pic_count'];
+    
+    
+    ?>
+	
+	
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<!--Put the following in the <head>-->
+<script type="text/javascript">
+$("document").ready(function(){
+  $(".js-ajax-php-json").submit(function(){
+    var data = {
+      "action": "getuserinfo"
+    };
+    data = $(this).serialize() + "&" + $.param(data);
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "database/getdata.php", //Relative or absolute path to response.php file
+      data: data,
+      success: function(data) {
+        $(".the-return").html(
+          "JSON: " + data["json"]
+        );
+ 
+        //alert("Form submitted successfully.\nReturned json: " + data["json"]);
+      }
+    });
+    return false;
+  });
+});
+</script>
+	
+	
+<!--Put the following in the <body>-->
+<form action="database/getdata.php" class="js-ajax-php-json" method="post" accept-charset="utf-8">
+  <input type="text" name="user_id_value" value="" placeholder="User id" />  
+  <input type="submit" name="submit" value="Submit form"  />
+</form>
+ 
+<div class="the-return">
+  [HTML is replaced when successful.]
+</div>	
 	
 	<script src="http://connect.facebook.net/en_US/all.js"></script>
 	  <script>
@@ -203,6 +274,5 @@
         onclick="publicresults(); return false;"
         value="Post Results"
       />
-
   </body>
 </html>
