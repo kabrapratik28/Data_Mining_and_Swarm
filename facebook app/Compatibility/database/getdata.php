@@ -63,7 +63,6 @@ function get_user_info_function(){
 		//$return["favorite_restaurant"] = "McDonald's";
 
 		$return = 	get_userinfo_from_mysql($return['user_id_value']) ; 
-	
 		$return["json"] = json_encode($return);
 
 		//THIS ECHO RESULTS WILL FETCH BY JQUERY  ******** SO DONT REMOVE THIS ECHO

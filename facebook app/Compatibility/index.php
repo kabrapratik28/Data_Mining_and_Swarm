@@ -1,5 +1,5 @@
 <html>
-
+<head>  <link rel="stylesheet" type="text/css" href="css/compatibility.css"></head>
   <body>
 
 
@@ -109,10 +109,10 @@
     }
 
     //print name and profile pic
-    echo $f['name']."<br/><img src='https://graph.facebook.com/".$f['id']."/picture' width='50' height='50'  /><br/>";
+    //echo $f['name']."<br/><img src='https://graph.facebook.com/".$f['id']."/picture' width='50' height='50'  /><br/>";
 
     //print birthday
-    echo $f['birthday']."<br/><br/><br/>" ; 
+    //echo $f['birthday']."<br/><br/><br/>" ; 
 
     //add to database table User (id,name,birthday)
     add_user($f); 
@@ -158,44 +158,184 @@
 	//friends getting from friends.php  // ***ONLY GET FRIENDS WHICH ARE USING THIS APP
 	//$friends_name_id = get_facebook_friends($f); 
 	
-    $friends_name_id = $g ['friends'] ['data'] ; 
-    function cmp($a, $b)   // assend by name
-    {
-    	return strcmp($a["name"], $b["name"]);
-    }
-    usort($friends_name_id, "cmp");
-    //echo print_r($friends_name_id)."<br/>";
-	foreach ($friends_name_id as $one_friend)
-	{
-		echo $one_friend['name']."<br/><img src='https://graph.facebook.com/".$one_friend['id']."/picture' width='50' height='50'  /><br/>";
-		
-	}
+
 	// ***************************
 	// PASSING DATE TO DATABASE 
 	// ***************************
 	// $datetoputinmysql = date('Y-m-d', strtotime('02/28/1994')); // "Year-month-date" mysql compatible
 	// ***************************
 	
+    // random no between 0,1 (mt_rand() / mt_getrandmax())
+    
     $one_user_all_values_array = get_userinfo_from_mysql($f['id']);
     
     $user_id_for_app = $one_user_all_values_array['user_id'];
     $nameofuser = $one_user_all_values_array['name'];
+    
     $user_avg_like_status  =  $one_user_all_values_array['avg_no_of_like_per_status'] ; 
+    $randuser_avg_like_status = (mt_rand() / mt_getrandmax())   *10 *   $user_avg_like_status;
+    
     $user_avg_like_photo  =  $one_user_all_values_array['avg_no_of_like_per_photo'] ;
+    $randuser_avg_like_photo =(mt_rand() / mt_getrandmax())   *10 *  user_avg_like_photo;
+    
     $user_no_of_place = $one_user_all_values_array['no_of_place'] ;
-    $user_avg_status_per_week =  $one_user_all_values_array['avg_status_per_week'] ;
-    $user_total_status   =$one_user_all_values_array['total_no_of_status'] ;
-    $user_avg_photo   =$one_user_all_values_array['avg_photo_per_week'] ;
+    $randuser_no_of_place  =(mt_rand() / mt_getrandmax())   *10 *   $user_no_of_place;
+    
+ //   $user_avg_status_per_week =  $one_user_all_values_array['avg_status_per_week'] ;
+  //  $randuser_avg_status_per_week =(mt_rand() / mt_getrandmax())   *10 * $user_avg_status_per_week ;
+    
+   $user_total_status   =$one_user_all_values_array['total_no_of_status'] ;
+    $randuser_total_status =(mt_rand() / mt_getrandmax())   *10 * $user_total_status ;
+    
+ //   $user_avg_photo   =$one_user_all_values_array['avg_photo_per_week'] ;
+  //  $randuser_avg_photo =(mt_rand() / mt_getrandmax())   *10 * $user_avg_photo  ;
+    
     $user_total_photo   =$one_user_all_values_array['total_no_of_photo'] ;
+    $randuser_total_photo =(mt_rand() / mt_getrandmax())   *10 *  $user_total_photo;
+    
     $user_frnd_cnt   =$one_user_all_values_array['friendcount'];
+    $randuser_frnd_cnt  =(mt_rand() / mt_getrandmax())   *10 * $user_frnd_cnt  ;
+    
     $user_prfile_pic_cnt   =$one_user_all_values_array['profile_pic_count'];
+    $randuser_prfile_pic_cnt =(mt_rand() / mt_getrandmax())   *10 * $user_prfile_pic_cnt ;
+    
     $user_cvr_pic_cnt   =$one_user_all_values_array['cover_pic_count'];
+    $randuser_cvr_pic_cnt  =(mt_rand() / mt_getrandmax())   *10 *  $user_cvr_pic_cnt  ;
+    
+echo <<<"INITIAL"
+	<div class="the-return">
+    <div class="container_size">
+    <div class="compatibility_name" >
+	<h1>COMPATIBILITY FINDER</h1>
+      </div>
+
+      <div class="left_user_details">
+
+	<div id="page-wrapper">
+
+	  <h2>$nameofuser</h2>
+	  <p class="styled">
+	    <span style="float : right;">$user_avg_like_status</span>
+	    <progress dir=rtl value="$user_avg_like_status" max="$randuser_avg_like_status" ></progress> <!--dir=rtl for right to left -->
+	  </p>
+
+	  <p class="styled">
+	    <span style="float : right;">$user_avg_like_photo</span>
+	    <progress dir=rtl value="$user_avg_like_photo" max="$randuser_avg_like_photo" ></progress> <!--dir=rtl for right to left -->
+	  </p>
+
+	  <p class="styled">
+	    <span style="float : right;">$user_no_of_place</span>
+	    <progress dir=rtl value="$user_no_of_place" max="$randuser_no_of_place" ></progress> <!--dir=rtl for right to left -->
+	  </p>
+
+	  <p class="styled">
+	    <span style="float : right;">$user_total_status</span>
+	    <progress dir=rtl value="$user_total_status" max="$randuser_total_status" ></progress> <!--dir=rtl for right to left -->
+	  </p>
+
+	  <p class="styled">
+	    <span style="float : right;">$user_total_photo</span>
+	    <progress dir=rtl value="$user_total_photo" max="$randuser_total_photo" ></progress> <!--dir=rtl for right to left -->
+	  </p>
+
+	  <p class="styled">
+	    <span style="float : right;">$user_frnd_cnt</span>
+	    <progress dir=rtl value="$user_frnd_cnt" max="$randuser_frnd_cnt" ></progress> <!--dir=rtl for right to left -->
+	  </p>
+
+	  <p class="styled">
+	    <span style="float : right;">$user_prfile_pic_cnt</span>
+	    <progress dir=rtl value="$user_prfile_pic_cnt" max="$randuser_prfile_pic_cnt" ></progress> <!--dir=rtl for right to left -->
+	  </p>
+
+	  <p class="styled">
+	    <span style="float : right;">$user_cvr_pic_cnt</span>
+	    <progress dir=rtl value="$user_cvr_pic_cnt" max="$randuser_cvr_pic_cnt" ></progress> <!--dir=rtl for right to left -->
+	  </p>
+
+	</div><!-- page wrapper ends  -->
+      </div><!-- user left ends  -->
+
+      <div class="middle_comparision_name">
+	<div id="page-wrapper">
+
+	  <h2>No of Pramameter</h2>
+	  
+	  <p>Average No of likes per Status<p>
+	    <br>
+	  <p>Average No of likes per Photo<p> 
+	    <br>  
+	  <p>No of Places Went to<p> 
+	    <br>  
+	  <p>Total No of Status<p> 
+	    <br> 
+	  <p>Total No of Photo<p> 
+	    <br>
+	  <p>No of Friend<p> 
+	    <br>
+	  <p>Profile Picture Count<p> 
+	    <br>
+	  <p>Cover Picture Count<p> 
+	    <br>
+	    
+	</div>
+      </div>
+
+      <div class="right_user_details" style="overflow-y : scroll;">
+	<div id="page-wrapper">
+	    <form action="database/getdata.php" class="js-ajax-php-json" method="post" accept-charset="utf-8" >
+	     
+	    <div class="buttonHolder">
+	     <input type="submit" name="submit" value="Compare !!!"  class="button_example"/><br><br>
+	    </div>
+	     
+INITIAL;
+    
+    $friends_name_id = $g ['friends'] ['data'] ;
+    function cmp($a, $b)   // assend by name
+    {
+    	return strcmp($a["name"], $b["name"]);
+    }
+    usort($friends_name_id, "cmp");
+    //echo print_r($friends_name_id)."<br/>";
     
     
-    ?>
-	
+    foreach ($friends_name_id as $one_friend)
+    {
+    	$id_of_one_friend = $one_friend['id'] ;
+    	echo <<<"FORMMIDDLE"
+<input type="radio" name="user_id_value" value="$id_of_one_friend">
+FORMMIDDLE;
+    	echo $one_friend['name']."  <img src='https://graph.facebook.com/".$id_of_one_friend."/picture' width='50' height='50'  /><br/><br/>";
+    }
+    
+echo <<<"FORMEND"
+    
+	</div><!-- page wrapper ends  -->
+      </div><!-- user right ends  -->
+
+    </div>
+    			
+</div><!-- upto this replace take place -->
+FORMEND;
+    
+    
+    ?> 
 	
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script type="text/javascript">
+  var fir_user_name = "<?php echo $nameofuser; ?>";
+  var fir_avg_like_of_stat = "<?php echo $user_avg_like_status; ?>";
+  var fir_avg_like_of_photo = "<?php echo $user_avg_like_photo; ?>";
+  var fir_no_of_place = "<?php echo $user_no_of_place; ?>";
+  var fir_total_status = "<?php echo $user_total_status; ?>";
+  var fir_total_no_of_photo= "<?php echo $user_total_photo; ?>";
+  var fir_friendcount = "<?php echo $user_frnd_cnt; ?>";
+  var fir_profile_pic_count = "<?php echo $user_prfile_pic_cnt; ?>";
+  var fir_cover_pic_count = "<?php echo $user_cvr_pic_cnt; ?>";
+</script>
 
 <!--Put the following in the <head>-->
 <script type="text/javascript">
@@ -211,8 +351,145 @@ $("document").ready(function(){
       url: "database/getdata.php", //Relative or absolute path to response.php file
       data: data,
       success: function(data) {
-        $(".the-return").html(
-          "JSON: " + data["json"]
+
+    	  var sec_user_name = (data['name' ]).toString() ; 
+    	  var sec_avg_like_of_stat = data['avg_no_of_like_per_status'];
+ 		  var sec_avg_like_of_photo  = data['avg_no_of_like_per_photo'] ; 	
+     	  var sec_no_of_place = data['no_of_place'] ; 
+     	  var sec_total_status = data['total_no_of_status'] ; 
+     	  var sec_total_no_of_photo = data['total_no_of_photo']  ; 
+     	  var sec_friendcount = data['friendcount'] ; 
+     	  var sec_profile_pic_count = data['profile_pic_count'] ; 
+     	  var sec_cover_pic_count = data['cover_pic_count'];
+
+     		var total_avg_like_of_stat = ( parseFloat(fir_avg_like_of_stat)   + parseFloat( sec_avg_like_of_stat) ).toString();  
+    		var total_avg_like_of_photo = ( parseFloat(fir_avg_like_of_photo) + parseFloat( sec_avg_like_of_photo)).toString();
+    		var total_no_of_place =( parseFloat(fir_no_of_place) + parseFloat(sec_no_of_place )).toString();
+    		var total_total_status = (parseFloat(fir_total_status)  + parseFloat(sec_total_status)).toString();
+    		var total_total_no_of_photo = (parseFloat(fir_total_no_of_photo) + parseFloat(sec_total_no_of_photo)).toString()  ;
+    		var total_friendcount = (parseFloat(fir_friendcount) + parseFloat(sec_friendcount) ).toString();
+    		var total_profile_pic_count =(parseFloat(fir_profile_pic_count) + parseFloat(sec_profile_pic_count)).toString() ; 
+    		var total_cover_pic_count =( parseFloat(fir_cover_pic_count) +  parseFloat(sec_cover_pic_count)).toString() ;
+
+     	  
+          $(".the-return").html(
+
+        		    "<div class=\"container_size\">\
+\
+        		      <div class=\"compatibility_name\" >\
+        			<h1>COMPATIBILITY FINDER</h1>\
+        		      </div>\
+\
+        		      <div class=\"left_user_details\">\
+\
+        			<div id=\"page-wrapper\">\
+\
+        			  <h2>"+fir_user_name+"</h2>\
+\
+\
+        			  <p class=\"styled\">\
+        			    <span style=\"float : right;\">"+fir_avg_like_of_stat+"</span>\
+        			    <progress dir=rtl value=\""+fir_avg_like_of_stat+"\" max=\""+total_avg_like_of_stat+"\" ></progress> <!--dir=rtl for right to left -->\
+        			  </p>\
+        			  <p class=\"styled\">\
+      			   	 	<span style=\"float : right;\">"+fir_avg_like_of_photo+"</span>\
+      			    	<progress dir=rtl value=\""+fir_avg_like_of_photo+"\" max=\""+total_avg_like_of_photo+"\" ></progress> <!--dir=rtl for right to left -->\
+      			  	  </p>\
+        			  <p class=\"styled\">\
+    			   	 	<span style=\"float : right;\">"+fir_no_of_place+"</span>\
+    			    	<progress dir=rtl value=\""+fir_no_of_place+"\" max=\""+total_no_of_place+"\" ></progress> <!--dir=rtl for right to left -->\
+    			  	  </p>\
+        			  <p class=\"styled\">\
+    			   	 	<span style=\"float : right;\">"+fir_total_status+"</span>\
+    			    	<progress dir=rtl value=\""+fir_total_status+"\" max=\""+total_total_status+"\" ></progress> <!--dir=rtl for right to left -->\
+    			  	  </p>\
+        			  <p class=\"styled\">\
+    			   	 	<span style=\"float : right;\">"+fir_total_no_of_photo+"</span>\
+    			    	<progress dir=rtl value=\""+fir_total_no_of_photo+"\" max=\""+total_total_no_of_photo+"\" ></progress> <!--dir=rtl for right to left -->\
+    			  	  </p>\
+        			  <p class=\"styled\">\
+    			   	 	<span style=\"float : right;\">"+fir_friendcount+"</span>\
+    			    	<progress dir=rtl value=\""+fir_friendcount+"\" max=\""+total_friendcount+"\" ></progress> <!--dir=rtl for right to left -->\
+    			  	  </p>\
+        			  <p class=\"styled\">\
+    			   	 	<span style=\"float : right;\">"+fir_profile_pic_count+"</span>\
+    			    	<progress dir=rtl value=\""+fir_profile_pic_count+"\" max=\""+total_profile_pic_count+"\" ></progress> <!--dir=rtl for right to left -->\
+    			  	  </p>\
+        			  <p class=\"styled\">\
+    			   	 	<span style=\"float : right;\">"+fir_cover_pic_count+"</span>\
+    			    	<progress dir=rtl value=\""+fir_cover_pic_count+"\" max=\""+total_cover_pic_count+"\" ></progress> <!--dir=rtl for right to left -->\
+    			  	  </p>\
+\
+        			</div><!-- page wrapper ends  -->\
+        		      </div><!-- user left ends  -->\
+\
+        		      <div class=\"middle_comparision_name\">\
+        			<div id=\"page-wrapper\">\
+\
+        			  <h2>No of Pramameter</h2>\
+        			  \
+\
+        			  <p>Average No of likes per Status<p>\
+        			    <br>\
+        			  <p>Average No of likes per Photo<p> \
+        			    <br>   \
+        			  <p>No of Places Went to<p> \
+        			    <br>  \
+        			  <p>Total No of Status<p> \
+        			    <br> \
+        			  <p>Total No of Photo<p> \
+        			    <br>\
+        			  <p>No of Friend<p> \
+        			    <br>\
+        			  <p>Profile Picture Count<p> \
+        			    <br>\
+        			  <p>Cover Picture Count<p> \
+        			    <br>\
+        			    \
+        			</div>\
+        		      </div>\
+\
+        		      <div class=\"right_user_details\">\
+        			<div id=\"page-wrapper\">\
+\
+        			  <h2>"+sec_user_name+"</h2>\
+\
+\
+<p class=\"styledd\">\
+  <span style=\"float : left;\">"+sec_avg_like_of_stat+"</span>\
+  <progress value=\""+sec_avg_like_of_stat+"\" max=\""+total_avg_like_of_stat+"\"></progress>\
+</p>\
+<p class=\"styledd\">\
+	<span style=\"float : left;\">"+sec_avg_like_of_photo+"</span>\
+	<progress value=\""+sec_avg_like_of_photo+"\" max=\""+total_avg_like_of_photo+"\"></progress>\
+	  </p>\
+<p class=\"styledd\">\
+	<span style=\"float : left;\">"+sec_no_of_place+"</span>\
+	<progress value=\""+sec_no_of_place+"\" max=\""+total_no_of_place+"\"></progress>\
+  </p>\
+<p class=\"styledd\">\
+<span style=\"float : left;\">"+sec_total_status+"</span>\
+<progress value=\""+sec_total_status+"\" max=\""+total_total_status+"\"></progress>\
+</p>\
+<p class=\"styledd\">\
+<span style=\"float : left;\">"+sec_total_no_of_photo+"</span>\
+<progress value=\""+sec_total_no_of_photo+"\" max=\""+total_total_no_of_photo+"\"></progress>\
+</p>\
+<p class=\"styledd\">\
+	<span style=\"float : left;\">"+sec_friendcount+"</span>\
+	<progress value=\""+sec_friendcount+"\" max=\""+total_friendcount+"\"></progress>\
+  </p>\
+<p class=\"styledd\">\
+<span style=\"float : left;\">"+sec_profile_pic_count+"</span>\
+<progress value=\""+sec_profile_pic_count+"\" max=\""+total_profile_pic_count+"\"></progress>\
+</p>\
+<p class=\"styledd\">\
+<span style=\"float : left;\">"+sec_cover_pic_count+"</span>\
+<progress value=\""+sec_cover_pic_count+"\" max=\""+total_cover_pic_count+"\"></progress>\
+</p>\
+</div><!-- page wrapper ends  -->  \
+</div><!-- user right ends  -->  \
+</div>"
         );
  
         //alert("Form submitted successfully.\nReturned json: " + data["json"]);
@@ -224,15 +501,7 @@ $("document").ready(function(){
 </script>
 	
 	
-<!--Put the following in the <body>-->
-<form action="database/getdata.php" class="js-ajax-php-json" method="post" accept-charset="utf-8">
-  <input type="text" name="user_id_value" value="" placeholder="User id" />  
-  <input type="submit" name="submit" value="Submit form"  />
-</form>
- 
-<div class="the-return">
-  [HTML is replaced when successful.]
-</div>	
+<br/><br/><br/>
 	
 	<script src="http://connect.facebook.net/en_US/all.js"></script>
 	  <script>
@@ -264,15 +533,17 @@ $("document").ready(function(){
 
 			}
 	  </script>
-      
+	  <br/>
+      <div class="button_example">
       <input type="button"
         onclick="invitefriends(); return false;"
         value="Send Request to Friends"
-      /><br/><br/><br/>
+      /><br/>
       
       <input type="button"
         onclick="publicresults(); return false;"
         value="Post Results"
       />
+      </div>
   </body>
 </html>
