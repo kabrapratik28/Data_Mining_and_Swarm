@@ -1,5 +1,8 @@
 <html>
-<head>  <link rel="stylesheet" type="text/css" href="css/compatibility.css"></head>
+<head> 
+<link rel="stylesheet" type="text/css" href="css/compatibility.css">
+
+</head>
   <body>
 
 
@@ -40,8 +43,14 @@
            (
                 //taking permission as passed in string 
             'scope'         =>           
-
-      		'user_about_me,
+			'user_birthday,
+             user_friends,
+             user_status,
+      		 user_groups,
+             user_photos,
+      		 user_tagged_places'
+          
+      		/*'user_about_me,
       		user_actions.books,
       		user_actions.music,
       		user_actions.news,
@@ -65,7 +74,7 @@
       		user_tagged_places,
       		user_videos,
       		user_website,
-      		user_work_history'
+      		user_work_history'*/
            	/*   // JUST REMOVE STRING COMPLETING BEFORE ADDING .. 
            	 *   // THIS are extended permissions (NOT REQUIRE)
            		,
@@ -88,7 +97,7 @@
       try
       {
       	// PLEAse CHANGE THIS ...... ************************
-        $f=$facebook->api('/me?fields=id,name,birthday,statuses,posts,photos,groups,tagged_places,friends');
+        $g=$facebook->api('me?fields=id,name,birthday,photos.limit(50000).fields(id,name,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),statuses.limit(50000).fields(id,message,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),groups.limit(50000).fields(id,name),tagged_places.limit(50000),albums.limit(50000).fields(count,name),friends');
         /*
          * email - require extended permission
          * inbox - read_mailbox requires extended permission 
@@ -109,15 +118,15 @@
     }
 
     //print name and profile pic
-    //echo $f['name']."<br/><img src='https://graph.facebook.com/".$f['id']."/picture' width='50' height='50'  /><br/>";
+    //echo $g['name']."<br/><img src='https://graph.facebook.com/".$g['id']."/picture' width='50' height='50'  /><br/>";
 
     //print birthday
-    //echo $f['birthday']."<br/><br/><br/>" ; 
+    //echo $g['birthday']."<br/><br/><br/>" ; 
 
     //add to database table User (id,name,birthday)
-    add_user($f); 
+    add_user($g); 
     
-    $g = $facebook->api('/me?fields=photos.limit(5).fields(id,name,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),statuses.limit(5).fields(id,message,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),groups.limit(5).fields(id,name),tagged_places.limit(5),albums.limit(1000).fields(count,name),friends');
+    //$g = $facebook->api('/me?fields=photos.limit(5).fields(id,name,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),statuses.limit(5).fields(id,message,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),groups.limit(5).fields(id,name),tagged_places.limit(5),albums.limit(1000).fields(count,name),friends');
     extract_status_related_things($g) ; 
     
     extract_photo_related_things($g);
@@ -130,33 +139,33 @@
     
     extract_profile_pic_timeline_count($g)  ; 
     //this is print recursive array 
-    //echo print_r($f)."<br/>";
+    //echo print_r($g)."<br/>";
     
     //recursive print statues
-    //echo print_r($f[statuses])."<br/>";
+    //echo print_r($g[statuses])."<br/>";
 
     // get status info from status.php
-    //$status_info =  get_status_data($f) ; //array
+    //$status_info =  get_status_data($g) ; //array
       
     //get post info from post.php
-	//$posts_info  = get_post_data($f)  ;  //array
+	//$posts_info  = get_post_data($g)  ;  //array
 
 	//get photos from photos.php
-	//$photos_info = get_photos_data($f) ;  //array
+	//$photos_info = get_photos_data($g) ;  //array
 	
 	// get no of groups fron groups.php
-	//$no_of_groups = get_groups_data($f) ; //number
+	//$no_of_groups = get_groups_data($g) ; //number
 	
 	/*   // NEEDED EXTENDED PERMISSION
 	// inbox (no of personal messages)  // not all meg gettings from first day
-	$no_of_messages = get_inbox_data($f) ; //number 
+	$no_of_messages = get_inbox_data($g) ; //number 
 	*/
 	
 	// tagged places info from tagged_places.php
-	//$tagged_places_info = get_tagged_places_data($f) ; // array of place and time 
+	//$tagged_places_info = get_tagged_places_data($g) ; // array of place and time 
 	
 	//friends getting from friends.php  // ***ONLY GET FRIENDS WHICH ARE USING THIS APP
-	//$friends_name_id = get_facebook_friends($f); 
+	//$friends_name_id = get_facebook_friends($g); 
 	
 
 	// ***************************
@@ -167,7 +176,7 @@
 	
     // random no between 0,1 (mt_rand() / mt_getrandmax())
     
-    $one_user_all_values_array = get_userinfo_from_mysql($f['id']);
+    $one_user_all_values_array = get_userinfo_from_mysql($g['id']);
     
     $user_id_for_app = $one_user_all_values_array['user_id'];
     $nameofuser = $one_user_all_values_array['name'];
@@ -207,6 +216,8 @@ echo <<<"INITIAL"
     <div class="container_size">
     <div class="compatibility_name" >
 	<h1>COMPATIBILITY FINDER</h1>
+	<h4><font color="red">Send request to your friends. Once they accept app request, you can Compare with them.  </font></h4>
+	<h5><font color="red">(See bottom left button for sending request)</font></h5>
       </div>
 
       <div class="left_user_details">
@@ -299,17 +310,31 @@ INITIAL;
     }
     usort($friends_name_id, "cmp");
     //echo print_r($friends_name_id)."<br/>";
-    
-    
-    foreach ($friends_name_id as $one_friend)
+    //$friends_name_id = array() ; 
+    //echo count($friends_name_id) ; 
+    if (count($friends_name_id)!=0)
     {
+   		 foreach ($friends_name_id as $one_friend)
+    	{
     	$id_of_one_friend = $one_friend['id'] ;
     	echo <<<"FORMMIDDLE"
 <input type="radio" name="user_id_value" value="$id_of_one_friend">
 FORMMIDDLE;
     	echo $one_friend['name']."  <img src='https://graph.facebook.com/".$id_of_one_friend."/picture' width='50' height='50'  /><br/><br/>";
+    	}
+    }else {
+
+    	echo <<<"NOTICE"
+    	<h3><font color="red">Send request to your friends. Once they accept app request, you can Compare with them. </font></h3>
+    <div class="button_example">
+      <input type="button"
+        onclick="invitefriends(); return false;"
+        value="Send Request to Friends"
+      /><br/>
+    	</div>
+NOTICE;
+    	
     }
-    
 echo <<<"FORMEND"
     
 	</div><!-- page wrapper ends  -->
@@ -489,7 +514,7 @@ $("document").ready(function(){
 </p>\
 </div><!-- page wrapper ends  -->  \
 </div><!-- user right ends  -->  \
-</div>"
+</div>" 
         );
  
         //alert("Form submitted successfully.\nReturned json: " + data["json"]);
