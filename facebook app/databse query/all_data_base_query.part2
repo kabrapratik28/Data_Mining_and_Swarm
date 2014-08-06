@@ -9,7 +9,7 @@ CREATE VIEW status_per_week AS
 select user_id , AVG(StatusPerWeek) as avg_status_per_week FROM statusweek group by user_id;
 
 CREATE VIEW total_status AS
-select user_id , COUNT(StatusPerWeek) as total_no_of_status FROM statusweek group by user_id;
+select user_id , SUM(StatusPerWeek) as total_no_of_status FROM statusweek group by user_id;
 
 CREATE VIEW photoweek AS
 SELECT user_id , COUNT(photo_id) AS PhotoPerWeek , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) AS week_beginning  FROM Photo  GROUP BY user_id , FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7))  ORDER BY FROM_DAYS(TO_DAYS(time_stamp) -MOD(TO_DAYS(time_stamp) -1, 7)) ;
@@ -18,7 +18,7 @@ CREATE VIEW photo_per_week AS
 select user_id , AVG(PhotoPerWeek) as avg_photo_per_week FROM photoweek group by user_id;
 
 CREATE VIEW total_photo AS 
-select user_id , COUNT(PhotoPerWeek) as total_no_of_photo FROM photoweek group by user_id;
+select user_id , SUM(PhotoPerWeek) as total_no_of_photo FROM photoweek group by user_id;
 
 CREATE VIEW user_info as
 select User.user_id , User.name , COALESCE(avg_no_of_like_per_status,0) AS avg_no_of_like_per_status , COALESCE(avg_no_of_like_per_photo,0) AS avg_no_of_like_per_photo ,COALESCE(no_of_place,0) AS no_of_place , COALESCE(avg_status_per_week,0) AS avg_status_per_week, COALESCE(total_no_of_status,0) AS total_no_of_status ,COALESCE(avg_photo_per_week,0) AS avg_photo_per_week , COALESCE(total_no_of_photo,0) AS total_no_of_photo, COALESCE(friendcount,0) AS friendcount, COALESCE(profile_pic_count,0) AS profile_pic_count ,COALESCE(cover_pic_count,0) AS cover_pic_count
