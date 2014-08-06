@@ -1,0 +1,11 @@
+HTTPS enable (SSL enable)
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-ubuntu-12-04
+
+NEVER USED SELF SIGNED SSL
+
+http://www.sslshopper.com/article-how-to-create-and-install-an-apache-self-signed-certificate.html
+
+SSL (NOT SELF SIGNED)
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-with-a-free-signed-ssl-certificate-on-a-vps
