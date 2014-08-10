@@ -48,7 +48,6 @@
 			'user_birthday,
              user_friends,
              user_status,
-      		 user_groups,
              user_photos,
       		 user_tagged_places'
           
@@ -99,7 +98,7 @@
       try
       {
       	// PLEAse CHANGE THIS ...... ************************
-        $g=$facebook->api('me?fields=id,name,birthday,photos.limit(50000).fields(id,name,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),statuses.limit(50000).fields(id,message,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),groups.limit(50000).fields(id,name),tagged_places.limit(50000),albums.limit(50000).fields(count,name),friends');
+        $g=$facebook->api('me?fields=id,name,birthday,photos.limit(50000).fields(id,name,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),statuses.limit(50000).fields(id,message,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),tagged_places.limit(50000),albums.limit(50000).fields(count,name),friends.limit(1000)');
         /*
          * email - require extended permission
          * inbox - read_mailbox requires extended permission 
@@ -133,7 +132,7 @@
     
     extract_photo_related_things($g);
     
-    extract_group_related_things($g);
+    //extract_group_related_things($g);
     
     extract_tagged_place($g) ; 
     
