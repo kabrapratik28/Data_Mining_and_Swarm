@@ -147,7 +147,7 @@ public class particle {
 		//settings settings_for_now = new settings(3,(float)0.72,(float)1.49,(float)1.49);
 		
 		// Setting taken from xml file 
-		xml_file_reader swarm_xml_reader = new xml_file_reader("swarm.xml") ; 
+		xml_file_reader swarm_xml_reader = new xml_file_reader("settings/swarm.xml") ; 
 		particle.setting_for_all = swarm_xml_reader.get_settings() ; // set settings	
 
 		data_reader_from_file d1  = new data_reader_from_file(particle.setting_for_all.file_name,",") ; 

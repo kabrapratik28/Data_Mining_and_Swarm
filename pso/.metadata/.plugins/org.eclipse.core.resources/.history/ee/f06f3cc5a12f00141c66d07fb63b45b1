@@ -1,0 +1,78 @@
+package dataset;
+
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+
+public class database_connectivity {
+	
+	Connection connect = null;
+	java.sql.Statement statement = null;
+	java.sql.PreparedStatement prepared_statement = null;
+
+	ResultSet resultSet = null;
+	
+	public database_connectivity(String Host, String Port, String Database_name, String User_name_of_database, String Password_of_user)
+	{
+		 try {
+				Class.forName("com.mysql.jdbc.Driver"); //loading driver
+				
+				String url =  "jdbc:mysql://"+Host+":"+Port+"/"+ Database_name; 
+				String username = User_name_of_database; 
+				String password = Password_of_user;
+				
+				//connecting 
+				connect = DriverManager.getConnection(url, username, password);
+				
+				// Statements allow to issue SQL queries to the database
+			    statement = connect.createStatement();
+		 }
+		 catch (Exception e) 
+		 {
+					// TODO Auto-generated catch block
+					System.out.println("Error : DATABASE OPEN PROBLEM !!!");
+		 }
+	}
+	
+	public void query_set_to_prepare_statement(String statement_of_query)
+	{
+		try {
+			prepared_statement = connect.prepareStatement(statement_of_query);  
+			//prepared statement optimized for parameterized query 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void excute_given_statement()
+	{
+		
+	}
+	
+	public void closedatabaseconnection()
+	{
+		 try {
+			 resultSet.close() ; 
+			 statement.close() ; 
+			 connect.close() ; 
+		 }
+		 catch (Exception e) 
+		 {
+					// TODO Auto-generated catch block
+					System.out.println("DATABASE CLOSE PROBLEM !!!");
+		 }
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		database_connectivity d1 = new database_connectivity("localhost", "3306", "facebook_database", "root", "pratik");
+		
+		d1.closedatabaseconnection() ; 
+	}
+
+}

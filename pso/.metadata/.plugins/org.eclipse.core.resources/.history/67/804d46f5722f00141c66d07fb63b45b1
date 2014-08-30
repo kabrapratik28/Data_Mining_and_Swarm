@@ -1,0 +1,23 @@
+package feature_extraction;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+
+public class linguistic_miner_of_text {
+	File liwcCatFile;
+	LIWCDictionaryHelper liwcDic;
+	public linguistic_miner_of_text(String LIWC_dictionary_file_location)
+	{
+		liwcCatFile = new File(LIWC_dictionary_file_location);
+		liwcDic = new LIWCDictionaryHelper(liwcCatFile);
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
