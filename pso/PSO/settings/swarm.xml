@@ -5,7 +5,7 @@
     
     <no_of_particle>10</no_of_particle>
 
-    <no_of_cluster>3</no_of_cluster>
+    <no_of_cluster>2</no_of_cluster>
 
     <w_inertia>0.72</w_inertia>
 

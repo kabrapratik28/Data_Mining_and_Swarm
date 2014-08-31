@@ -3,6 +3,7 @@ package swarm;
 import java.util.Vector;
 
 import dataset.data_reader_from_file;
+import dataset.database_connectivity;
 import dataset.xml_file_reader;
 
 public class particle {	
@@ -147,13 +148,19 @@ public class particle {
 		//settings settings_for_now = new settings(3,(float)0.72,(float)1.49,(float)1.49);
 		
 		// Setting taken from xml file 
-		xml_file_reader swarm_xml_reader = new xml_file_reader("swarm.xml") ; 
+		xml_file_reader swarm_xml_reader = new xml_file_reader("settings/swarm.xml") ; 
 		particle.setting_for_all = swarm_xml_reader.get_settings() ; // set settings	
-
+		// this is for data reading from file
+		/*
 		data_reader_from_file d1  = new data_reader_from_file(particle.setting_for_all.file_name,",") ; 
 		swarm_based_clustering.points = d1.get_dataset() ; 
 		random_particle_generator r1 = new random_particle_generator(particle.setting_for_all.no_of_cluster, d1.get_min_and_max_value_of_dimensions()) ; 
-	
+		*/
+		// Database Connectivity
+		database_connectivity d1 = new database_connectivity("localhost", "3306", "facebook_database", "root", "pratik");
+		swarm_based_clustering.points = d1.get_dataset("LIWC_feature_extraction_of_user", 88);
+		random_particle_generator r1 = new random_particle_generator(particle.setting_for_all.no_of_cluster, d1.get_min_and_max_value_of_dimensions("MIN_LIWC_Feature", "MAX_LIWC_Feature", 87)) ; 
+		
 		//particles information
 		Vector<particle> particles_as_cen = new Vector<particle>() ;
 		

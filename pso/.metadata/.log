@@ -6589,3 +6589,24 @@ Command-line arguments:  -os linux -ws gtk -arch x86
 
 !ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-08-30 22:54:05.571
 !MESSAGE No repository found at jar:file:/home/pratik/Desktop/pdt-Update-3.3.0.201406110111.zip!/.
+!SESSION 2014-08-31 09:20:38.141 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.7.0_13
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-08-31 09:21:02.487
+!MESSAGE No repository found at jar:file:/home/pratik/Desktop/cdt-master-8.0.2.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-08-31 09:21:34.296
+!MESSAGE No repository found at jar:file:/home/pratik/Desktop/PyDev%203.6.0.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-08-31 09:22:07.274
+!MESSAGE No repository found at http://download.eclipse.org/tools/pdt/updates/2.0/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-08-31 09:22:39.323
+!MESSAGE No repository found at http://download.eclipse.org/tools/pdt/updates/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-08-31 09:22:39.389
+!MESSAGE No repository found at jar:file:/home/pratik/Desktop/pdt-Update-3.3.0.201406110111.zip!/.
