@@ -1,0 +1,11 @@
+package dataset;
+
+import java.util.Vector;
+
+//xml file settings related to data 
+public class dataset_and_parameter_settings {
+	public dataset_and_parameter_settings(int option_of_file_or_database, String file_name, String database_name, Vector<Integer> parameter_to_be_considered_pso )
+	{
+		
+	}
+}

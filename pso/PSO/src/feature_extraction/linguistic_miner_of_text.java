@@ -6,12 +6,14 @@ import java.util.Map;
 public class linguistic_miner_of_text {
 	File liwcCatFile;
 	LIWCDictionaryHelper liwcDic;
-
+	
+	//Provide LIWC CAT file where all dictionary of words are present
 	public linguistic_miner_of_text(String LIWC_dictionary_file_location) {
 		liwcCatFile = new File(LIWC_dictionary_file_location);
 		liwcDic = new LIWCDictionaryHelper(liwcCatFile);
 	}
-
+	
+	//Given Text it returns value to be returned
 	public Map<String, Double> get_liwc_value_of_text(String text) {
 		Map<String, Double> dictnioary_of_liwc_value_for_given_text;
 		dictnioary_of_liwc_value_for_given_text = liwcDic.getCounts(text);

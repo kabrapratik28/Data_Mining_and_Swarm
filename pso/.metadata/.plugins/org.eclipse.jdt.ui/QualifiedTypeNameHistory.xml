@@ -36,6 +36,9 @@
 <fullyQualifiedTypeName name="dataset.swarm_xml_file_reader"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="swarm.swarm_based_clustering"/>
 <fullyQualifiedTypeName name="java.util.Vector"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="dataset.database_connectivity"/>
+<fullyQualifiedTypeName name="swarm.swarm_based_clustering"/>
+<fullyQualifiedTypeName name="dataset.data_reader_from_file"/>
 </qualifiedTypeNameHistroy>

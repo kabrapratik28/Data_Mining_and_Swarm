@@ -152,6 +152,7 @@ public class particle {
 		particle.setting_for_all = swarm_xml_reader.get_settings() ; // set settings	
 		// this is for data reading from file
 		/*
+		 //File Name NOW TAKE FROM OTHER PLACE ******************** 
 		data_reader_from_file d1  = new data_reader_from_file(particle.setting_for_all.file_name,",") ; 
 		swarm_based_clustering.points = d1.get_dataset() ; 
 		random_particle_generator r1 = new random_particle_generator(particle.setting_for_all.no_of_cluster, d1.get_min_and_max_value_of_dimensions()) ; 

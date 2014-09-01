@@ -9,7 +9,7 @@ public class settings {
 	int max_no_of_iterations ; 
 	String file_name ; 
 	static float INFINITY ;  // assign max float value by Float.MAX_VALUE
-	public settings(int no_of_cluster , /*int no_of_dimension,*/ float w, float c1 , float c2, int max_no_of_iter , String file_name , int no_of_particle)
+	public settings(int no_of_cluster , /*int no_of_dimension,*/ float w, float c1 , float c2, int max_no_of_iter , int no_of_particle)
 	{
 		this.no_of_cluster = no_of_cluster ; 
 		//this.no_of_dimension = no_of_dimension ; 
@@ -17,7 +17,6 @@ public class settings {
 		this.c1 = c1 ; 
 		this.c2 = c2 ;
 		this.max_no_of_iterations = max_no_of_iter ; 
-		this.file_name = file_name ; 
 		this.no_of_particle = no_of_particle ; 
 	}
 }

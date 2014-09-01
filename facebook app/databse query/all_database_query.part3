@@ -92,7 +92,6 @@ PRIMARY KEY (status_id),
 FOREIGN KEY (status_id) REFERENCES Status(status_id)
 ); 
 
-
 CREATE VIEW LIWC_feature_extraction_of_user AS
 select 
  user_id,

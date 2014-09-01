@@ -2,9 +2,6 @@ package swarm;
 
 import java.util.Vector;
 import java.util.Collections;
-
-import dataset.data_reader_from_file;
-
 //import dataset.Data_reader_from_file;
 
 public class swarm_based_clustering {

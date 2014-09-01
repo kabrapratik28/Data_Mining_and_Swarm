@@ -16,11 +16,27 @@
     <max_no_of_iterations>1000</max_no_of_iterations>
 
     <!--   minimum distance traversal condition to terminate (OR to no of iterations conditions) 
-    <min_distance_to_terminate> </min_distance_to_terminate>
+	 <min_distance_to_terminate> </min_distance_to_terminate>
     -->
-  
-    <data_file_name>test_dataset/1.iris/iris.data</data_file_name>
-  
-  </settings>
     
+    <data_file_name>test_dataset/1.iris/iris.data</data_file_name>
+    
+  </settings>
+
+  <data_take_from>
+
+    <!--1.File 2.Database -->
+    <option_of_file_or_database>2</option_of_file_or_database>
+
+    <!-- option only cosider on selecting 1 above -->
+    <data_file_name>test_dataset/1.iris/iris.data</data_file_name>
+    
+    <!-- option only cosider on selecting 2 above -->
+    <database_name>facebook_database</database_name>
+
+    <parameters_take_into_considerations>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15</parameters_take_into_considerations>
+    
+    
+  </data_take_from>
+
 </swarm>

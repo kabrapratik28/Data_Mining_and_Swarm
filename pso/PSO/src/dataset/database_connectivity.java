@@ -17,6 +17,7 @@ public class database_connectivity {
 	
 	Vector< Vector<Float> > dataset=null ;
 	
+	//Connect to database by user name and gien password 
 	public database_connectivity(String Host, String Port, String Database_name, String User_name_of_database, String Password_of_user)
 	{
 		 try {
@@ -39,6 +40,7 @@ public class database_connectivity {
 		 }
 	}
 	
+	// Statement To be executed to be set here
 	public void query_set_to_prepare_statement(String statement_of_query)
 	{
 		try {
@@ -50,6 +52,7 @@ public class database_connectivity {
 		}
 	}
 	
+	//Set String for that number of question mark in query
 	public void set_string_to_prepared_statement(int counter,String string_to_set)
 	{
 		try {
@@ -60,6 +63,7 @@ public class database_connectivity {
 		}
 	}
 	
+	//Set double value for that no of question mark in query
 	public void set_double_to_prepared_statement(int counter, double double_to_set)
 	{
 		try {
@@ -70,6 +74,8 @@ public class database_connectivity {
 		}
 	}
 	
+	//Get dataset (data) from executed query
+	//Select Query
 	public ResultSet execute_set_query()
 	{
 		ResultSet result_set = null ; 
@@ -82,6 +88,7 @@ public class database_connectivity {
 		return result_set ; 
 	}
 	
+	//Query which dont require to return dataset (e.g. Insert , Update, Delete)
 	public void execute_update_query()
 	{
 		try {
@@ -92,6 +99,7 @@ public class database_connectivity {
 		}
 	}
 	
+	//Close all database connections
 	public void closedatabaseconnection()
 	{
 		 try {
@@ -105,13 +113,16 @@ public class database_connectivity {
 					System.out.println("DATABASE CLOSE PROBLEM !!!");
 		 }
 	}
-	
+	//Print Query which set in prepared statement
 	public void print_prepared_statement()
 	{
 		System.out.println(prepared_statement.toString());
 	}
 	
 	/*Dataset, Min, Max */
+	//Parameter :
+	//Table from which user data going t be read
+	//Parameter which are going to be read
 	public Vector < Vector<Float> > get_dataset(String table_name_from_which_user_data_fetch, int no_of_parameter_in_db_user)
 	{
 	    dataset =  new Vector<Vector<Float> >();
@@ -140,6 +151,10 @@ public class database_connectivity {
 		return dataset ; 
 	}
 	
+	//Parameter 
+	//Table from which min value going to be read 
+	//Table from which max value going to be read
+	//No of parameter going to be read
 	public Vector< Vector<Float> > get_min_and_max_value_of_dimensions(String table_name_from_which_min_value, String table_name_from_which_max_value,int no_of_parameter_in_min_max)
 	{
 		Vector<Float> min_values = new Vector<Float>();

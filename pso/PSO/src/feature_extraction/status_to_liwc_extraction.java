@@ -4,10 +4,14 @@ import java.sql.ResultSet;
 import java.util.Map;
 import dataset.database_connectivity;
 
+//Take data from database and send it to linguistic miner of text 
+// and store result to database 
 public class status_to_liwc_extraction {
 	database_connectivity database_connetor;
 	linguistic_miner_of_text text_to_liwc;
 
+	//Connect to database name 
+	//Connect to LIWC.CAT file
 	public status_to_liwc_extraction(String LIWC_dictionary_location,
 			String Host, String Port, String Database_name,
 			String User_name_of_database, String Password_of_user) 
@@ -17,7 +21,7 @@ public class status_to_liwc_extraction {
 		text_to_liwc = new linguistic_miner_of_text(LIWC_dictionary_location);
 	}
 
-	// Function helps us to calculate LIWC feature on status that ae added new
+	// Function helps us to calculate LIWC feature on status that is added new
 	// to Status Table
 	public ResultSet new_status_in_Status_table() 
 	{
@@ -27,7 +31,8 @@ public class status_to_liwc_extraction {
 		result_new_statuses = database_connetor.execute_set_query();
 		return result_new_statuses;
 	}
-
+	
+	//New Results are stored to database
 	public void new_status_adder_to_Linguistic_features(ResultSet new_status_data) 
 	{
 		String current_status_id;
