@@ -41,4 +41,5 @@
 <fullyQualifiedTypeName name="dataset.database_connectivity"/>
 <fullyQualifiedTypeName name="swarm.swarm_based_clustering"/>
 <fullyQualifiedTypeName name="dataset.data_reader_from_file"/>
+<fullyQualifiedTypeName name="dataset.dataset_and_parameter_settings"/>
 </qualifiedTypeNameHistroy>

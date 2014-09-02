@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <swarm>
-
+                   <!--    ____________________________________________________________
+			  |           PLEASE DONT GIVE SPACES IN BELOW                 |
+			  _____________________________________________________________
+		   -->
   <settings>
     
     <no_of_particle>10</no_of_particle>
@@ -34,7 +37,40 @@
     <!-- option only cosider on selecting 2 above -->
     <database_name>facebook_database</database_name>
 
-    <parameters_take_into_considerations>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15</parameters_take_into_considerations>
+    <user_value_table_name_in_database>LIWC_feature_extraction_of_user</user_value_table_name_in_database>
+
+    <!--minimum value table for pso lower limit -->
+    <min_value_table_name_in_database>MIN_LIWC_Feature</min_value_table_name_in_database>
+
+    <!--maximum value table for pso lower limit -->
+    <max_value_table_name_in_database>MAX_LIWC_Feature</max_value_table_name_in_database>
+           
+
+    <!-- #### IMPORTANT ASSUMPTION #### -->
+    <!-- PARAMETER OF MIN MAX AND USER DATA MUST BE SAME WITH DIFFERENCE ONLY IN FIRST COLUMN IN USER TABLE   -->
+    <!-- EXAMPLE   -->
+    <!-- 
+       USER TABLE 
+       ________________________________________________
+       |   USER_ID |  AVG_WPS | AVG_ANGERWORDS | ...   |
+       ________________________________________________
+
+       MIN AND MAX TABLE
+       ________________________________________________
+       |   AVG_WPS | AVG_ANGERWORDS | ...              |
+       ________________________________________________
+   
+   DIFFERENCE
+   =============
+   __________________________________________________________
+   |ONLY FIRST COLUMN IN USER TABLE DIFFERSE I.E. USER_ID    |
+   | SO IN THE CODE FIRST PARAMETER IN USER TABLE ELIMINATES |
+   ___________________________________________________________
+
+   *******  PLEASE DONT INCLUDE FIRST COLUMN IN PARAMETER CONSIDERATION (I.E. USER_ID)
+   -->
+
+    <parameters_take_into_considerations>2,4</parameters_take_into_considerations>
     
     
   </data_take_from>

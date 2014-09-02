@@ -123,7 +123,7 @@ public class database_connectivity {
 	//Parameter :
 	//Table from which user data going t be read
 	//Parameter which are going to be read
-	public Vector < Vector<Float> > get_dataset(String table_name_from_which_user_data_fetch, Vector<Integer> parameter_taken_into_consideration)
+	public Vector < Vector<Float> > get_dataset(String table_name_from_which_user_data_fetch, int no_of_parameter_in_db_user)
 	{
 	    dataset =  new Vector<Vector<Float> >();
 		this.query_set_to_prepare_statement("Select * from "+table_name_from_which_user_data_fetch+" ;");
@@ -133,12 +133,11 @@ public class database_connectivity {
 		while(ResultSet_of_all_user_data.next())
 		{
 			 Vector<Float> one_user = new Vector<Float>();
-			 
+			 int counter_column = 0 ; 
 			 // Add row to vector (One User added to one vector)
-			 // Iterate over vector and take elements that user iven in parameter
-			 for(int vector_one_parameter_suggested : parameter_taken_into_consideration)
+			 for(counter_column = 2; counter_column <= no_of_parameter_in_db_user ; counter_column++)
 			 {
-				 one_user.add(ResultSet_of_all_user_data.getFloat(vector_one_parameter_suggested));
+				 one_user.add(ResultSet_of_all_user_data.getFloat(counter_column));
 			 }
 			 //System.out.println(one_user.size());
 			 //System.out.println(one_user);
@@ -156,7 +155,7 @@ public class database_connectivity {
 	//Table from which min value going to be read 
 	//Table from which max value going to be read
 	//No of parameter going to be read
-	public Vector< Vector<Float> > get_min_and_max_value_of_dimensions(String table_name_from_which_min_value, String table_name_from_which_max_value,Vector<Integer> parameter_taken_into_consideration)
+	public Vector< Vector<Float> > get_min_and_max_value_of_dimensions(String table_name_from_which_min_value, String table_name_from_which_max_value,int no_of_parameter_in_min_max)
 	{
 		Vector<Float> min_values = new Vector<Float>();
 		Vector<Float> max_values = new Vector<Float>();
@@ -167,12 +166,12 @@ public class database_connectivity {
 		try{
 		while(ResultSet_of_min_values.next())
 		{
-			
+
+			 int counter_column = 0 ; 
 			 // Add row to vector (One User added to one vector)
-			 for(int counter_of_parameter_provided : parameter_taken_into_consideration)
+			 for(counter_column = 1; counter_column <= no_of_parameter_in_min_max ; counter_column++)
 			 {
-				 // (counter_of_parameter_provided-1) bz min max dont have first column that is user_id
-				 min_values.add(ResultSet_of_min_values.getFloat((counter_of_parameter_provided-1)));
+				 min_values.add(ResultSet_of_min_values.getFloat(counter_column));
 			 }
 			 //System.out.println(one_user.size());
 			 //System.out.println(one_user);
@@ -189,12 +188,12 @@ public class database_connectivity {
 			while(ResultSet_of_max_values.next())
 			{
 
+			 int counter_column = 0 ; 
 			 // Add row to vector (One User added to one vector)
-				for(int counter_of_parameter_provided : parameter_taken_into_consideration)
-				{
-					// (counter_of_parameter_provided-1) bz min max dont have first column that is user_id
-					max_values.add(ResultSet_of_max_values.getFloat((counter_of_parameter_provided-1)));
-				}
+			 for(counter_column = 1; counter_column <= no_of_parameter_in_min_max ; counter_column++)
+			 {
+				 max_values.add(ResultSet_of_max_values.getFloat(counter_column));
+			 }
 			 //System.out.println(one_user.size());
 			 //System.out.println(one_user);
 			}

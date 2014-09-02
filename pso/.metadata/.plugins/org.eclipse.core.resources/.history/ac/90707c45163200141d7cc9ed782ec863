@@ -110,7 +110,7 @@ public class xml_file_reader {
 		
 		//test
 		//xml_file_reader s1 = new xml_file_reader("settings/swarm.xml") ; 
-		//System.out.println(s1.dataset_and_parameter_settings_session.database_user_data_table_name);
+	
 	}
 
 }

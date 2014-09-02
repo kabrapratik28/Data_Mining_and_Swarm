@@ -58,11 +58,7 @@ public class xml_file_reader {
 			
 			int option_of_file_or_database = Integer.parseInt(getValue("option_of_file_or_database", element));
 			String file_name= getValue("data_file_name", element);
-			
 			String database_name = getValue("database_name", element);
-			String database_user_data_table_name = getValue("user_value_table_name_in_database", element);
-			String database_min_data_table_name = getValue("min_value_table_name_in_database", element);
-			String database_max_data_table_name = getValue("max_value_table_name_in_database", element);
 			
 			// String of numbers separated by comma(,)
 			String parameters_take_into_considerations = getValue("parameters_take_into_considerations", element);
@@ -74,7 +70,7 @@ public class xml_file_reader {
 			{
 				parameter_taken_for_pso.add(Integer.parseInt(indiviual_integer));
 			}
-			dataset_and_parameter_settings_session = new dataset_and_parameter_settings(option_of_file_or_database, file_name, database_name, database_user_data_table_name,database_min_data_table_name, database_max_data_table_name,parameter_taken_for_pso); 
+			dataset_and_parameter_settings_session = new dataset_and_parameter_settings(option_of_file_or_database, file_name, database_name, parameter_taken_for_pso); 
 		}		
 
 		}//try closing
@@ -110,7 +106,7 @@ public class xml_file_reader {
 		
 		//test
 		//xml_file_reader s1 = new xml_file_reader("settings/swarm.xml") ; 
-		//System.out.println(s1.dataset_and_parameter_settings_session.database_user_data_table_name);
+		
 	}
 
 }

@@ -152,35 +152,25 @@ public class particle {
 		xml_file_reader swarm_xml_reader = new xml_file_reader("settings/swarm.xml") ; 
 		particle.setting_for_all = swarm_xml_reader.get_settings() ; // set settings	
 		
-		// setting of data taken from swarm xml reader object
+		// setting taken from swarm xml readeer object
 		dataset_and_parameter_settings data_taken_from = swarm_xml_reader.get_dataset_and_parameter_settings();
-		random_particle_generator r1 = null ; // random particle pointer
 		
 		// this is for data reading from file
 		if (data_taken_from.option_of_file_or_database == 1 )
 		{
-			data_reader_from_file d1  = new data_reader_from_file(particle.setting_for_all.file_name,",") ; 
-			swarm_based_clustering.points = d1.get_dataset() ; 
-			r1 = new random_particle_generator(particle.setting_for_all.no_of_cluster, d1.get_min_and_max_value_of_dimensions()) ; 
+		data_reader_from_file d1  = new data_reader_from_file(particle.setting_for_all.file_name,",") ; 
+		swarm_based_clustering.points = d1.get_dataset() ; 
+		random_particle_generator r1 = new random_particle_generator(particle.setting_for_all.no_of_cluster, d1.get_min_and_max_value_of_dimensions()) ; 
 		}
 		
 		else if (data_taken_from.option_of_file_or_database == 2)
 		{
-			// Database Connectivity
-			database_connectivity d1 = new database_connectivity("localhost", "3306", data_taken_from.database_name , "root", "pratik");
-			swarm_based_clustering.points = d1.get_dataset(data_taken_from.database_user_data_table_name, data_taken_from.parameter_to_be_considered_pso);
-			r1 = new random_particle_generator(particle.setting_for_all.no_of_cluster, d1.get_min_and_max_value_of_dimensions(data_taken_from.database_min_data_table_name, data_taken_from.database_max_data_table_name, data_taken_from.parameter_to_be_considered_pso)) ; 
-			d1.closedatabaseconnection() ; 
-			//Print Which dataset taken from database 
-			//System.out.println(swarm_based_clustering.points);
-			//System.out.println(d1.get_min_and_max_value_of_dimensions(data_taken_from.database_min_data_table_name, data_taken_from.database_max_data_table_name, data_taken_from.parameter_to_be_considered_pso));
+		// Database Connectivity
+		database_connectivity d1 = new database_connectivity("localhost", "3306", "facebook_database", "root", "pratik");
+		swarm_based_clustering.points = d1.get_dataset("LIWC_feature_extraction_of_user", 88);
+		random_particle_generator r1 = new random_particle_generator(particle.setting_for_all.no_of_cluster, d1.get_min_and_max_value_of_dimensions("MIN_LIWC_Feature", "MAX_LIWC_Feature", 87)) ; 
+		d1.closedatabaseconnection() ; 
 		}
-		
-		else 
-		{
-			System.out.println("Error : Wrong value put in swarm.xml for option of file or database");
-		}
-		
 		
 		//particles information
 		Vector<particle> particles_as_cen = new Vector<particle>() ;

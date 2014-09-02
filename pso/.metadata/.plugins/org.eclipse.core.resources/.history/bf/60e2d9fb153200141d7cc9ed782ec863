@@ -74,7 +74,7 @@ public class xml_file_reader {
 			{
 				parameter_taken_for_pso.add(Integer.parseInt(indiviual_integer));
 			}
-			dataset_and_parameter_settings_session = new dataset_and_parameter_settings(option_of_file_or_database, file_name, database_name, database_user_data_table_name,database_min_data_table_name, database_max_data_table_name,parameter_taken_for_pso); 
+			dataset_and_parameter_settings_session = new dataset_and_parameter_settings(option_of_file_or_database, file_name, database_name, database_min_data_table_name, database_max_data_table_name,parameter_taken_for_pso); 
 		}		
 
 		}//try closing
@@ -110,7 +110,7 @@ public class xml_file_reader {
 		
 		//test
 		//xml_file_reader s1 = new xml_file_reader("settings/swarm.xml") ; 
-		//System.out.println(s1.dataset_and_parameter_settings_session.database_user_data_table_name);
+		
 	}
 
 }

@@ -171,17 +171,12 @@ public class particle {
 			swarm_based_clustering.points = d1.get_dataset(data_taken_from.database_user_data_table_name, data_taken_from.parameter_to_be_considered_pso);
 			r1 = new random_particle_generator(particle.setting_for_all.no_of_cluster, d1.get_min_and_max_value_of_dimensions(data_taken_from.database_min_data_table_name, data_taken_from.database_max_data_table_name, data_taken_from.parameter_to_be_considered_pso)) ; 
 			d1.closedatabaseconnection() ; 
-			//Print Which dataset taken from database 
-			//System.out.println(swarm_based_clustering.points);
-			//System.out.println(d1.get_min_and_max_value_of_dimensions(data_taken_from.database_min_data_table_name, data_taken_from.database_max_data_table_name, data_taken_from.parameter_to_be_considered_pso));
 		}
 		
 		else 
 		{
 			System.out.println("Error : Wrong value put in swarm.xml for option of file or database");
 		}
-		
-		
 		//particles information
 		Vector<particle> particles_as_cen = new Vector<particle>() ;
 		
