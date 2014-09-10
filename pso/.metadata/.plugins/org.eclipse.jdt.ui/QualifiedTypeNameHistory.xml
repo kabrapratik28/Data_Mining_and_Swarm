@@ -36,10 +36,12 @@
 <fullyQualifiedTypeName name="dataset.swarm_xml_file_reader"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="java.util.Vector"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="dataset.database_connectivity"/>
 <fullyQualifiedTypeName name="swarm.swarm_based_clustering"/>
-<fullyQualifiedTypeName name="dataset.data_reader_from_file"/>
 <fullyQualifiedTypeName name="dataset.dataset_and_parameter_settings"/>
+<fullyQualifiedTypeName name="dataset.data_reader_from_file"/>
+<fullyQualifiedTypeName name="weka.clusterers.ClusterEvaluation"/>
+<fullyQualifiedTypeName name="dataset.xml_file_reader"/>
+<fullyQualifiedTypeName name="java.util.Vector"/>
 </qualifiedTypeNameHistroy>

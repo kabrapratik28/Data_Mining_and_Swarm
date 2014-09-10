@@ -2,7 +2,11 @@ package swarm;
 
 import java.util.Vector;
 import java.util.Collections;
-//import dataset.Data_reader_from_file;
+//import dataset.data_reader_from_file;
+
+import dataset.xml_file_reader;
+import dataset.database_connectivity;
+import dataset.dataset_and_parameter_settings;
 
 public class swarm_based_clustering {
 	Vector< cluster > ClusterFormation ; // all cluster are store of current Cluster
@@ -18,7 +22,7 @@ public class swarm_based_clustering {
 		 * paper by A.A.A. Esmin : F2 => cal_quantization_error_normalized
 		 *               (BEST=>)  F3 => cal_quantization_error_normalized_more_cluster  
 		 */
-		quantization_error_value  = cal_quantization_error_normalized_more_cluster(ClusterFormation); // quantization error calculated
+		quantization_error_value  = cal_quantization_error(ClusterFormation); // quantization error calculated
 	}
 	
 	public float get_quantization_error_value ()  //to get quantization error value
@@ -241,6 +245,16 @@ public class swarm_based_clustering {
 		points.add(onec);
 		
 		onec = new Vector<Float>();
+		onec.add((float) 1);
+		onec.add((float) 10);
+		points.add(onec);
+		
+		onec = new Vector<Float>();
+		onec.add((float) 1);
+		onec.add((float) 11);
+		points.add(onec);
+		
+		onec = new Vector<Float>();
 		onec.add((float) 7);
 		onec.add((float) 1);
 		points.add(onec);
@@ -270,7 +284,7 @@ public class swarm_based_clustering {
 		swarm_based_clustering s1 = new swarm_based_clustering(cent);
 		System.out.println(s1.get_quantization_error_value());
 		*/
-
+		
 		//test case fail 
 		// SOLVED USING THIS SOLUTION  //	settings.INFINITY = Float.MAX_VALUE ;
 		/*	Vector <Vector<Float>> cent = new Vector<Vector<Float>>() ;  
@@ -295,18 +309,50 @@ public class swarm_based_clustering {
 		onec.add((float)2.119962);
 		cent.add(onec);
 	
-		Data_reader_from_file d1  = new Data_reader_from_file("iris.data",",") ; 
+		data_reader_from_file d1  = new data_reader_from_file("iris.data",",") ; 
 		swarm_based_clustering.points = d1.get_dataset() ; 
 		swarm_based_clustering s1 = new swarm_based_clustering(cent);
 		System.out.println(s1.get_quantization_error_value());
 		*/
 		/*  <==== WINE DATA CALCULATION ==== >
-		Data_reader_from_file d1  = new Data_reader_from_file("wine.data",",") ; 
+		data_reader_from_file d1  = new data_reader_from_file("wine.data",",") ; 
 		swarm_based_clustering.points = d1.get_dataset() ; 
 		simplekmeans k1 = new simplekmeans(swarm_based_clustering.points , 10 , 3) ; 
 		swarm_based_clustering s1 = new swarm_based_clustering(k1.get_centroids()) ;
 		System.out.println(s1.get_quantization_error_value());
 		*/
-		
+		  //Databse reading 
+		/*
+		xml_file_reader swarm_xml_reader = new xml_file_reader("settings/swarm.xml") ; 
+		dataset_and_parameter_settings data_taken_from = swarm_xml_reader.get_dataset_and_parameter_settings();
+
+		database_connectivity d1 = new database_connectivity("localhost", "3306", data_taken_from.database_name , "root", "pratik");
+		swarm_based_clustering.points = d1.get_dataset(data_taken_from.database_user_data_table_name, data_taken_from.parameter_to_be_considered_pso);
+		d1.closedatabaseconnection() ; 
+		Vector <Vector<Float>> cent = new Vector<Vector<Float>>() ;  
+		Vector<Float> onec = new Vector<Float>() ; 
+		onec.add((float)3.7302222);
+		onec.add((float)4.690148);
+		onec.add((float)-0.082720526);
+		onec.add((float)2.8103561);
+		onec.add((float)18.030653);
+		onec.add((float)1.8634562);
+		onec.add((float)1.848664);
+
+		cent.add(onec);
+				
+	    onec = new Vector<Float>() ; 
+		onec.add((float)-0.28942367);
+		onec.add((float)-5.1166496);
+		onec.add((float)-1.546348);
+		onec.add((float)3.6480591);
+		onec.add((float)1.1987032);
+		onec.add((float)0.5276011);
+		onec.add((float)2.731648);
+
+		cent.add(onec);
+		swarm_based_clustering s1 = new swarm_based_clustering(cent) ;
+		System.out.println(s1.get_quantization_error_value());
+		 */
 	}
 }

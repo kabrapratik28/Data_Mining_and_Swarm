@@ -21,9 +21,7 @@
     <!--   minimum distance traversal condition to terminate (OR to no of iterations conditions) 
 	 <min_distance_to_terminate> </min_distance_to_terminate>
     -->
-    
-    <data_file_name>test_dataset/1.iris/iris.data</data_file_name>
-    
+        
   </settings>
 
   <data_take_from>
@@ -32,7 +30,7 @@
     <option_of_file_or_database>2</option_of_file_or_database>
 
     <!-- option only cosider on selecting 1 above -->
-    <data_file_name>test_dataset/1.iris/iris.data</data_file_name>
+    <data_file_name>test_dataset/0.very tiny dataset/abc.csv</data_file_name>
     
     <!-- option only cosider on selecting 2 above -->
     <database_name>facebook_database</database_name>
@@ -70,9 +68,10 @@
    *******  PLEASE DONT INCLUDE FIRST COLUMN IN PARAMETER CONSIDERATION (I.E. USER_ID)
    -->
 
-    <parameters_take_into_considerations>2,4</parameters_take_into_considerations>
+    <parameters_take_into_considerations>2,3,4,5,6,7,8,9,10,11,12,13,14,15</parameters_take_into_considerations>
     
-    
+    <liwc_feature_extraction_file>settings/LIWC.CAT</liwc_feature_extraction_file>  
+
   </data_take_from>
 
 </swarm>

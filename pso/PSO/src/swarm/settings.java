@@ -7,7 +7,6 @@ public class settings {
 	float w ; //inertia
 	float c1 , c2 ; 
 	int max_no_of_iterations ; 
-	String file_name ; 
 	static float INFINITY ;  // assign max float value by Float.MAX_VALUE
 	public settings(int no_of_cluster , /*int no_of_dimension,*/ float w, float c1 , float c2, int max_no_of_iter , int no_of_particle)
 	{

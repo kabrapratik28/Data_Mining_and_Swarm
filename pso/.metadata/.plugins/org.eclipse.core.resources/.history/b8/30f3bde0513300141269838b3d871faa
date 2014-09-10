@@ -1,0 +1,357 @@
+package swarm;
+
+import java.util.Vector;
+import java.util.Collections;
+//import dataset.data_reader_from_file;
+
+import dataset.xml_file_reader;
+import dataset.database_connectivity;
+import dataset.dataset_and_parameter_settings;
+
+public class swarm_based_clustering {
+	Vector< cluster > ClusterFormation ; // all cluster are store of current Cluster
+	float quantization_error_value ; 
+	static Vector< Vector<Float> > points ; 
+	
+	public swarm_based_clustering(Vector< Vector <Float> > position_of_centroids)
+	{
+		ClusterFormation = new Vector<>() ; 
+		assign_point_to_cluster(position_of_centroids, points) ;   // assigning of points to respective near cluster
+		/*
+		 * Basic paper by van de merwe : cal_quantization_error
+		 * paper by A.A.A. Esmin : F2 => cal_quantization_error_normalized
+		 *               (BEST=>)  F3 => cal_quantization_error_normalized_more_cluster  
+		 */
+		quantization_error_value  = cal_quantization_error_normalized_more_cluster(ClusterFormation); // quantization error calculated
+	}
+	
+	public float get_quantization_error_value ()  //to get quantization error value
+	{
+		return quantization_error_value ; 
+	}
+	
+	public float cal_euclidean_distance(Vector<Float> data_position , Vector<Float> centroid_position)
+	{
+		float distance=0 ; 
+		float sumofsquare = 0  ; 
+		int data_position_vec_size = data_position.size() ; 
+		for (int counter_position_size = 0 ; counter_position_size < data_position_vec_size ; counter_position_size++)
+		{
+			float diffrence_of_position = data_position.get(counter_position_size) - centroid_position.get(counter_position_size);
+			sumofsquare = sumofsquare + (float)Math.pow(diffrence_of_position, 2);
+		}
+		distance = (float)Math.sqrt(sumofsquare);
+		return distance ; 
+	}
+
+	public float cal_quantization_error(Vector<cluster> whole_cluster)
+	{
+		/*  *NOT HANDLED YET HANDLE THIS *
+		 * BE CAUTIONS : about any cluster can get zero elements 
+		 * suppose one particle near to all points
+		 * another particle is not near to any so 0/0 can occur
+		 */
+
+		float je_quantization_error = 0 ; 
+		float je_quantization_error_numerator = 0 ; 
+		int no_of_cluster = whole_cluster.size() ; 
+		for (int count_cluster=0 ; count_cluster < no_of_cluster ; count_cluster++ )
+		{
+			float distance_total_by_one_cluster = 0 ; 
+			int total_no_of_point_in_cluster = whole_cluster.get(count_cluster).near_points.size() ; 
+			for (int point_counter = 0 ; point_counter < total_no_of_point_in_cluster; point_counter++)
+			{
+				distance_total_by_one_cluster  = 
+						distance_total_by_one_cluster  + 
+						cal_euclidean_distance(whole_cluster.get(count_cluster).near_points.get(point_counter),whole_cluster.get(count_cluster).centroid);
+			}
+			
+			je_quantization_error_numerator  = je_quantization_error_numerator + (distance_total_by_one_cluster/total_no_of_point_in_cluster); 
+		}
+		je_quantization_error = je_quantization_error_numerator  / no_of_cluster ; 
+		/*
+		 * Float divide zero by zero not throw exception
+		 * Check by isNaN(Not a Number) is it infinity 
+		 * if yes set to infinity 
+		 */
+
+		if (Float.isNaN(je_quantization_error))
+		{
+			je_quantization_error = settings.INFINITY ; // set infinity
+		}
+		return je_quantization_error ; 
+	}
+	
+	
+	public float cal_quantization_error_normalized(Vector<cluster> whole_cluster)
+	{
+		/*
+		 * this is method according to  A.A.A. Esmin paper (f2 formula)
+		 */
+		
+		float je_quantization_error = 0 ; 
+		float je_quantization_error_numerator = 0 ; 
+		int no_of_cluster = whole_cluster.size() ; 
+		for (int count_cluster=0 ; count_cluster < no_of_cluster ; count_cluster++ )
+		{
+			float distance_total_by_one_cluster = 0 ; 
+			int total_no_of_point_in_cluster = whole_cluster.get(count_cluster).near_points.size() ; 
+			for (int point_counter = 0 ; point_counter < total_no_of_point_in_cluster; point_counter++)
+			{
+				distance_total_by_one_cluster  = 
+						distance_total_by_one_cluster  + 
+						cal_euclidean_distance(whole_cluster.get(count_cluster).near_points.get(point_counter),whole_cluster.get(count_cluster).centroid);
+			}
+			
+			je_quantization_error_numerator  = je_quantization_error_numerator + (
+					(distance_total_by_one_cluster/total_no_of_point_in_cluster)
+					*
+					/* added by A.A.A. Esmin F2 formula */
+					((float)total_no_of_point_in_cluster/(float)points.size()) // if not make float it will became 0
+					); 
+		}
+		// bz no denometer now so direct assignment
+		je_quantization_error = je_quantization_error_numerator ; 
+		// removed in the paper of A.A.A. Esmin F2 formula
+		//je_quantization_error = je_quantization_error_numerator  / no_of_cluster ; 
+		/*
+		 * Float divide zero by zero not throw exception
+		 * Check by isNaN(Not a Number) is it infinity 
+		 * if yes set to infinity 
+		 */
+		if (Float.isNaN(je_quantization_error))
+		{
+			je_quantization_error = settings.INFINITY ; // set infinity
+		}
+		return je_quantization_error ; 
+	}
+	
+	
+	public float cal_quantization_error_normalized_more_cluster(Vector<cluster> whole_cluster)
+	{
+		/*
+		 * this is method according to  A.A.A. Esmin paper (f3 formula)
+		 */
+		Vector<Integer> no_of_cluster_for_min_max_cal = new Vector<>()  ;
+		float je_quantization_error = 0 ; 
+		float je_quantization_error_numerator = 0 ; 
+		int no_of_cluster = whole_cluster.size() ; 
+		for (int count_cluster=0 ; count_cluster < no_of_cluster ; count_cluster++ )
+		{
+			float distance_total_by_one_cluster = 0 ; 
+			int total_no_of_point_in_cluster = whole_cluster.get(count_cluster).near_points.size() ;
+			// adding point so to finally calculate min point cluster and max point cluster
+			no_of_cluster_for_min_max_cal.add(total_no_of_point_in_cluster);
+			for (int point_counter = 0 ; point_counter < total_no_of_point_in_cluster; point_counter++)
+			{
+				distance_total_by_one_cluster  = 
+						distance_total_by_one_cluster  + 
+						cal_euclidean_distance(whole_cluster.get(count_cluster).near_points.get(point_counter),whole_cluster.get(count_cluster).centroid);
+			}
+			
+			je_quantization_error_numerator  = je_quantization_error_numerator + (
+					(distance_total_by_one_cluster/total_no_of_point_in_cluster)
+					*
+					/* added by A.A.A. Esmin F2 formula */
+					((float)total_no_of_point_in_cluster/(float)points.size()) // if not make float it will became 0
+					); 
+		}
+		// bz no denometer now so direct assignment
+		//F3 formula 			                           //******IMP HERE********
+		je_quantization_error = je_quantization_error_numerator *
+				(
+					Collections.max(no_of_cluster_for_min_max_cal) 
+					- Collections.min(no_of_cluster_for_min_max_cal)
+					+1
+				) ; 
+		// removed in the paper of A.A.A. Esmin F2,F3 formula
+		//je_quantization_error = je_quantization_error_numerator  / no_of_cluster ; 
+		/*
+		 * Float divide zero by zero not throw exception
+		 * Check by isNaN(Not a Number) is it infinity 
+		 * if yes set to infinity 
+		 */
+		if (Float.isNaN(je_quantization_error))
+		{
+			je_quantization_error = settings.INFINITY ; // set infinity
+		}
+		return je_quantization_error ; 
+	}
+	
+	
+	
+	public void assign_point_to_cluster(Vector< Vector <Float> > position_of_centroids, Vector< Vector<Float> > points)
+	{
+		int size_of_centroids = position_of_centroids.size() ; 
+		//Cluster objects made and added to object vector
+		for (int count_centroids=0 ; count_centroids < size_of_centroids ; count_centroids++)
+		{
+			cluster c1 = new cluster(position_of_centroids.get(count_centroids));
+			ClusterFormation.add(c1);
+		}
+		
+		// each point now calculate distance and assigned to cluster object respectively
+		int size_of_points = points.size() ; 
+		for (int count_on_point = 0 ; count_on_point < size_of_points; count_on_point++)
+		{
+			float closest_distance_from_cluster = -1 ; 
+			int index_of_closest_centroid = -1 ; 
+			int size_of_centroi = ClusterFormation.size() ;
+			// look for which is closest centroid 
+			for (int counter_on_centroi = 0 ; counter_on_centroi < size_of_centroi ; counter_on_centroi++)
+			{
+				float current_dis_from_curr_centroid = 
+						cal_euclidean_distance(points.get(count_on_point), ClusterFormation.get(counter_on_centroi).centroid); 
+				if (closest_distance_from_cluster == -1 )  //only for first time
+				{
+					closest_distance_from_cluster = current_dis_from_curr_centroid ; 
+					index_of_closest_centroid = counter_on_centroi ; 
+				}
+				else if (closest_distance_from_cluster > current_dis_from_curr_centroid)  // if distance is smaller then only update 
+				{
+					closest_distance_from_cluster = current_dis_from_curr_centroid ; 
+					index_of_closest_centroid = counter_on_centroi ; 
+				}
+			}
+			
+			//assign point to cluster according to closest centroid and its resp. index
+			ClusterFormation.get(index_of_closest_centroid).add_point(points.get(count_on_point)) ; 
+		}
+	}
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		//testing 
+		/*
+		Vector <Vector<Float>> cent = new Vector<Vector<Float>>() ;  
+		Vector<Float> onec = new Vector<Float>() ; 
+		onec.add((float)2);
+		onec.add((float)6.5);
+		cent.add(onec);
+		
+	    onec = new Vector<Float>() ; 
+		onec.add((float)9);
+		onec.add((float)0);
+		cent.add(onec);
+		
+		Vector <Vector<Float>> points = new Vector<Vector<Float>>() ; 
+		onec = new Vector<Float>();
+		onec.add((float) 1);
+		onec.add((float) 5);
+		points.add(onec);
+		
+		onec = new Vector<Float>();
+		onec.add((float) 1);
+		onec.add((float) 10);
+		points.add(onec);
+		
+		onec = new Vector<Float>();
+		onec.add((float) 1);
+		onec.add((float) 11);
+		points.add(onec);
+		
+		onec = new Vector<Float>();
+		onec.add((float) 7);
+		onec.add((float) 1);
+		points.add(onec);
+		
+		onec = new Vector<Float>();
+		onec.add((float) 2);
+		onec.add((float) 7);
+		points.add(onec);
+		
+		onec = new Vector<Float>();
+		onec.add((float) 3);
+		onec.add((float) 6);
+		points.add(onec);
+		
+		onec = new Vector<Float>();
+		onec.add((float) 8);
+		onec.add((float) 2);
+		points.add(onec);
+		
+		onec = new Vector<Float>();
+		onec.add((float) 9);
+		onec.add((float) 1);
+		points.add(onec);
+		
+		// now send data to code 
+		swarm_based_clustering.points = points ; 
+		swarm_based_clustering s1 = new swarm_based_clustering(cent);
+		System.out.println(s1.get_quantization_error_value());
+		*/
+		
+		//test case fail 
+		// SOLVED USING THIS SOLUTION  //	settings.INFINITY = Float.MAX_VALUE ;
+		/*	Vector <Vector<Float>> cent = new Vector<Vector<Float>>() ;  
+		Vector<Float> onec = new Vector<Float>() ; 
+		onec.add((float)4.8286843);
+		onec.add((float)3.5884287);
+		onec.add((float)2.2840087);
+		onec.add((float)0.3912301);
+		cent.add(onec);
+		
+	    onec = new Vector<Float>() ; 
+		onec.add((float)4.5839624);
+		onec.add((float)4.3574142);
+		onec.add((float)2.009513);
+		onec.add((float)1.696347);
+		cent.add(onec);
+		
+	    onec = new Vector<Float>() ; 
+		onec.add((float)6.658968);
+		onec.add((float)3.9877458);
+		onec.add((float)5.1710057);
+		onec.add((float)2.119962);
+		cent.add(onec);
+	
+		data_reader_from_file d1  = new data_reader_from_file("iris.data",",") ; 
+		swarm_based_clustering.points = d1.get_dataset() ; 
+		swarm_based_clustering s1 = new swarm_based_clustering(cent);
+		System.out.println(s1.get_quantization_error_value());
+		*/
+		/*  <==== WINE DATA CALCULATION ==== >
+		data_reader_from_file d1  = new data_reader_from_file("wine.data",",") ; 
+		swarm_based_clustering.points = d1.get_dataset() ; 
+		simplekmeans k1 = new simplekmeans(swarm_based_clustering.points , 10 , 3) ; 
+		swarm_based_clustering s1 = new swarm_based_clustering(k1.get_centroids()) ;
+		System.out.println(s1.get_quantization_error_value());
+		*/
+		  //Databse reading 
+		xml_file_reader swarm_xml_reader = new xml_file_reader("settings/swarm.xml") ; 
+		dataset_and_parameter_settings data_taken_from = swarm_xml_reader.get_dataset_and_parameter_settings();
+
+		database_connectivity d1 = new database_connectivity("localhost", "3306", data_taken_from.database_name , "root", "pratik");
+		swarm_based_clustering.points = d1.get_dataset(data_taken_from.database_user_data_table_name, data_taken_from.parameter_to_be_considered_pso);
+		d1.closedatabaseconnection() ; 
+		Vector <Vector<Float>> cent = new Vector<Vector<Float>>() ;  
+		Vector<Float> onec = new Vector<Float>() ; 
+		onec.add((float)3.7302222);
+		onec.add((float)4.690148);
+		onec.add((float)-0.082720526);
+		onec.add((float)2.8103561);
+		onec.add((float)18.030653);
+		onec.add((float)1.8634562);
+		onec.add((float)1.848664);
+
+		cent.add(onec);
+				
+	    onec = new Vector<Float>() ; 
+		onec.add((float)-0.28942367);
+		onec.add((float)-5.1166496);
+		onec.add((float)-1.546348);
+		onec.add((float)3.6480591);
+		onec.add((float)1.1987032);
+		onec.add((float)0.5276011);
+		onec.add((float)2.731648);
+
+		cent.add(onec);
+		swarm_based_clustering s1 = new swarm_based_clustering(cent) ;
+		System.out.println(s1.get_quantization_error_value());
+		 
+	}
+}
