@@ -11,7 +11,7 @@
 <coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="132" y="30"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="120" y="30"/>
-<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="76" y="30"/>
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="104" y="30"/>
@@ -33,31 +33,21 @@
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
-<part id="3"/>
-<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="particle.java" partName="particle.java" path="/home/pratik/Desktop/pso/PSO/src/swarm/particle.java" title="particle.java" tooltip="PSO/src/swarm/particle.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PSO/src/swarm/particle.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5144" selectionTopPixel="2023"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="fitness_function.java" partName="fitness_function.java" path="/home/pratik/Desktop/pso/PSO/src/graph_clustering/fitness_function.java" title="fitness_function.java" tooltip="PSO/src/graph_clustering/fitness_function.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PSO/src/graph_clustering/fitness_function.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2609" selectionTopPixel="1146"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="cluster.java" partName="cluster.java" path="/home/pratik/Desktop/pso/PSO/src/swarm/cluster.java" title="cluster.java" tooltip="PSO/src/swarm/cluster.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PSO/src/swarm/cluster.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="14" selectionTopPixel="0"/>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="make_communities_according_to_dissimilarity.java" partName="make_communities_according_to_dissimilarity.java" path="/home/pratik/Desktop/pso/PSO/src/graph_clustering/make_communities_according_to_dissimilarity.java" title="make_communities_according_to_dissimilarity.java" tooltip="PSO/src/graph_clustering/make_communities_according_to_dissimilarity.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PSO/src/graph_clustering/make_communities_according_to_dissimilarity.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3518" selectionTopPixel="1413"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="random_particle_generator.java" partName="random_particle_generator.java" path="/home/pratik/Desktop/pso/PSO/src/swarm/random_particle_generator.java" title="random_particle_generator.java" tooltip="PSO/src/swarm/random_particle_generator.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PSO/src/swarm/random_particle_generator.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="215" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="database_connectivity.java" partName="database_connectivity.java" path="/home/pratik/Desktop/pso/PSO/src/dataset/database_connectivity.java" title="database_connectivity.java" tooltip="PSO/src/dataset/database_connectivity.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PSO/src/dataset/database_connectivity.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="2238"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.ClassFileEditor" name="Vector.class" partName="Vector.class" title="Vector.class" tooltip="java.util.Vector" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" org.eclipse.jdt.ui.ClassFileIdentifier="=PSO/\/usr\/lib\/jvm\/jdk1.7.0\/jre\/lib\/rt.jar&lt;java.util(Vector.class"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="28342" selectionTopPixel="12206"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="graphdata.java" partName="graphdata.java" path="/home/pratik/Desktop/pso/PSO/src/graph_clustering/graphdata.java" title="graphdata.java" tooltip="PSO/src/graph_clustering/graphdata.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/PSO/src/graph_clustering/graphdata.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -158,7 +148,7 @@
 <view id="org.eclipse.jdt.ui.SourceView" partName="Declaration"/>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.ClassFileEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.ui.internal.ide.application.ResourcePerspective" id="org.eclipse.ui.resourcePerspective" label="Resource"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -406,58 +396,42 @@
 <view id="org.eclipse.debug.ui.BreakpointView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <fastViewBars/>
-<layout>
-<mainWindow>
-<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
-<page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.PackageExplorer" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.7497929" ratioLeft="905" ratioRight="302" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.7497929" ratioLeft="905" ratioRight="302" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.74814814" ratioLeft="505" ratioRight="170" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.ConsoleFolderView" ratio="0.74814814" ratioLeft="505" ratioRight="170" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.PropertySheet" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.debug.ui.DisplayView" label="LabelNotFound"/>
 <page content="org.eclipse.search.SearchResultView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.4488189" ratioLeft="228" ratioRight="280" relationship="4" relative="org.eclipse.debug.internal.ui.NavigatorFolderView"/>
-<info folder="true" part="org.eclipse.debug.internal.ui.OutlineFolderView" ratio="0.7497929" ratioLeft="905" ratioRight="302" relationship="2" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.OutlineFolderView" ratio="0.7497929" ratioLeft="905" ratioRight="302" relationship="2" relative="org.eclipse.ui.editorss">&#x0A;<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.49958575" ratioLeft="603" ratioRight="604" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">
-<folder activePageID="org.eclipse.debug.ui.VariableView" appearance="2" expanded="2">
-<page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
+<info folder="true" part="org.eclipse.debug.internal.ui.ToolsFolderView" ratio="0.49958575" ratioLeft="603" ratioRight="604" relationship="2" relative="org.eclipse.debug.internal.ui.NavigatorFolderView">&#x0A;<folder activePageID="org.eclipse.debug.ui.VariableView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="Breakpoints"/>
 <page content="org.eclipse.debug.ui.ExpressionView" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
@@ -469,162 +443,158 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/PSO/src/swarm/particle.java"/>
-<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=PSO/\/usr\/lib\/jvm\/jdk1.7.0\/jre\/lib\/rt.jar&lt;java.util(Vector.class"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/PSO/src/swarm/test.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/PSO/src/swarm/cluster.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/PSO/src/swarm/random_particle_generator.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/PSO/src/dataset/database_connectivity.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/PSO/src/graph_clustering/dissimilarity_i_j_node.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/PSO/src/graph_clustering/make_communities_according_to_dissimilarity.java"/>
 </editors>
-<item historyLabel="Vector.class" index="1">
-<position info="not_deleted" x="28342" y="0"/>
+<item historyLabel="dissimilarity_i_j_node.java" index="0">
+<position info="not_deleted" x="2461" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3128" y="0"/>
+<item historyLabel="dissimilarity_i_j_node.java" index="0">
+<position info="not_deleted" x="1379" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3192" y="0"/>
+<item historyLabel="dissimilarity_i_j_node.java" index="0">
+<position info="not_deleted" x="1610" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3255" y="0"/>
+<item historyLabel="dissimilarity_i_j_node.java" index="0">
+<position info="not_deleted" x="1638" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3340" y="0"/>
+<item historyLabel="dissimilarity_i_j_node.java" index="0">
+<position info="not_deleted" x="1674" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3101" y="0"/>
+<item historyLabel="dissimilarity_i_j_node.java" index="0">
+<position info="not_deleted" x="1865" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3075" y="0"/>
+<item historyLabel="dissimilarity_i_j_node.java" index="0">
+<position info="not_deleted" x="1893" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3563" y="0"/>
+<item historyLabel="dissimilarity_i_j_node.java" index="0">
+<position info="not_deleted" x="1890" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="2993" y="0"/>
+<item historyLabel="dissimilarity_i_j_node.java" index="0">
+<position info="not_deleted" x="1966" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3101" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="114" y="22"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3128" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3192" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3099" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3255" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3283" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3340" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3101" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3139" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="4524" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3237" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="4830" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3380" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="4877" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3384" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="5034" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3323" y="37"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="5139" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="5671" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="5375" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3774" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="4524" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4006" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="4830" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4058" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="4876" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3926" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="4877" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4019" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="5034" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3857" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="5139" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3819" y="245"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="5671" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3780" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3075" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3819" y="245"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3563" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4133" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="2993" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4136" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="2832" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3020" y="19"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="2924" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="3085" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="2993" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="5058" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3101" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4333" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3128" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4439" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3192" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4532" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3255" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4617" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3340" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4553" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="3101" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4617" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="5542" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4405" y="0"/>
 </item>
-<item historyLabel="test.java" index="2">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4401" y="0"/>
 </item>
-<item historyLabel="test.java" index="2">
-<position info="not_deleted" x="196" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4800" y="0"/>
 </item>
-<item historyLabel="test.java" index="2">
-<position info="not_deleted" x="129" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="5162" y="0"/>
 </item>
-<item historyLabel="particle.java" index="0">
-<position info="not_deleted" x="5144" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4867" y="0"/>
 </item>
-<item historyLabel="cluster.java" index="3">
-<position info="not_deleted" x="14" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4942" y="0"/>
 </item>
-<item historyLabel="random_particle_generator.java" index="4">
-<position info="not_deleted" x="215" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4937" y="0"/>
 </item>
-<item historyLabel="database_connectivity.java" index="5">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4869" y="0"/>
 </item>
-<item active="true" historyLabel="Vector.class" index="1">
-<position info="not_deleted" x="28342" y="0"/>
+<item active="true" historyLabel="make_communities_according_to_dissimilarity.java" index="1">
+<position info="not_deleted" x="4866" y="1"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -632,12 +602,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="left"/>
-</trimArea>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 <trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>
@@ -646,11 +610,28 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
-<trimItem IMemento.internal.id="bottom"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="graphdata.java" tooltip="PSO/src/graph_clustering/graphdata.java">
+<persistable path="/PSO/src/graph_clustering/graphdata.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="particle.java" tooltip="PSO/src/swarm/particle.java">
+<persistable path="/PSO/src/swarm/particle.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="dissimilarity_i_j_node.java" tooltip="PSO/src/graph_clustering/dissimilarity_i_j_node.java">
+<persistable path="/PSO/src/graph_clustering/dissimilarity_i_j_node.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="fitness_function.java" tooltip="PSO/src/graph_clustering/fitness_function.java">
+<persistable path="/PSO/src/graph_clustering/fitness_function.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="swarm_based_clustering.java" tooltip="PSO/src/swarm/swarm_based_clustering.java">
+<persistable path="/PSO/src/swarm/swarm_based_clustering.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="cluster.java" tooltip="PSO/src/swarm/cluster.java">
+<persistable path="/PSO/src/swarm/cluster.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="test.java" tooltip="PSO/src/swarm/test.java">
 <persistable path="/PSO/src/swarm/test.java"/>
 </file>
@@ -666,14 +647,8 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="random_particle_generator.java" tooltip="PSO/src/swarm/random_particle_generator.java">
 <persistable path="/PSO/src/swarm/random_particle_generator.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="cluster.java" tooltip="PSO/src/swarm/cluster.java">
-<persistable path="/PSO/src/swarm/cluster.java"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="dataset_and_parameter_settings.java" tooltip="PSO/src/dataset/dataset_and_parameter_settings.java">
 <persistable path="/PSO/src/dataset/dataset_and_parameter_settings.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="swarm_based_clustering.java" tooltip="PSO/src/swarm/swarm_based_clustering.java">
-<persistable path="/PSO/src/swarm/swarm_based_clustering.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="simplekmeans.java" tooltip="PSO/src/swarm/simplekmeans.java">
 <persistable path="/PSO/src/swarm/simplekmeans.java"/>
@@ -683,18 +658,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LIWCDictionaryHelper.java" tooltip="PSO/src/feature_extraction/LIWCDictionaryHelper.java">
 <persistable path="/PSO/src/feature_extraction/LIWCDictionaryHelper.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="linguistic_miner_of_text.java" tooltip="PSO/src/feature_extraction/linguistic_miner_of_text.java">
-<persistable path="/PSO/src/feature_extraction/linguistic_miner_of_text.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="status_to_liwc_extraction.java" tooltip="PSO/src/feature_extraction/status_to_liwc_extraction.java">
-<persistable path="/PSO/src/feature_extraction/status_to_liwc_extraction.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="xml_file_reader.java" tooltip="PSO/src/dataset/xml_file_reader.java">
-<persistable path="/PSO/src/dataset/xml_file_reader.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="data_reader_from_file.java" tooltip="PSO/src/dataset/data_reader_from_file.java">
-<persistable path="/PSO/src/dataset/data_reader_from_file.java"/>
 </file>
 </mruList>
 </workbench>

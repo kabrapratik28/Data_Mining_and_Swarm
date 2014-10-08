@@ -8,7 +8,7 @@
     
     <no_of_particle>10</no_of_particle>
 
-    <no_of_cluster>2</no_of_cluster>
+    <no_of_cluster>3</no_of_cluster>
 
     <w_inertia>0.72</w_inertia>
 
@@ -27,10 +27,10 @@
   <data_take_from>
 
     <!--1.File 2.Database -->
-    <option_of_file_or_database>2</option_of_file_or_database>
+    <option_of_file_or_database>1</option_of_file_or_database>
 
     <!-- option only cosider on selecting 1 above -->
-    <data_file_name>test_dataset/0.very tiny dataset/abc.csv</data_file_name>
+    <data_file_name>test_dataset/2.wine/wine.data</data_file_name>
     
     <!-- option only cosider on selecting 2 above -->
     <database_name>facebook_database</database_name>

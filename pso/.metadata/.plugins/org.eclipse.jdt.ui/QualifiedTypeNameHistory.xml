@@ -5,7 +5,6 @@
 <fullyQualifiedTypeName name="swarm.cluster"/>
 <fullyQualifiedTypeName name="dataset.dataset"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
-<fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="maina"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.util.Collection"/>
@@ -30,11 +29,8 @@
 <fullyQualifiedTypeName name="org.w3c.dom.NodeList"/>
 <fullyQualifiedTypeName name="org.w3c.dom.Element"/>
 <fullyQualifiedTypeName name="org.w3c.dom.Node"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="java.lang.Float"/>
 <fullyQualifiedTypeName name="swarm.settings"/>
 <fullyQualifiedTypeName name="dataset.swarm_xml_file_reader"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="dataset.database_connectivity"/>
@@ -43,5 +39,13 @@
 <fullyQualifiedTypeName name="dataset.data_reader_from_file"/>
 <fullyQualifiedTypeName name="weka.clusterers.ClusterEvaluation"/>
 <fullyQualifiedTypeName name="dataset.xml_file_reader"/>
+<fullyQualifiedTypeName name="graph_clustering.fitness_function"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="graph_clustering.dissimilarity_i_j_node"/>
+<fullyQualifiedTypeName name="java.lang.Float"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="graph_clustering.make_communities_according_to_dissimilarity"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="java.util.Vector"/>
 </qualifiedTypeNameHistroy>

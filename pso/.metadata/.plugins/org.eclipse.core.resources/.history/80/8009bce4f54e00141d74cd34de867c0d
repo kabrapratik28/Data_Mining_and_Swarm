@@ -1,0 +1,24 @@
+package graph_clustering;
+
+import java.util.Vector;
+
+public class graphdata {
+	
+	Vector<Vector<Float>> nodes_linkage_graph ; 
+    Vector<Float> eigen_value ; 
+    Vector<Vector<Float>> eigen_vector ; 
+	
+	public graphdata()
+	{
+		
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

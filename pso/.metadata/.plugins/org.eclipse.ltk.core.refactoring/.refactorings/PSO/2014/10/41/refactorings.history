@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;graph_clustering.dissimilarity_i_j_node.java&apos; to &apos;make_communities_according_to_dissimilarity.java&apos;&#x0A;- Original project: &apos;PSO&apos;&#x0A;- Original element: &apos;graph_clustering.dissimilarity_i_j_node.java&apos;&#x0A;- Renamed element: &apos;graph_clustering.make_communities_according_to_dissimilarity.java&apos;" description="Rename compilation unit &apos;dissimilarity_i_j_node.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;graph_clustering{dissimilarity_i_j_node.java" name="make_communities_according_to_dissimilarity.java" references="false" stamp="1412782629953" version="1.0"/>
+</session>

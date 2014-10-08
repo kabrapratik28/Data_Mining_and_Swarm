@@ -268,14 +268,14 @@ public class particle {
 		}
 		System.out.println("Result Cluster Quantization Error : "+particle.gbest);
 		System.out.println(particle.gbest_position);
-		/*
+		
 		System.out.println("===== Printing particles ====== ");
 		for (int i=0; i<setting_for_all.no_of_particle ; i++)
 		{
 			System.out.println("Particle no. coordinates  "+String.valueOf(i));
 			System.out.println(particles_as_cen.get(i).current_location);
 		}
-		*/
+		
 }
 
 }

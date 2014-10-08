@@ -1,0 +1,16 @@
+package graph_clustering;
+
+import java.util.Vector;
+
+public class fitness_function {
+	public fitness_function (Vector< Vector<Float> > community_linkage)
+	{}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
