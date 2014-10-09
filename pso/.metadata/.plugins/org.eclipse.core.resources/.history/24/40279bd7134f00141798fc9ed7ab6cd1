@@ -1,0 +1,18 @@
+package graph_clustering;
+
+public class graph_communities_and_fitness {
+	
+	public graph_communities_and_fitness(Vector<Float> pso_every_iteration_result) {
+		// TODO Auto-generated constructor stub
+		
+	}
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

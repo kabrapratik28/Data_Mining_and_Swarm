@@ -5738,3 +5738,24 @@ java.net.UnknownHostException: pydev.org
 	at org.eclipse.ecf.provider.filetransfer.httpclient.HttpClientFileSystemBrowser.runRequest(HttpClientFileSystemBrowser.java:227)
 	at org.eclipse.ecf.provider.filetransfer.browse.AbstractFileSystemBrowser$DirectoryJob.run(AbstractFileSystemBrowser.java:69)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SESSION 2014-10-08 22:19:31.626 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.7.0_13
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-10-08 22:23:28.033
+!MESSAGE No repository found at jar:file:/home/pratik/Desktop/cdt-master-8.0.2.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-10-08 22:23:52.512
+!MESSAGE No repository found at jar:file:/home/pratik/Desktop/PyDev%203.6.0.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-10-08 22:24:12.354
+!MESSAGE No repository found at http://download.eclipse.org/tools/pdt/updates/2.0/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-10-08 22:24:31.656
+!MESSAGE No repository found at http://download.eclipse.org/tools/pdt/updates/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-10-08 22:24:31.687
+!MESSAGE No repository found at jar:file:/home/pratik/Desktop/pdt-Update-3.3.0.201406110111.zip!/.

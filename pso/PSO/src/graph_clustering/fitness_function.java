@@ -61,7 +61,7 @@ public class fitness_function {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		/*
 		Vector <Vector<Float>> comun = new Vector<Vector<Float>>() ;  
 		Vector<Float> onec = new Vector<Float>() ; 
 		onec.add((float)(3.0/12.0));
@@ -87,7 +87,7 @@ public class fitness_function {
 		fitness_function ff = new fitness_function(comun);
 		
 		System.out.println(ff.get_Q_value());
-
+	*/
 	}
 
 }

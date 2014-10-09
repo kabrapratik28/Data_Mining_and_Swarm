@@ -1,0 +1,20 @@
+package graph_clustering;
+
+import java.util.Vector;
+
+public class graph_communities_and_fitness {
+	
+	public graph_communities_and_fitness(Vector<Float> sorted_eigen_value , Vector<Vector<Float>> sorted_eigen_vector) {
+		// TODO Auto-generated constructor stub
+		
+	}
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

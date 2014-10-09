@@ -36,9 +36,10 @@ public class make_communities_according_to_dissimilarity {
 			centroid_no_to_element_vec.put(centroid_number_in_graph.get(centroid_counter), new Vector<Integer>()) ; 
 		}
 		
-		Vector<Vector<Float>> centroids_respective_eigenvector_values = new Vector<Vector<Float>>();
+		
 		
 		/*  // NOW BELOW METHOD GIVE ONLY NODE NUMBER AND CENTROID NUMBER // SO NO NEED
+		Vector<Vector<Float>> centroids_respective_eigenvector_values = new Vector<Vector<Float>>();
 		//all centroid vectors eigenvector values
 		for (int centroid_counter = 0 ; centroid_counter < centroid_number_in_graph.size() ; centroid_counter++ )
 		{
@@ -112,7 +113,7 @@ public class make_communities_according_to_dissimilarity {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		/*
 		//Test Purpose
 		Vector<Float> eigen_values = new Vector<Float>();
 		Vector<Vector<Float>> eigen_vector = new Vector<Vector<Float>>() ; 
@@ -142,6 +143,7 @@ public class make_communities_according_to_dissimilarity {
 		
 		make_communities_according_to_dissimilarity aa = new make_communities_according_to_dissimilarity(eigen_values, eigen_vector)  ;
 		System.out.println(aa.community_find_out_of_given_centroid(centroid_number_in_graph)); 
+		*/
 	}
 
 }

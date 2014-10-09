@@ -8,6 +8,9 @@ public class graphdata {
     Vector<Float> eigen_value ; 
     Vector<Vector<Float>> eigen_vector ; 
 	
+    Vector<Float> sorted_eigen_value ; 
+    Vector<Vector<Float>> sorted_eigen_vector ;
+    
 	public graphdata()
 	{
 		
@@ -34,7 +37,7 @@ public class graphdata {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

@@ -1,0 +1,19 @@
+package graph_clustering;
+
+public class a {
+	public void aa()
+	{
+		int k= 10 ; 
+	  b	bb = new b();
+	  bb.baba(k) ;
+	  System.out.println(k);
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
