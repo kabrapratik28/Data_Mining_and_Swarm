@@ -10,7 +10,6 @@
 <fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="swarm.random_particle_generator"/>
 <fullyQualifiedTypeName name="swarm.particle"/>
 <fullyQualifiedTypeName name="dataset.Data_reader_from_file"/>
@@ -41,11 +40,16 @@
 <fullyQualifiedTypeName name="dataset.xml_file_reader"/>
 <fullyQualifiedTypeName name="graph_clustering.fitness_function"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="graph_clustering.dissimilarity_i_j_node"/>
-<fullyQualifiedTypeName name="java.lang.Float"/>
-<fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="graph_clustering.make_communities_according_to_dissimilarity"/>
+<fullyQualifiedTypeName name="java.util.TreeMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="java.util.TreeSet"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.lang.Float"/>
 <fullyQualifiedTypeName name="java.util.Vector"/>
+<fullyQualifiedTypeName name="graph_clustering.graph_communities_and_fitness"/>
 </qualifiedTypeNameHistroy>

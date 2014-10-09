@@ -242,7 +242,6 @@ public class graph_communities_and_fitness {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		/*
 		Vector<Float> eiva = new Vector<Float>() ; 
 		eiva.add(0.92f) ; 
 		eiva.add(0.65f);
@@ -269,19 +268,16 @@ public class graph_communities_and_fitness {
 		
 		//flag and center
 		Vector<Float> fl_cen = new Vector<Float>();
-		fl_cen.add(0.9f);
+		fl_cen.add(0.9f)
 		fl_cen.add(0.3f);
 		fl_cen.add(.6f) ; 
-		//fl_cen.add(.55f);
 		
-		fl_cen.add(.5f);
+		fl_cen.add(-.1f);
 		fl_cen.add(0.55f);
 		fl_cen.add(.4f);
-		//fl_cen.add(.7f);
 		
 		gc.graph_cluster_at_every_pso_iteration(fl_cen);
 		System.out.println(gc.actual_center_selected_from_eigen_vector);
-		*/
 	}
 
 }

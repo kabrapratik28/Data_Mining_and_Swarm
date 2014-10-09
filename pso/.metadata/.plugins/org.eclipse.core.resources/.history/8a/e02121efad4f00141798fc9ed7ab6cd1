@@ -1,6 +1,7 @@
 package graph_clustering;
 
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.Vector;
 
@@ -25,7 +26,7 @@ public class graph_communities_and_fitness {
 	Vector<Vector<Float>> actual_center_selected_from_eigen_vector ; 
 	
 	//set of points(not repeated) which are selected for centroid
-	TreeSet<Integer> node_selected_as_centroid ; 
+	Set<Integer> node_selected_as_centroid ; 
 	
 	//Random Number Generator
 	Random random_number_giver_between_0_and_1 ; 
@@ -41,10 +42,9 @@ public class graph_communities_and_fitness {
 	{
 		this.pso_results_at_every_iteration = pso_results_at_every_iteration ;
 		//every step is one function
-		pso_results_rounding_off() ;
+		pso_results_rounding_off() ; 
 		centroids_size_greater_than_two_checking();
 		assign_first_eigen_vector_values_to_estimated_near_centroids(); 
-		combine_common_center_and_set_centroids_for_this_pso_iteration_result();
 	}
 	
 	public float get_Q_value_for_this_iteration()
@@ -60,21 +60,13 @@ public class graph_communities_and_fitness {
 		return pso_results_at_every_iteration ; 
 	}
 	
-	//this are centroids are set for graph for this pso iteration
-	//now compute spectral method on this after that Q value(how fine clustering is) 
-	//and return to pso so pso set particle pbest and gbest according to Q value
-	public Vector<Vector<Float>> get_actual_center_selected_from_eigen_vector()
-	{
-		return actual_center_selected_from_eigen_vector ; 
-	}
-	
 	//step 1 
 	public void pso_results_rounding_off()
 	{
 		// always even // half flag half centroids
 		int size_of_particle_dimension = pso_results_at_every_iteration.size() ; // 1 ... n
 		int flags_are_upto= (size_of_particle_dimension/2)-1 ; // 0 is starting index 0 ... n-1
-		int actual_center_start_from = flags_are_upto+1 ; // 0 is starting index n/2 ... n-1
+		int actual_center_start_from = flags_are_upto ; // 0 is starting index n/2 ... n-1
 		n = 0 ; // setting to zero
 		center_estimated_by_pso = new Vector<Float>() ; //  center vector intialization
 		// rounding off and center consideration
@@ -106,7 +98,7 @@ public class graph_communities_and_fitness {
 			
 			int size_of_particle_dimension = pso_results_at_every_iteration.size() ; // 1 ... n
 			int flags_are_upto= (size_of_particle_dimension/2)-1 ; // 0 is starting index 0 ... n-1
-			int actual_center_start_from = flags_are_upto+1 ; // 0 is starting index n/2 ... n-1
+			int actual_center_start_from = flags_are_upto ; // 0 is starting index n/2 ... n-1
 			n = 2 ; // setting to two
 			center_estimated_by_pso = new Vector<Float>() ; //  center vector intialization
 			// rounding off and center consideration
@@ -190,50 +182,6 @@ public class graph_communities_and_fitness {
 		// centers are not repeated bz set data structure store only non repeated value
 		// so repeated center are eliminated.
 		
-		//if after combining center size is 1 make it 2 
-		//select furtherest point (long distance point)
-		if (node_selected_as_centroid.size()==1)
-		{
-			float max_distance_between_curr = 0.0f ; 
-			int node_which_is_far_from_curr = 0  ;
-			
-			float curr_node_eigen_vector_number_one_value = sorted_eigen_vector.get(0).get(node_selected_as_centroid.first()) ; 
-			for (int node_counter = 0 ; node_counter < sorted_eigen_vector.get(0).size() ; node_counter++)
-			{
-				float diff = curr_node_eigen_vector_number_one_value - sorted_eigen_vector.get(0).get(node_counter);
-				
-				// diff can be -ve but this represent distance so make it +ve
-				if (diff < 0 )
-				{
-					diff = diff * (-1.0f) ; 
-				}
-				
-				if (max_distance_between_curr < diff)
-				{
-					max_distance_between_curr = diff ; 
-					node_which_is_far_from_curr = node_counter ; 
-				}
-				
-			}
-			
-			// add farthest node to set of centroids 
-			node_selected_as_centroid.add(node_which_is_far_from_curr);
-		}
-		
-		//n-1 count
-		int no_of_eigen_value_to_be_considered = node_selected_as_centroid.size() - 1; 
-		
-		//take (n-1) first eigenvector values for current n centroids
-		for (int node_number : node_selected_as_centroid)
-		{
-			Vector<Float> eigen_vector_from_current_centroid_node = new Vector<Float>(); 
-			for (int count_eigen_vector = 0 ; count_eigen_vector < no_of_eigen_value_to_be_considered ; count_eigen_vector++)
-			{
-				eigen_vector_from_current_centroid_node.
-					add(sorted_eigen_vector.get(count_eigen_vector).get(node_number));
-			}
-			actual_center_selected_from_eigen_vector.add(eigen_vector_from_current_centroid_node);
-		}
 		
 	}
 	
@@ -242,46 +190,7 @@ public class graph_communities_and_fitness {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		/*
-		Vector<Float> eiva = new Vector<Float>() ; 
-		eiva.add(0.92f) ; 
-		eiva.add(0.65f);
-		
-		Vector<Vector<Float>> ss = new Vector<Vector<Float>>() ; 
-		
-		Vector<Float> eivv = new Vector<>();
-		eivv.add(-0.2655134f);
-		eivv.add(.77f) ; 
-		eivv.add(-0.555f) ; 
-		eivv.add(0.543f) ; 
-		
-		ss.add(eivv) ; 
-		
-		eivv = new Vector<>();
-		eivv.add(-0.4655134f);
-		eivv.add(-0.57f) ; 
-		eivv.add(.45f) ; 
-		eivv.add(0.73f) ; 
-		
-		ss.add(eivv) ; 
-		
-		graph_communities_and_fitness gc = new graph_communities_and_fitness(eiva, ss);
-		
-		//flag and center
-		Vector<Float> fl_cen = new Vector<Float>();
-		fl_cen.add(0.9f);
-		fl_cen.add(0.3f);
-		fl_cen.add(.6f) ; 
-		//fl_cen.add(.55f);
-		
-		fl_cen.add(.5f);
-		fl_cen.add(0.55f);
-		fl_cen.add(.4f);
-		//fl_cen.add(.7f);
-		
-		gc.graph_cluster_at_every_pso_iteration(fl_cen);
-		System.out.println(gc.actual_center_selected_from_eigen_vector);
-		*/
+
 	}
 
 }

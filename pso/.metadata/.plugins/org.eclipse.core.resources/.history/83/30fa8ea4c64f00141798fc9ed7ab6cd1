@@ -274,7 +274,7 @@ public class graph_communities_and_fitness {
 		fl_cen.add(.6f) ; 
 		//fl_cen.add(.55f);
 		
-		fl_cen.add(.5f);
+		fl_cen.add(-.1f);
 		fl_cen.add(0.55f);
 		fl_cen.add(.4f);
 		//fl_cen.add(.7f);
