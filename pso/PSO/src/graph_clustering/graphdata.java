@@ -21,16 +21,15 @@ public class graphdata {
 		
 	}
 	
-	public void same_centroids_elimination()
+	public void sort_eigen_value_eigen_vector_in_descending_order()
 	{
 		
 	}
 	
-	public void set_nearest_node_as_centroids()
+	public void max_min_value_for_particle(Vector<Float> first_eigen_vector)
 	{
 		
 	}
-	
 	
 	/**
 	 * @param args
