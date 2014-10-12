@@ -1,0 +1,13 @@
+package graph_clustering;
+
+public class graph_particle {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

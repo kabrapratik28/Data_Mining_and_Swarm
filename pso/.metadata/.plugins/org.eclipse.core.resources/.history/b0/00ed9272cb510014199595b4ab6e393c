@@ -1,0 +1,99 @@
+package graph_clustering;
+
+import java.util.Random;
+import java.util.Vector;
+
+public class pso_on_graph {
+	
+	//only 2 values 
+	//min max values in between particle intiated 
+	Vector<Float> min_max_value ; 
+	
+	//Graph Data
+	Vector<Vector<Float>> graph_data ; 
+	
+	//eigen value and vectors
+	Vector<Float> sorted_eigen_value ; 
+	Vector<Vector<Float>> sorted_eigen_vector ; 
+	
+	//particle dimension = 2 * (+ve eigen values)
+	int half_size_particle_dimension ; 
+	
+	//Random Float generator
+	Random random ; 
+	
+	public pso_on_graph(Vector<Vector<Float>> graph_data ,Vector<Float> sorted_eigen_value, Vector<Vector<Float>> sorted_eigen_vector)
+	{
+		// random no generator between 0 and 1
+		random = new Random() ;
+		
+		this.graph_data = graph_data ; 
+		this.sorted_eigen_value = sorted_eigen_value ;
+		this.sorted_eigen_vector  = sorted_eigen_vector ; 
+		
+		//particle dimension set 
+		half_size_particle_dimension = sorted_eigen_value.size() ; 
+		
+		//get min max limitation of first eigen vector
+		min_max_value_for_particle(sorted_eigen_vector.get(0));
+	}
+	
+	public void min_max_value_for_particle(Vector<Float> first_eigen_vector)
+	{
+		min_max_value = new Vector<Float>() ;
+		float min_value = Float.MAX_VALUE; 
+		float max_value = Float.MIN_VALUE; 
+		for (int counter_eigen_vector_values =0 ; counter_eigen_vector_values < first_eigen_vector.size() ; counter_eigen_vector_values++)
+		{
+			if (max_value < first_eigen_vector.get(counter_eigen_vector_values))
+			{
+				max_value = first_eigen_vector.get(counter_eigen_vector_values);
+			}
+			if (min_value > first_eigen_vector.get(counter_eigen_vector_values))
+			{
+				min_value = first_eigen_vector.get(counter_eigen_vector_values);
+			}
+		}
+		min_max_value.add(min_value);
+		min_max_value.add(max_value);
+		
+	}
+	
+	//max_number_of_communities == number of +ve eigen vector
+	//no of +ve eigen vector passed above 
+	public Vector<Float> give_random_particles()
+	{
+		Vector<Float> particle_of_swarm = new Vector<Float>() ; 	
+		//dimension centroid consideration between 0 and 1
+		for (int dimension_counter= 0 ; dimension_counter < half_size_particle_dimension ; dimension_counter++)
+		{
+			particle_of_swarm.add(random.nextFloat()) ; //between 0 and 1 given
+		}
+		
+		// actual centroids randomly initiated
+		for (int dimension_counter= 0 ; dimension_counter < half_size_particle_dimension ; dimension_counter++)
+		{
+			particle_of_swarm.
+				add(random_no_giver_in_range(min_max_value.get(0), min_max_value.get(1))) ; //particle centroids randomly initated
+		}
+		
+		return particle_of_swarm ; 
+	}
+
+	// same as swarm.random_particle generator
+	public float random_no_giver_in_range(float min_value , float max_value)
+	{
+		float new_random_number_in_range = random.nextFloat() * (max_value-min_value) + min_value ; 
+		return new_random_number_in_range ; 
+	}
+
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

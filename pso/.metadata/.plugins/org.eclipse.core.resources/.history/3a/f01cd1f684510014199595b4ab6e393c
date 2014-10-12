@@ -1,0 +1,18 @@
+package graph_clustering;
+
+import java.util.Vector;
+
+public class b {
+	Vector<Float> vv ; 
+	public Vector<Float> bb()
+	{
+		return vv;
+	}
+	
+	public void newvv(Float g , Float h)
+	{
+		
+		vv.add(g);
+		vv.add(h);
+	}
+}

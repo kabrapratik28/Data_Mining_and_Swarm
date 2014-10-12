@@ -25,12 +25,7 @@ public class graphdata {
 	{
 		
 	}
-	
-	public void max_min_value_for_particle(Vector<Float> first_eigen_vector)
-	{
 		
-	}
-	
 	/**
 	 * @param args
 	 */
