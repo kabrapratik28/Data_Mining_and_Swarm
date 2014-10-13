@@ -182,150 +182,14 @@ public class graph_particle {
 		graph_particle.setting_for_all_graph = g1 ; 
 		
 		//read graph matrix from some where and pass here
-		Vector<Vector<Float>> graph_matrix =   new Vector<Vector<Float>>() ; 
+		Vector<Vector<Float>> graph_matrix =   null ; 
 		
 		/*
 		 *For now add nodes here 
 		 *after all development please read here from some file 
 		 */
-		//matrix
-		Vector<Float> gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(7.0f);
-		gmr.add(0.0f);
-		gmr.add(4.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
 		
-		gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(2.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(1.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(5.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(7.0f);
-		gmr.add(2.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(8.0f);
-		gmr.add(2.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(5.0f);
-		gmr.add(8.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(6.0f);
-		gmr.add(2.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(4.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(2.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(1.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(6.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(2.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		//eigen values
-		Vector<Float> eigen_val = new Vector<Float>();
-		eigen_val.add(0.6589890f);
-		eigen_val.add(0.1822428f);
-		eigen_val.add(0.0000000103f);
-		//eigen vectors
-		Vector<Vector<Float>> eigen_vec = new Vector<Vector<Float>>(); 
-		Vector<Float> eigen_rw = new Vector<Float>() ; 
-		eigen_rw.add(-0.4367024f);
-		eigen_rw.add(0.0195190f);
-		eigen_rw.add(0.4017060f);
-		eigen_rw.add(-0.1549812f);
-		eigen_rw.add(0.2647199f);
-		eigen_rw.add(-0.5201837f);
-		eigen_rw.add(0.3485508f);
-		eigen_rw.add(0.4017060f);
-		eigen_vec.add(eigen_rw);
-		
-		eigen_rw = new Vector<Float>() ; 
-		eigen_rw.add(-0.0726331f);
-		eigen_rw.add(0.7799345f);
-		eigen_rw.add(-0.3652825f);
-		eigen_rw.add(0.0640670f);
-		eigen_rw.add(-0.0665701f);
-		eigen_rw.add(-0.1485186f);
-		eigen_rw.add(0.2982785f);
-		eigen_rw.add(-0.3652825f);
-		eigen_vec.add(eigen_rw);
-		
-		eigen_rw = new Vector<Float>() ; 
-		eigen_rw.add(0.00002f);
-		eigen_rw.add(-0.00001f);
-		eigen_rw.add(-0.000003f);
-		eigen_rw.add(-0.00004f);
-		eigen_rw.add(-0.00003f);
-		eigen_rw.add(0.00001f);
-		eigen_rw.add(0.00008f);
-		eigen_rw.add(0.000009f);
-		eigen_vec.add(eigen_rw);
-		
-		/*
-		 * ENDS HERE 
-		 */
-		 
 		graphdata graphdata_obj = new graphdata(graph_matrix) ; 
-		
-		//===============REMOVE THIS ALSO =======================
-		graphdata_obj.sorted_eigen_value = eigen_val ;
-		graphdata_obj.sorted_eigen_vector = eigen_vec ;
-		//=================================================
 		
 		// graph make community obj making
 		graph_make_communities graph_make_communities_obj = new graph_make_communities
@@ -344,9 +208,6 @@ public class graph_particle {
 		
 		//random particle giver object
 		random_particle_giver random_particle_giver_obj = new random_particle_giver(graphdata_obj.get_sorted_eigen_value(), graphdata_obj.get_sorted_eigen_vector());
-		
-		// assigen min max value
-		graph_particle.min_max_values_for_particle =  random_particle_giver_obj.min_max_value ; 
 		
 		//particle value assignment 
 		Vector<graph_particle> particles_as_cen = new Vector<graph_particle>(); 
@@ -377,24 +238,11 @@ public class graph_particle {
 				partin.set_pbest() ; 
 			}
 			
-			for (graph_particle partin : particles_as_cen)
-			{
-				if (partin.get_pbest_value() > graph_particle.gbest) // we wenat value to be maximize
-				{
-					graph_particle.gbest = partin.get_pbest_value() ; 
-					graph_particle.gbest_position = new Vector< Float >();
-					graph_particle.copy_vector_inside_vector(partin.get_pbest_position(), graph_particle.gbest_position);
-				}
-			}
+			
 		}
 		
-		System.out.println("Graph community error : "+graph_particle.gbest);
-		System.out.println(graph_particle.gbest_position);
-		//gbest position passed
+		//assign min max value
 		
-		graph_particle.graph_make_communities_obj.graph_cluster_at_every_pso_iteration(graph_particle.gbest_position);
-		//print centroids and respective grouping
-		System.out.println(graph_particle.graph_make_communities_obj.get_centroid_no_to_element_vec());
 	}
 
 }

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;graph_clustering.pso_on_graph&apos; to &apos;random_particle_giver&apos;&#x0A;- Original project: &apos;PSO&apos;&#x0A;- Original element: &apos;graph_clustering.pso_on_graph&apos;&#x0A;- Renamed element: &apos;graph_clustering.random_particle_giver&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;pso_on_graph&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;graph_clustering{pso_on_graph.java[pso_on_graph" matchStrategy="1" name="random_particle_giver" qualified="false" references="true" similarDeclarations="false" stamp="1413094899638" textual="false" version="1.0"/>
+</session>

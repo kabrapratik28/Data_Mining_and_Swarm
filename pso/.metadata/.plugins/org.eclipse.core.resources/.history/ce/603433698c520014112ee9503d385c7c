@@ -345,9 +345,6 @@ public class graph_particle {
 		//random particle giver object
 		random_particle_giver random_particle_giver_obj = new random_particle_giver(graphdata_obj.get_sorted_eigen_value(), graphdata_obj.get_sorted_eigen_vector());
 		
-		// assigen min max value
-		graph_particle.min_max_values_for_particle =  random_particle_giver_obj.min_max_value ; 
-		
 		//particle value assignment 
 		Vector<graph_particle> particles_as_cen = new Vector<graph_particle>(); 
 		for(int particle_counter= 0 ; particle_counter < graph_particle.setting_for_all_graph.no_of_particle ; particle_counter++)
