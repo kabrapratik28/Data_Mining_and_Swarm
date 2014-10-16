@@ -31,7 +31,8 @@ public class random_particle_giver {
 		this.sorted_eigen_vector  = sorted_eigen_vector ; 
 		
 		//particle dimension set 
-		half_size_particle_dimension = sorted_eigen_value.size() ; 
+		//particle centroid is (+ve eigen value + 1 ) no of centroids
+		half_size_particle_dimension = sorted_eigen_value.size()+1 ; 
 		
 		//get min max limitation of first eigen vector
 		min_max_value_for_particle(sorted_eigen_vector.get(0));
@@ -120,7 +121,32 @@ public class random_particle_giver {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		/*
+		 * TESTING WILL TROW EXCEPTION BZ IT IS CALLING PARTICLE
+		Vector<Float> sorted_eigen_va = new  Vector<Float>();
+		Vector<Vector<Float>> sorted_eigen_ve = new Vector<Vector<Float>>();
 		
+		sorted_eigen_va.add(0.8677277f);
+		sorted_eigen_va.add(0.712951f);
+		
+		Vector<Float> sorted_eigen_tem = new Vector<Float>();
+		sorted_eigen_tem.add(0.14249386f);
+		sorted_eigen_tem.add(0.072698124f);
+		sorted_eigen_tem.add(-0.005455382f);
+		sorted_eigen_ve.add(sorted_eigen_tem);
+		
+		sorted_eigen_tem = new Vector<Float>();
+		sorted_eigen_tem.add(0.07090773f);
+		sorted_eigen_tem.add(0.22916597f);
+		sorted_eigen_tem.add(0.1311889f);
+		sorted_eigen_ve.add(sorted_eigen_tem);
+		
+		random_particle_giver r1 = new random_particle_giver(sorted_eigen_va, sorted_eigen_ve);
+		for (int i = 0 ; i<5 ; i++)
+		{
+		   r1.give_random_particle() ; 
+		}
+		*/
 	}
 
 }

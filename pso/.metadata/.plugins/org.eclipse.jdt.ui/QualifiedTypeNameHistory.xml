@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="dataset.data"/>
-<fullyQualifiedTypeName name="swarm.cluster"/>
-<fullyQualifiedTypeName name="dataset.dataset"/>
-<fullyQualifiedTypeName name="java.util.Arrays"/>
-<fullyQualifiedTypeName name="maina"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
@@ -14,9 +9,6 @@
 <fullyQualifiedTypeName name="java.io.PrintWriter"/>
 <fullyQualifiedTypeName name="dataset.csv_file_creator"/>
 <fullyQualifiedTypeName name="dataset.csv_to_arff"/>
-<fullyQualifiedTypeName name="java.io.BufferedReader"/>
-<fullyQualifiedTypeName name="java.io.FileReader"/>
-<fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="swarm.simplekmeans"/>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="javax.xml.parsers.DocumentBuilderFactory"/>
@@ -44,20 +36,28 @@
 <fullyQualifiedTypeName name="java.util.TreeSet"/>
 <fullyQualifiedTypeName name="graph_clustering.graph_communities_and_fitness"/>
 <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.Iterator"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Iterator"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="graph_clustering.fitness_function"/>
 <fullyQualifiedTypeName name="graph_clustering.pso_on_graph"/>
 <fullyQualifiedTypeName name="swarm.random_particle_generator"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="swarm.particle"/>
-<fullyQualifiedTypeName name="graph_clustering.graphdata"/>
 <fullyQualifiedTypeName name="graph_clustering.graph_make_communities"/>
 <fullyQualifiedTypeName name="graph_clustering.a"/>
 <fullyQualifiedTypeName name="graph_clustering.graph_settings"/>
-<fullyQualifiedTypeName name="graph_clustering.community_fitness_function"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="Jama.EigenvalueDecomposition"/>
+<fullyQualifiedTypeName name="java.lang.Double"/>
+<fullyQualifiedTypeName name="graph_clustering.graphdata"/>
+<fullyQualifiedTypeName name="Jama.Matrix"/>
+<fullyQualifiedTypeName name="graph_clustering.random_particle_giver"/>
 <fullyQualifiedTypeName name="java.lang.Float"/>
 <fullyQualifiedTypeName name="java.util.Vector"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="graph_clustering.graph_particle"/>
+<fullyQualifiedTypeName name="graph_clustering.community_fitness_function"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.io.FileReader"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
 </qualifiedTypeNameHistroy>

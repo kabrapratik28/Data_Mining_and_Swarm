@@ -2,8 +2,6 @@ package graph_clustering;
 
 import java.util.Vector;
 
-import swarm.particle;
-
 public class graph_particle {
 	
 	Vector< Float > current_location ;  // now current velocity
@@ -189,147 +187,45 @@ public class graph_particle {
 		 *after all development please read here from some file 
 		 */
 		//matrix
-		Vector<Float> gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(7.0f);
-		gmr.add(0.0f);
-		gmr.add(4.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
+
+		//karate
+		float [][] asd = {{0,1,1,1,1,1,1,1,1,0,1,1,1,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0}, {1,0,1,1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0}, {1,1,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0}, {1,1,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1}, {0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,1,1}, {0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,1,0,1,1,0,0,0,0,0,1,1,1,0,1}, {0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,1,1,1,1,1,1,1,0} };
+		//make following removal eigen value vector 3
 		
-		gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(2.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(1.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(5.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(7.0f);
-		gmr.add(2.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(8.0f);
-		gmr.add(2.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(5.0f);
-		gmr.add(8.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(6.0f);
-		gmr.add(2.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(4.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(2.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(1.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(6.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		
-		gmr = new Vector<Float>();
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(2.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		gmr.add(0.0f);
-		graph_matrix.add(gmr);
-		//eigen values
-		Vector<Float> eigen_val = new Vector<Float>();
-		eigen_val.add(0.6589890f);
-		eigen_val.add(0.1822428f);
-		eigen_val.add(0.0000000103f);
-		//eigen vectors
-		Vector<Vector<Float>> eigen_vec = new Vector<Vector<Float>>(); 
-		Vector<Float> eigen_rw = new Vector<Float>() ; 
-		eigen_rw.add(-0.4367024f);
-		eigen_rw.add(0.0195190f);
-		eigen_rw.add(0.4017060f);
-		eigen_rw.add(-0.1549812f);
-		eigen_rw.add(0.2647199f);
-		eigen_rw.add(-0.5201837f);
-		eigen_rw.add(0.3485508f);
-		eigen_rw.add(0.4017060f);
-		eigen_vec.add(eigen_rw);
-		
-		eigen_rw = new Vector<Float>() ; 
-		eigen_rw.add(-0.0726331f);
-		eigen_rw.add(0.7799345f);
-		eigen_rw.add(-0.3652825f);
-		eigen_rw.add(0.0640670f);
-		eigen_rw.add(-0.0665701f);
-		eigen_rw.add(-0.1485186f);
-		eigen_rw.add(0.2982785f);
-		eigen_rw.add(-0.3652825f);
-		eigen_vec.add(eigen_rw);
-		
-		eigen_rw = new Vector<Float>() ; 
-		eigen_rw.add(0.00002f);
-		eigen_rw.add(-0.00001f);
-		eigen_rw.add(-0.000003f);
-		eigen_rw.add(-0.00004f);
-		eigen_rw.add(-0.00003f);
-		eigen_rw.add(0.00001f);
-		eigen_rw.add(0.00008f);
-		eigen_rw.add(0.000009f);
-		eigen_vec.add(eigen_rw);
-		
+		//small example
+		//float[][] asd  = {{0,1,1,0,0,1},{1,0,1,0,0,0},{1,1,0,0,0,0},{0,0,0,0,1,1},{0,0,0,1,0,1},{1,0,0,1,1,0}};
+		Vector<Vector<Float>> aa = new Vector<Vector<Float>>() ; 
+		for (int k=0 ; k< asd.length ; k++)
+		{
+			Vector<Float> pp = new Vector<Float>(); 
+			for(int j=0 ; j<asd[k].length ; j++)
+			{
+				pp.add(asd[k][j]);
+			}
+			aa.add(pp);
+		}
+		//===================================
+
 		/*
 		 * ENDS HERE 
 		 */
 		 
-		graphdata graphdata_obj = new graphdata(graph_matrix) ; 
-		
-		//===============REMOVE THIS ALSO =======================
-		graphdata_obj.sorted_eigen_value = eigen_val ;
-		graphdata_obj.sorted_eigen_vector = eigen_vec ;
-		//=================================================
+		graphdata graphdata_obj = new graphdata(aa) ; 
+
+		//====================  *** DELETE THIS *** =====================================
+		while(graphdata_obj.get_sorted_eigen_value().size() > 3)
+		{
+			graphdata_obj.sorted_eigen_value.remove(3);
+			graphdata_obj.sorted_eigen_vector.remove(3);
+		}
+		//=================== DELETE THIS ENDS ==================================
 		
 		// graph make community obj making
 		graph_make_communities graph_make_communities_obj = new graph_make_communities
 					(graphdata_obj.get_sorted_eigen_value(), graphdata_obj.get_sorted_eigen_vector());
+		
+		System.out.println(graphdata_obj.get_sorted_eigen_value());
+		System.out.println(graphdata_obj.get_sorted_eigen_vector());
 		
 		// assign this for all particle (eigen value vector same for all particle)
 		graph_particle.graph_make_communities_obj = graph_make_communities_obj ; 
@@ -347,6 +243,8 @@ public class graph_particle {
 		
 		// assigen min max value
 		graph_particle.min_max_values_for_particle =  random_particle_giver_obj.min_max_value ; 
+		
+		System.out.println("Min Max Value" + graph_particle.min_max_values_for_particle);
 		
 		//particle value assignment 
 		Vector<graph_particle> particles_as_cen = new Vector<graph_particle>(); 

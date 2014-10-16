@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="/home/pratik/Desktop/pso/PSO/Jar Files add to Classpath/Database Connector/mysql-connector-java-5.1.29-bin.jar"/>
 	<classpathentry kind="lib" path="/home/pratik/Desktop/pso/PSO/Jar Files add to Classpath/Weka/weka.jar"/>
+	<classpathentry kind="lib" path="/home/pratik/Desktop/pso/PSO/Jar Files add to Classpath/Java Matrix/Jama-1.0.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

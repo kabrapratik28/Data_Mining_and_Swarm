@@ -1,0 +1,118 @@
+package graph_clustering;
+
+import java.util.*;
+import java.util.Vector;
+import Jama.Matrix;
+import Jama.EigenvalueDecomposition;
+
+public class graphdata {
+	
+	Vector<Vector<Float>> nodes_linkage_graph ; 
+    Vector<Float> eigen_value ; 
+    Vector<Vector<Float>> eigen_vector ; 
+	
+    Vector<Float> sorted_eigen_value ; 
+    Vector<Vector<Float>> sorted_eigen_vector ;
+    
+    Vector<Vector<Float>> graph_matrix ; 
+    
+    Matrix graph_matrix_jama ; 
+    EigenvalueDecomposition eigen_values_of_matrix ; 
+    double [] eigen_values_jama ; 
+    double [][] eigen_vectors_jama ; 
+    double[][] graph_matrix_array ; 
+    
+	public graphdata(Vector<Vector<Float>> graph_matrix)
+	{
+		//apply some java eigen value package here 
+		//to calculate eigen value and vector
+		//pass to sort egen valu and vector
+		//pass to extract positive eigen value and respective vector
+
+		this.graph_matrix = graph_matrix ; 
+		
+		//convert vector to array
+		graph_matrix_array  = new double[this.graph_matrix.size()][] ; 
+		
+		for (int count_row_of_matrix=0; count_row_of_matrix < this.graph_matrix.size() ; count_row_of_matrix++)
+		{
+			double[] row_of_matrix = new double[this.graph_matrix.get(count_row_of_matrix).size()] ;
+			for (int clm_of_matrix = 0 ; clm_of_matrix < this.graph_matrix.get(count_row_of_matrix).size() ; clm_of_matrix++)
+			{
+				
+				row_of_matrix[clm_of_matrix] = Double.parseDouble(Float.toString(this.graph_matrix.get(count_row_of_matrix).get(clm_of_matrix)));
+			}
+			graph_matrix_array[count_row_of_matrix] = row_of_matrix ;
+		}
+			
+		graph_matrix_jama = new Matrix(graph_matrix_array);
+		eigen_values_of_matrix = new EigenvalueDecomposition(graph_matrix_jama) ;
+		eigen_values_jama = eigen_values_of_matrix.getRealEigenvalues() ;
+		eigen_vectors_jama = eigen_values_of_matrix.getV().getArray() ; 
+		eigen_value = new Vector<Float>() ; 
+		eigen_vector = new Vector<Vector<Float>>();
+		
+		//getting +ve eigen vectors
+		for (int count_eigen_value = 0 ; count_eigen_value < eigen_values_jama.length ; count_eigen_value++)
+		{
+			if(eigen_values_jama[count_eigen_value] > 0)
+			{
+				eigen_value.add((float)eigen_values_jama[count_eigen_value]);
+				Vector<Float> eigen_vector_for_eigen_value = new Vector<Float>();
+				for(int count_row_eigen_vec=0 ; count_row_eigen_vec < eigen_vectors_jama.length ; count_row_eigen_vec++)
+				{
+					eigen_vector_for_eigen_value.add((float)eigen_vectors_jama[count_row_eigen_vec][count_eigen_value]);
+				}
+				eigen_vector.add(eigen_vector_for_eigen_value);
+			}
+		}
+		
+		//sorted eigen values and vectors
+		sorted_eigen_value = new Vector<Float>() ; 
+		sorted_eigen_vector = new Vector<Vector<Float>>();
+		sort_eigen_value_eigen_vector_in_descending_order() ; 
+	}
+
+	public void sort_eigen_value_eigen_vector_in_descending_order()
+	{
+		int size_of_eigen_val = eigen_value.size() ; 
+		for (int count_eigen_vec = 0 ; count_eigen_vec < size_of_eigen_val ; count_eigen_vec++)
+		{
+			 Object maximum_value_obj = Collections.max(eigen_value);
+			 float maximum_value  = (float)maximum_value_obj ; 
+			 // max eigen value at every iteration added
+			 // and that deleted so next time max value selected from remaining values
+			 sorted_eigen_value.add(maximum_value);
+			 int index_to_be_added_to_sorted_and_removed_from_nonsorted = eigen_value.indexOf(maximum_value_obj);
+			 sorted_eigen_vector.add(eigen_vector.get(index_to_be_added_to_sorted_and_removed_from_nonsorted));
+			 
+			 // now delete respective eigen value and vector
+			 eigen_value.remove(index_to_be_added_to_sorted_and_removed_from_nonsorted);
+			 eigen_vector.remove(index_to_be_added_to_sorted_and_removed_from_nonsorted);
+		}
+	}
+	
+	public Vector<Float> get_sorted_eigen_value()
+	{
+		return sorted_eigen_value ; 
+	}
+	
+	public Vector<Vector<Float>> get_sorted_eigen_vector()
+	{
+		return sorted_eigen_vector ; 
+	}
+		
+	public Vector<Vector<Float>> get_graph_matrix()
+	{
+		return graph_matrix ; 
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+
+	}
+	
+}
