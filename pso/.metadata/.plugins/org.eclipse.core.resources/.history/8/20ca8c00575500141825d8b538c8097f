@@ -1,5 +1,8 @@
 package graph_clustering;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Map ; 
 import java.util.HashMap;
 import java.util.Vector;
@@ -49,22 +52,15 @@ public class community_fitness_function {
 			float sum_of_all_inter_community_linkage = 0  ;
 			for (int other_community_counter=0 ; other_community_counter<no_of_communities; other_community_counter++ )
 			{
-				//intra is added 2 times 
-				if (community_counter == other_community_counter)
-				{
-					sum_of_all_inter_community_linkage = 
-							sum_of_all_inter_community_linkage + 2 * community_inter_intra_linkage.get(community_counter).get(other_community_counter) ;			
-				}
-				//inter added just 1 time
-				else
-				{
+				// Dont consider intra community values
+				//if (community_counter != other_community_counter)
+				//{
 					sum_of_all_inter_community_linkage = 
 							sum_of_all_inter_community_linkage +
 							community_inter_intra_linkage.get(community_counter).get(other_community_counter) ;
-				}
+				//}
 			}
-			//divide this by 2 * total no. of edges we have
-			A_vector_inter_cluster_values.add((sum_of_all_inter_community_linkage/(2*sum_of_all_linkage_in_graph)));
+			A_vector_inter_cluster_values.add(sum_of_all_inter_community_linkage);
 		}
 	}
 	
@@ -74,8 +70,7 @@ public class community_fitness_function {
 		for (int community_counter=0 ; community_counter < no_of_communities ; community_counter++)
 		{
 			Q_value_for_community = Q_value_for_community +
-					// fraction of edges in intra
-					((community_inter_intra_linkage.get(community_counter).get(community_counter)/sum_of_all_linkage_in_graph )/* intra community fraction */
+					(community_inter_intra_linkage.get(community_counter).get(community_counter) /* intra community fraction */
 							-
 					(float)Math.pow(A_vector_inter_cluster_values.get(community_counter), 2) /*inter community fraction*/
 					) ; 
@@ -169,8 +164,7 @@ public class community_fitness_function {
 				community_inter_intra_linkage.get(another_community_counter).set(counter_to_community_no, community_one_to_another_total);
 			}
 		}
-		//System.out.println(community_inter_intra_linkage);
-		/*
+		System.out.println(community_inter_intra_linkage);
 		for (int count_community= 0 ; count_community < community_inter_intra_linkage.size() ; count_community++)
 		{
 			for(int count_column =0 ; count_column < community_inter_intra_linkage.get(0).size(); count_column++)
@@ -182,8 +176,7 @@ public class community_fitness_function {
 		}
 		
 		System.out.println(community_inter_intra_linkage);
-		*/
-		//System.out.println("all nodes total weight "+sum_of_all_linkage_in_graph);
+		System.out.println("all nodes total weight "+sum_of_all_linkage_in_graph);
 	}
 	
 	/**
@@ -361,7 +354,6 @@ public class community_fitness_function {
 				System.out.println(asa);
 				float [][] asd = {{0,1,1,1,1,1,1,1,1,0,1,1,1,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0}, {1,0,1,1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0}, {1,1,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0}, {1,1,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1}, {0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,1,1}, {0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,1,0,1,1,0,0,0,0,0,1,1,1,0,1}, {0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,1,1,1,1,1,1,1,0} };
 				//float[][] asd  = {{0,1,1,0,0,1},{1,0,1,0,0,0},{1,1,0,0,0,0},{0,0,0,0,1,1},{0,0,0,1,0,1},{1,0,0,1,1,0}};
-				
 				Vector<Vector<Float>> aa = new Vector<Vector<Float>>() ; 
 				for (int k=0 ; k< asd.length ; k++)
 				{

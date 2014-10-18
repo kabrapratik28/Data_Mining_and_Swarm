@@ -218,10 +218,10 @@ public class graph_particle {
 		graphdata graphdata_obj = new graphdata(aa) ; 
 
 		//====================  *** DELETE THIS *** =====================================
-		while(graphdata_obj.get_sorted_eigen_value().size() > 3)
+		while(graphdata_obj.get_sorted_eigen_value().size() > 4)
 		{
-			graphdata_obj.sorted_eigen_value.remove(3);
-			graphdata_obj.sorted_eigen_vector.remove(3);
+			graphdata_obj.sorted_eigen_value.remove(4);
+			graphdata_obj.sorted_eigen_vector.remove(4);
 		}
 		//=================== DELETE THIS ENDS ==================================
 		
