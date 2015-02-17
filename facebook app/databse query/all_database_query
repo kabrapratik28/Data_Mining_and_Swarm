@@ -134,6 +134,15 @@ FOREIGN KEY (user_id) REFERENCES User(user_id),
 PRIMARY KEY (user_id)
 );
 
+Create Table FriendConnection
+(
+user_id varchar(50)  ,
+friend_id varchar(50) ,
+FOREIGN KEY (user_id) REFERENCES User(user_id),
+FOREIGN KEY (friend_id) REFERENCES User(user_id),
+PRIMARY KEY (user_id,friend_id)
+);
+
 Create Table ProfilePicAndTimeLine
 (
 user_id varchar(50)  ,
@@ -142,6 +151,18 @@ cover_pic_count int,
 FOREIGN KEY (user_id) REFERENCES User(user_id),
 PRIMARY KEY (user_id)
 );
+
+
+CREATE TABLE CommunityConnection
+(
+community_id varchar(5),
+user_id varchar(50)  , 
+FOREIGN KEY (user_id) REFERENCES User(user_id)
+);
+
+
+
+
 
 CREATE VIEW no_of_likes_per_status AS
 select User.user_id,count(StatusLike.user_id) as CountStatusLike 
@@ -383,5 +404,116 @@ where
     Linguistic_features.status_id = Status.status_id 
 group by 
     user_id; 
+
+
+
+CREATE VIEW user_all_features AS
+select 
+ LIWC_feature_extraction_of_user.user_id as user_id,
+ avg_no_of_like_per_photo,
+ avg_no_of_like_per_status,
+ no_of_place,
+ avg_photo_per_week,
+ avg_status_per_week,
+ AVG_WPS,
+ AVG_UNIQUE_Feature, /* PLEASE DONT WRITE UNIQUE */
+ AVG_SIXLTR,
+ AVG_ABBREVIATIONS ,
+ AVG_EMOTICONS ,
+ AVG_QMARKS,
+ AVG_PERIOD ,
+ AVG_COMMA ,
+ AVG_COLON ,
+ AVG_SEMIC,
+ AVG_QMARK ,
+ AVG_EXCLAM,
+ AVG_DASH,
+ AVG_QUOTE,
+ AVG_APOSTRO ,
+ AVG_PARENTH,
+ AVG_OTHERP,
+ AVG_ALLPCT ,
+ AVG_PRONOUN,
+ AVG_I,
+ AVG_WE,
+ AVG_SELF,
+ AVG_YOU ,
+ AVG_OTHER,
+ AVG_NEGATIONS ,
+ AVG_ASSENTS,
+ AVG_ARTICLES ,
+ AVG_PREPOSITIONS ,
+ AVG_NUMBERS ,
+ AVG_AFFECTIVE_PROCESS ,
+ AVG_POSITIVE_EMOTION,
+ AVG_POSITIVE_FEELING ,
+ AVG_OPTIMISM,
+ AVG_NEGATIVE_EMOTION ,
+ AVG_ANXIETY ,
+ AVG_ANGER ,
+ AVG_SADNESS,
+ AVG_COGNITIVE_PROCESS ,
+ AVG_CAUSATION ,
+ AVG_INSIGHT,
+ AVG_DISCREPANCY,
+ AVG_INHIBITION ,
+ AVG_TENTATIVE ,
+ AVG_CERTAINTY ,
+ AVG_SENSORY_PROCESS ,
+ AVG_SEEING ,
+ AVG_HEARING ,
+ AVG_FEELING ,
+ AVG_SOCIAL_PROCESS ,
+ AVG_COMMUNICATION ,
+ AVG_REFERENCE_PEOPLE ,
+ AVG_FRIENDS ,
+ AVG_FAMILY ,
+ AVG_HUMANS ,
+ AVG_TIME ,
+ AVG_PAST ,
+ AVG_PRESENT ,
+ AVG_FUTURE ,
+ AVG_SPACE ,
+ AVG_UP ,
+ AVG_DOWN,
+ AVG_INCLUSIVE ,
+ AVG_EXCLUSIVE ,
+ AVG_MOTION ,
+ AVG_OCCUPATION ,
+ AVG_SCHOOL ,
+ AVG_JOB_OR_WORK ,
+ AVG_ACHIEVEMENT ,
+ AVG_LEISURE_ACTIVITY ,
+ AVG_HOME ,
+ AVG_SPORTS ,
+ AVG_TV_OR_MOVIE ,
+ AVG_MUSIC ,
+ AVG_MONEY ,
+ AVG_METAPHYSICAL ,
+ AVG_RELIGION ,
+ AVG_DEATH_AND_DYING ,
+ AVG_PHYSICAL_STATES ,
+ AVG_BODY_STATES ,
+ AVG_SEXUALITY ,
+ AVG_EATING ,
+ AVG_SLEEPING,
+ AVG_GROOMING ,
+ AVG_SWEAR_WORDS,
+ AVG_NONFLUENCIES ,
+ AVG_FILLERS ,
+ AVG_DIC 
+from
+    LIWC_feature_extraction_of_user, avg_likes_per_photo, avg_likes_per_status, no_of_place_people_went_to, photo_per_week, status_per_week
+where 
+    LIWC_feature_extraction_of_user.user_id = avg_likes_per_photo.user_id
+    and  LIWC_feature_extraction_of_user.user_id = avg_likes_per_status.user_id 
+    and  LIWC_feature_extraction_of_user.user_id =  no_of_place_people_went_to.user_id 
+    and  LIWC_feature_extraction_of_user.user_id =  photo_per_week.user_id 
+    and  LIWC_feature_extraction_of_user.user_id = status_per_week.user_id
+    
+
+
+
+
 
 
