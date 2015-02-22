@@ -1,10 +1,5 @@
 package swarm;
 
-import graph_clustering.graph_particle;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Vector;
 
 import dataset.data_reader_from_file;
@@ -282,66 +277,8 @@ public class particle {
 		}
 		*/
 
-	//only when database is selected in above equation
-	if (data_taken_from.option_of_file_or_database == 2)
-	{				
-		//store all user  
-		Vector<String> user_long_ids_of_facebook = new Vector<String>(); 
-		
 		swarm_based_clustering particle_cluster_last_for_database = new swarm_based_clustering(particle.gbest_position);
-
-		database_connectivity dd1 = new database_connectivity("localhost", "3306", "facebook_database", "root", "pratik");
 		
-		// change this name and take from xml settings already given name
-		dd1.query_set_to_prepare_statement("select user_id from user_all_features ; ");
-		ResultSet r11 = dd1.execute_set_query() ; 
-		
-		try {
-			while(r11.next())
-			{
-				String user = r11.getString("user_id") ;	
-				user_long_ids_of_facebook.add(user) ; 
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		//delete previous entry
-		dd1.query_set_to_prepare_statement("truncate table ClusterandUser ; ");
-		dd1.execute_update_query() ; 
-		
-		//in vector which user going 
-		int user_no_in_vector = 0 ; 
-		for (Vector<Float> each_user_point : swarm_based_clustering.points)
-		{
-			//intially max value //we want min value
-			float curr_distance = Float.MAX_VALUE ; 
-			int cluster_closer = 0 ; 
-			int count_cluster_no =  0 ; 
-			// no of cluster which is less
-			for(Vector<Float> each_center : particle.gbest_position)
-			{
-				float curr_dista_curr_center = particle_cluster_last_for_database.cal_euclidean_distance(each_user_point, each_center) ; 
-				if (curr_dista_curr_center < curr_distance)
-				{
-					// add user where he belong
-					curr_distance = curr_dista_curr_center ; 
-					cluster_closer = count_cluster_no ; 
-				}
-				count_cluster_no++ ; 
-			}
-			//add user to database accordingly
-			dd1.query_set_to_prepare_statement("insert into ClusterandUser values ( '" + cluster_closer + "' , '" + user_long_ids_of_facebook.get(user_no_in_vector) +"' ) ; " );
-			dd1.execute_update_query();
-			
-			// next user data will taken in next loop
-			user_no_in_vector++ ; 
-		}
-		
-		dd1.closedatabaseconnection() ; 
-	}	
 }
 
 }

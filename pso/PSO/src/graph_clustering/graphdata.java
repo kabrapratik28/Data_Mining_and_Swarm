@@ -114,6 +114,7 @@ public class graphdata {
 			 if (maximum_value != 1.0f)
 			 {
 				 sorted_eigen_value.add(maximum_value);
+				 //System.out.println(maximum_value);
 				 sorted_eigen_vector.add(eigen_vector.get(index_to_be_added_to_sorted_and_removed_from_nonsorted));
 			 }
 			 

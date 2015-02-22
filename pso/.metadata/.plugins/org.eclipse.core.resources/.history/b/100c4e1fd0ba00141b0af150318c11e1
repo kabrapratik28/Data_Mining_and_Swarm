@@ -312,33 +312,7 @@ public class particle {
 		dd1.query_set_to_prepare_statement("truncate table ClusterandUser ; ");
 		dd1.execute_update_query() ; 
 		
-		//in vector which user going 
-		int user_no_in_vector = 0 ; 
-		for (Vector<Float> each_user_point : swarm_based_clustering.points)
-		{
-			//intially max value //we want min value
-			float curr_distance = Float.MAX_VALUE ; 
-			int cluster_closer = 0 ; 
-			int count_cluster_no =  0 ; 
-			// no of cluster which is less
-			for(Vector<Float> each_center : particle.gbest_position)
-			{
-				float curr_dista_curr_center = particle_cluster_last_for_database.cal_euclidean_distance(each_user_point, each_center) ; 
-				if (curr_dista_curr_center < curr_distance)
-				{
-					// add user where he belong
-					curr_distance = curr_dista_curr_center ; 
-					cluster_closer = count_cluster_no ; 
-				}
-				count_cluster_no++ ; 
-			}
-			//add user to database accordingly
-			dd1.query_set_to_prepare_statement("insert into ClusterandUser values ( '" + cluster_closer + "' , '" + user_long_ids_of_facebook.get(user_no_in_vector) +"' ) ; " );
-			dd1.execute_update_query();
-			
-			// next user data will taken in next loop
-			user_no_in_vector++ ; 
-		}
+		
 		
 		dd1.closedatabaseconnection() ; 
 	}	

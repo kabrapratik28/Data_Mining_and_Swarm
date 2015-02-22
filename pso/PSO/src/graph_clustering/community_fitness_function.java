@@ -309,8 +309,8 @@ public class community_fitness_function {
 		 System.out.println(ff1.get_Q_value());
 		 */
 		
-		/*     KARATE CLUB*/
-		//====================== DELETE THIS =======================
+		/*     KARATE CLUB
+		//====================== DELETE THIS ======================= */
 				HashMap<Integer, Vector<Integer>> asa = new HashMap<Integer,Vector<Integer>>();
 				Vector<Integer> pp = new Vector<Integer>();
 				pp.add(6);

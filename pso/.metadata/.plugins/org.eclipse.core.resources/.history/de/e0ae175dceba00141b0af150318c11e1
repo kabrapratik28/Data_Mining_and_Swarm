@@ -25,6 +25,12 @@ public class swarm_based_clustering {
 		quantization_error_value  = cal_quantization_error(ClusterFormation); // quantization error calculated
 	}
 	
+	public Vector<cluster> get_cluster()
+	{
+		//System.out.println(quantization_error_value);
+		return ClusterFormation ; 
+	}
+	
 	public float get_quantization_error_value ()  //to get quantization error value
 	{
 		return quantization_error_value ; 

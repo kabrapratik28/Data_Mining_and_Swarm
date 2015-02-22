@@ -86,9 +86,9 @@ public class LIWCDictionaryHelper {
 		String[] words = tokenize(text);
 		String[] sentences = splitSentences(text);
 		
-		System.out.println("Input text splitted into " + words.length
-				+ " words and " + sentences.length + " sentences");
-		System.out.flush();
+		//System.out.println("Input text splitted into " + words.length
+		//		+ " words and " + sentences.length + " sentences");
+		//System.out.flush();
 		
 		// word count (NOT A PROPER FEATURE)
 		//if (absoluteCounts) { counts.put("WC", new Double(words.length)); }

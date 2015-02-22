@@ -333,8 +333,7 @@ public class particle {
 				count_cluster_no++ ; 
 			}
 			//add user to database accordingly
-			dd1.query_set_to_prepare_statement("insert into ClusterandUser values ( '" + cluster_closer + "' , '" + user_long_ids_of_facebook.get(user_no_in_vector) +"' ) ; " );
-			dd1.execute_update_query();
+			
 			
 			// next user data will taken in next loop
 			user_no_in_vector++ ; 

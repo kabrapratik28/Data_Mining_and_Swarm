@@ -8,7 +8,7 @@
     
     <no_of_particle>10</no_of_particle>
 
-    <no_of_cluster>3</no_of_cluster>
+    <no_of_cluster>5</no_of_cluster>
 
     <w_inertia>0.72</w_inertia>
 
@@ -27,7 +27,7 @@
   <data_take_from>
 
     <!--1.File 2.Database -->
-    <option_of_file_or_database>1</option_of_file_or_database>
+    <option_of_file_or_database>2</option_of_file_or_database>
 
     <!-- option only cosider on selecting 1 above -->
     <data_file_name>test_dataset/2.wine/wine.data</data_file_name>
@@ -35,13 +35,13 @@
     <!-- option only cosider on selecting 2 above -->
     <database_name>facebook_database</database_name>
 
-    <user_value_table_name_in_database>LIWC_feature_extraction_of_user</user_value_table_name_in_database>
+    <user_value_table_name_in_database>user_all_features</user_value_table_name_in_database>
 
     <!--minimum value table for pso lower limit -->
-    <min_value_table_name_in_database>MIN_LIWC_Feature</min_value_table_name_in_database>
+    <min_value_table_name_in_database>MIN_user_all_features</min_value_table_name_in_database>
 
     <!--maximum value table for pso lower limit -->
-    <max_value_table_name_in_database>MAX_LIWC_Feature</max_value_table_name_in_database>
+    <max_value_table_name_in_database>MAX_user_all_features</max_value_table_name_in_database>
            
 
     <!-- #### IMPORTANT ASSUMPTION #### -->

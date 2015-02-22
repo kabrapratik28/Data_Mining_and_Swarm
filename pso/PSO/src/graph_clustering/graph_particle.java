@@ -1,5 +1,11 @@
 package graph_clustering;
 
+import dataset.database_connectivity;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Vector;
 
 public class graph_particle {
@@ -182,6 +188,67 @@ public class graph_particle {
 		//read graph matrix from some where and pass here
 		Vector<Vector<Float>> graph_matrix =   new Vector<Vector<Float>>() ; 
 		
+		// big facebook id to small int mapping for matrix assignment
+		HashMap<String, Integer> big_facebook_id_to_small_id = new HashMap<String, Integer>() ; 
+		
+		//back mapping after community forms to get user belongs to which comminty
+		HashMap<Integer, String> small_id_to_big_facebook_id = new HashMap<Integer, String>(); 
+		
+		int mapping_count = 0 ; 
+		
+		database_connectivity d1 = new database_connectivity("localhost", "3306", "facebook_database", "root", "pratik");
+		d1.query_set_to_prepare_statement("select user_id,friend_id from FriendConnection ; ");
+		
+		ResultSet r1 = d1.execute_set_query() ; 
+		try {
+			while(r1.next())
+			{
+				String user = r1.getString("user_id") ;
+				String frnd_id = r1.getString("friend_id") ;
+				//add to hash table if entry is not there
+				if (!big_facebook_id_to_small_id.containsKey(user))
+				{
+					big_facebook_id_to_small_id.put(user, mapping_count);
+					small_id_to_big_facebook_id.put(mapping_count, user);
+					mapping_count++ ; 
+				}
+				//same way add for friend
+				if (!big_facebook_id_to_small_id.containsKey(frnd_id))
+				{
+					big_facebook_id_to_small_id.put(frnd_id, mapping_count);
+					small_id_to_big_facebook_id.put(mapping_count, frnd_id);
+					mapping_count++ ; 
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//matrix of connections of friends in Social n/w
+		float asd[][]= new float[mapping_count][mapping_count];
+		
+		//d1.query_set_to_prepare_statement("select user_id,friend_id from FriendConnection ; ");
+		r1 = d1.execute_set_query() ;
+		try {
+			while(r1.next())
+			{
+				String user = r1.getString("user_id") ;
+				String frnd_id = r1.getString("friend_id") ;
+				//add to hash table if entry is not there
+				if (big_facebook_id_to_small_id.containsKey(user) && big_facebook_id_to_small_id.containsKey(frnd_id)  )
+				{
+					asd[big_facebook_id_to_small_id.get(user)][big_facebook_id_to_small_id.get(frnd_id)] = 1 ; 
+					asd[big_facebook_id_to_small_id.get(frnd_id)][big_facebook_id_to_small_id.get(user)] = 1 ; 
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		d1.closedatabaseconnection() ; 
+		
 		/*
 		 *For now add nodes here 
 		 *after all development please read here from some file 
@@ -190,7 +257,7 @@ public class graph_particle {
 
 		//karate data set
 		//****** make following eigen value vector 3 *********
-		float [][] asd = {{0,1,1,1,1,1,1,1,1,0,1,1,1,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0}, {1,0,1,1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0}, {1,1,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0}, {1,1,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1}, {0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,1,1}, {0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,1,0,1,1,0,0,0,0,0,1,1,1,0,1}, {0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,1,1,1,1,1,1,1,0} };
+		//float [][] asd = {{0,1,1,1,1,1,1,1,1,0,1,1,1,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0}, {1,0,1,1,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0}, {1,1,0,1,0,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0}, {1,1,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,1,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1}, {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1}, {0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1}, {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,1,1}, {0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,1,0,1,1,0,0,0,0,0,1,1,1,0,1}, {0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,1,0,0,1,1,1,0,1,1,0,0,1,1,1,1,1,1,1,0} };
 
 		//dolphin dataset
 		//********** make following eigen value vector 4  **********
@@ -199,6 +266,7 @@ public class graph_particle {
 		
 		//small example
 		//float[][] asd  = {{0,1,1,0,0,1},{1,0,1,0,0,0},{1,1,0,0,0,0},{0,0,0,0,1,1},{0,0,0,1,0,1},{1,0,0,1,1,0}};
+		
 		Vector<Vector<Float>> aa = new Vector<Vector<Float>>() ; 
 		for (int k=0 ; k< asd.length ; k++)
 		{
@@ -216,7 +284,7 @@ public class graph_particle {
 		 */
 		 
 		graphdata graphdata_obj = new graphdata(aa) ; 
-
+		/*
 		//====================  *** DELETE THIS *** =====================================
 		while(graphdata_obj.get_sorted_eigen_value().size() > 3)
 		{
@@ -224,7 +292,7 @@ public class graph_particle {
 			graphdata_obj.sorted_eigen_vector.remove(3);
 		}
 		//=================== DELETE THIS ENDS ==================================
-		
+		*/
 		// graph make community obj making
 		graph_make_communities graph_make_communities_obj = new graph_make_communities
 					(graphdata_obj.get_sorted_eigen_value(), graphdata_obj.get_sorted_eigen_vector());
@@ -298,6 +366,26 @@ public class graph_particle {
 		graph_particle.graph_make_communities_obj.graph_cluster_at_every_pso_iteration(graph_particle.gbest_position);
 		//print centroids and respective grouping
 		System.out.println(graph_particle.graph_make_communities_obj.get_centroid_no_to_element_vec());
+		
+		database_connectivity dd1 = new database_connectivity("localhost", "3306", "facebook_database", "root", "pratik");
+				
+		dd1.query_set_to_prepare_statement("truncate table CommunityConnection ; ");
+		dd1.execute_update_query() ; 
+		
+		int community_no_counter = 0 ; 
+		for (Vector<Integer> every_community : graph_particle.graph_make_communities_obj.get_centroid_no_to_element_vec().values())
+		{
+			//for every community
+			for (int one_man : every_community)
+			{
+				dd1.query_set_to_prepare_statement("insert into CommunityConnection values ( '" + community_no_counter + "' , '" + small_id_to_big_facebook_id.get(one_man) +"' ) ; " );
+				dd1.execute_update_query();
+			}
+			community_no_counter++ ; 
+		}
+		
+		dd1.closedatabaseconnection() ; 
 	}
-
+		
+	
 }
