@@ -714,4 +714,32 @@ MIN(AVG_FILLERS) as MIN_FILLERS,
 MIN(AVG_DIC) as MIN_DIC
 from user_all_features;
 
+select user_id
+from ClusterandUser
+where cluster_id in
+(
+select cluster_id 
+from ClusterandUser
+where user_id =  '100002387831900' 
+)
+and user_id not in ('100002387831900')
+;
+
+
+select user_id
+from CommunityConnection
+where community_id in
+(
+select community_id 
+from CommunityConnection
+where user_id =  '10201579183561898' 
+)
+and user_id not in 
+(
+select friend_id 
+from FriendConnection
+where user_id = '10201579183561898'
+)
+and user_id not in ('10201579183561898')
+;
 

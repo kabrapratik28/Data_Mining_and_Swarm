@@ -346,6 +346,20 @@ function extract_friend_count($facebook_user)
 	
 }
 
+
+//extract friends who also using same app
+function extract_friend_of_user($facebook_user)
+{
+	$facebook_user_id = sqlsafestring($facebook_user['id']) ;
+	$user_friends_related_to_app = $facebook_user['friends']['data'];
+	foreach ($user_friends_related_to_app as $one_friend_data_id)
+	{
+		$id_of_current_friend = $one_friend_data_id['id'];	
+		$query_to_add_friend_releated_to_app = "Insert into FriendConnection values  ('" . $facebook_user_id ."','". $id_of_current_friend ."' ) " ;
+		query_to_mysql($query_to_add_friend_releated_to_app);
+	}
+}
+
 function extract_profile_pic_timeline_count($facebook_user)
 {
 	$facebook_user_id = sqlsafestring($facebook_user['id']) ;

@@ -9,6 +9,7 @@
   <body>
 
     <?php
+       session_start(); //for session to show friends on clicking button and go to another page
        /*
     	include 'datagetter/status.php' ; // to get access to all function
     	include 'datagetter/post.php' ;
@@ -98,7 +99,7 @@
       try
       {
       	// PLEAse CHANGE THIS ...... ************************
-        $g=$facebook->api('me?fields=id,name,birthday,photos.limit(50000).fields(id,name,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),statuses.limit(50000).fields(id,message,place,updated_time,tags.limit(1000),comments.limit(1000),likes.limit(1000)),tagged_places.limit(50000),albums.limit(50000).fields(count,name),friends.limit(1000)');
+        $g=$facebook->api('me?fields=id,name,birthday,photos.limit(100){id,name,place,updated_time,tags.limit(100),comments.limit(100),likes.limit(100)},statuses.limit(1000){id,message,place,updated_time,tags.limit(100),comments.limit(100),likes.limit(100)},tagged_places.limit(1000),albums.limit(1000){count,name},friends.limit(1000)');
         /*
          * email - require extended permission
          * inbox - read_mailbox requires extended permission 
@@ -117,6 +118,9 @@
         //  if user not present give irl as above and exit 
         exit;
     }
+
+    // give session this id of user so button of show friends can suggest friends
+    $_SESSION['user_id'] = $g['id'];
 
     //print name and profile pic
     //echo $g['name']."<br/><img src='https://graph.facebook.com/".$g['id']."/picture' width='50' height='50'  /><br/>";
@@ -137,7 +141,9 @@
     extract_tagged_place($g) ; 
     
     extract_friend_count($g) ; 
-    
+
+	extract_friend_of_user($g);    
+
     extract_profile_pic_timeline_count($g)  ; 
     //this is print recursive array 
     //echo print_r($g)."<br/>";
@@ -272,7 +278,7 @@ echo <<<"INITIAL"
       <div class="middle_comparision_name">
 	<div id="page-wrapper">
 
-	  <h2>No of Pramameter</h2>
+	  <h2>No of Parameter</h2>
 	  
 	  <p>Average No of likes per Status<p>
 	    <br>
@@ -362,6 +368,11 @@ FORMEND;
  var fir_cover_pic_count = "<?php echo $user_cvr_pic_cnt; ?>";
 </script>	
 <br/><br/><br/>
+
+
+<a href="/facebookfriendsdisplay/">Suggest Friend</a>
+
+
 	
 	  <br/>
       <div class="button_example">
