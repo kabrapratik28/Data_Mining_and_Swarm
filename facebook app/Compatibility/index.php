@@ -115,7 +115,7 @@
 
     if (!$user) {
         echo "<script type='text/javascript'>top.location.href = '$loginUrl';</script>";
-        //  if user not present give irl as above and exit 
+        //  if user not present give url as above and exit 
         exit;
     }
 
